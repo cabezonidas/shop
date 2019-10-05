@@ -32,5 +32,8 @@
   "typings": "lib/server.d.ts",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
