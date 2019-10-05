@@ -4,6 +4,7 @@
   "devDependencies": {
     "@types/node": "^12.7.11",
     "lerna": "^3.16.4",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.3"
   },
   "workspaces": [
