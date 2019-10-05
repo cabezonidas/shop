@@ -27,5 +27,6 @@
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
-  }
+  },
+  "typings": "lib/server.d.ts"
 }
