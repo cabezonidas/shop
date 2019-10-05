@@ -10,7 +10,7 @@
   "author": "Cabe <sebastian.scd@gmail.com>",
   "homepage": "https://github.com/cabezonidas/shop#readme",
   "license": "ISC",
-  "main": "lib/index.js",
+  "main": "lib/server.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -28,13 +28,13 @@
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node -r ts-node/register ./src/index.ts",
+    "start": "node -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
   },
-  "typings": "lib/index.d.ts",
+  "typings": "lib/server.d.ts",
   "publishConfig": {
     "access": "public"
   },
