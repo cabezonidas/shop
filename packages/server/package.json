@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
   },
-  "typings": "lib/server.d.ts"
+  "typings": "lib/server.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }
