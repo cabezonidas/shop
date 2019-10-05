@@ -24,7 +24,11 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node ."
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
