@@ -21,8 +21,29 @@ export const getProduct = (req: Request, res: Response) => {
   });
 };
 
+export const deleteProduct = (req: Request, res: Response) => {
+  Product.findById(req.body.id, (err, product) => {
+    if (err) {
+      res.send(err);
+    } else {
+      if (product) {
+        product.remove((errorRemoving, productRemoved) => {
+          if (errorRemoving) {
+            res.send(errorRemoving);
+          } else {
+            res.send(productRemoved);
+          }
+        });
+      } else {
+        res.send();
+      }
+    }
+  });
+};
+
 export const addProduct = (req: Request, res: Response) => {
-  new Product(req.body).save((err, product) => {
+  const body = { ...req.body, createdAt: new Date() };
+  new Product(body).save((err, product) => {
     if (err) {
       res.send(err);
     } else {
