@@ -5,7 +5,7 @@
   "author": "Cabe <sebastian.scd@gmail.com>",
   "homepage": "https://github.com/cabezonidas/shop#readme",
   "license": "ISC",
-  "main": "lib/common.ts",
+  "main": "./lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -21,8 +21,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build-common": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly && tsc --build tsconfig.esm.json",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
   },
   "bugs": {
