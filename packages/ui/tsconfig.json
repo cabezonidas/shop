@@ -1,8 +1,11 @@
 {
   "include": ["src"],
   "extends": "../../tsconfig.json",
+  "exclude": ["node_modules", "lib-esm", "lib", "**/*.story*", "**/*.spec*"],
   "compilerOptions": {
     "outDir": "lib",
+    "jsx": "react",
+    "esModuleInterop": true,
     "declaration": true
   }
 }
