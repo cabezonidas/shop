@@ -5,7 +5,7 @@
   "author": "Cabe <sebastian.scd@gmail.com>",
   "homepage": "https://github.com/cabezonidas/shop#readme",
   "license": "ISC",
-  "main": "lib/ui.js",
+  "main": "src/ui.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -13,14 +13,23 @@
   "files": [
     "lib"
   ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "storybook": "start-storybook"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabezonidas/shop.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.2.8",
+    "babel-loader": "^8.0.6"
   }
 }
