@@ -16,6 +16,7 @@
   "scripts": {
     "publish": "lerna run tsc && lerna publish",
     "storybook": "lerna run storybook --stream",
+    "build": "lerna run build-common && lerna run build-ui",
     "tsc": "tsc"
   }
 }
