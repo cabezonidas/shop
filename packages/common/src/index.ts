@@ -26,8 +26,8 @@ export const secretSanta = (participants: IParticipant[]) => {
     }
   };
 
-  indexedParticipants.forEach(p => {
-    const to = getUnselectedParticipants(participants, p.id, selectedDestinations);
+  indexedParticipants.forEach(({ id, ...p }) => {
+    const to = getUnselectedParticipants(participants, id, selectedDestinations);
     selectedDestinations.push(to);
     result.push({
       from: p,
