@@ -1,4 +1,7 @@
+import { getDigits } from "@cabezonidas/shop-common";
+
 angular.module("todoApp", []).controller("TodoListController", function() {
+  console.log(getDigits());
   var todoList = this;
   todoList.todos = [
     { text: "learn AngularJS", done: true },
