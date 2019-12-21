@@ -1,4 +1,5 @@
 import * as express from "express";
+import { ApolloServer } from "apollo-server";
 import { connect } from "mongoose";
 import {
   allProducts,
@@ -6,6 +7,8 @@ import {
   deleteProduct,
   getProduct,
 } from "./controllers/productController";
+import { typeDefs } from "./type-defs";
+import { resolvers } from "./resolvers";
 
 const app = express();
 const port = 8899;
@@ -21,7 +24,7 @@ app.delete("/products/delete", deleteProduct);
 app.get("/products/:id", getProduct);
 
 app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  console.log(`Express server ready at http://localhost:${port}`);
 });
 
 const uri: string =
@@ -38,3 +41,9 @@ connect(
     }
   }
 );
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.listen().then(({ url }) => {
+  console.log(`🚀 Graphql server ready at ${url}`);
+});
