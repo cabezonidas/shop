@@ -36,6 +36,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-typescript": "^7.3.2",
+    "@types/yup": "^0.26.27",
     "typescript": "^3.3.3"
   },
   "dependencies": {
