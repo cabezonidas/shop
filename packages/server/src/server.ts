@@ -1,30 +1,16 @@
 import * as express from "express";
 import { ApolloServer } from "apollo-server";
 import { connect } from "mongoose";
-import {
-  allProducts,
-  addProduct,
-  deleteProduct,
-  getProduct,
-} from "./controllers/productController";
 import { typeDefs } from "./type-defs";
 import { resolvers } from "./resolvers";
 
-const app = express();
-const port = 8899;
-
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello world 2!");
+const expressPort = 8899;
+express().listen(expressPort, () => {
+  console.log(`Express server ready at http://localhost:${expressPort}/`);
 });
-app.get("/products", allProducts);
-app.post("/products/add", addProduct);
-app.delete("/products/delete", deleteProduct);
-app.get("/products/:id", getProduct);
 
-app.listen(port, () => {
-  console.log(`Express server ready at http://localhost:${port}`);
+new ApolloServer({ typeDefs, resolvers }).listen().then(({ url }) => {
+  console.log(`Graphql server ready at ${url}`);
 });
 
 const uri: string =
@@ -37,13 +23,7 @@ connect(
     if (err) {
       console.log(err.message);
     } else {
-      console.log("Successfully Connected!");
+      console.log("DB Successfully connected");
     }
   }
 );
-
-const server = new ApolloServer({ typeDefs, resolvers });
-
-server.listen().then(({ url }) => {
-  console.log(`🚀 Graphql server ready at ${url}`);
-});
