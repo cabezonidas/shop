@@ -1,8 +1,8 @@
 import * as express from "express";
 import { ApolloServer } from "apollo-server";
 import { connect } from "mongoose";
-import { typeDefs } from "./type-defs";
-import { resolvers } from "./resolvers";
+import typeDefs from "./type-defs";
+import resolvers from "./resolvers";
 
 const expressPort = 8899;
 express().listen(expressPort, () => {
