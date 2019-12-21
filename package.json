@@ -17,8 +17,8 @@
     "publish": "lerna run tsc && lerna publish",
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
-    "build": "lerna run build-common && lerna run build-ui && lerna run sub-app-build",
+    "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
-    "start-front-end": "npm run build && lerna run start-front-end --stream"
+    "start-front-end": "lerna run start-front-end --stream"
   }
 }

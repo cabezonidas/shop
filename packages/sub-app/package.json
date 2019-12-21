@@ -25,11 +25,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-sub-app": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sub-app-build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json"
+    "sub-app-build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run sub-app-build"
   },
   "eslintConfig": {
     "extends": "react-app"
