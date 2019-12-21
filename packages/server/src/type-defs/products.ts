@@ -1,8 +1,14 @@
 import { gql } from "apollo-server";
 
 export const productTypeDefs = gql`
+  type Product {
+    id: String
+    title: String
+    description: String
+    createdAt: String
+  }
   type Query {
-    products: String
+    products: [Product]
   }
   input CreateProductInput {
     title: String
