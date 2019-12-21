@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { Square } from "@cabezonidas/shop-ui";
 import { secretSanta } from "@cabezonidas/shop-common";
+import { App as SubApp } from "@cabezonidas/shop-sub-app";
 
 const myParticipants = [
   { name: "Nico cuñado", phone: "91122447624", overseas: false, sendsOverseas: false },
@@ -64,6 +65,7 @@ const App: React.FC = () => {
           </div>
         </div>
         <Square />
+        <SubApp />
       </header>
     </div>
   );
