@@ -1,5 +1,5 @@
 import { createProductSchema } from "@cabezonidas/shop-common";
-import Product from "../schema/product";
+import { Product } from "../schema";
 
 export const productResolvers = {
   Mutation: {

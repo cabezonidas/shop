@@ -12,6 +12,6 @@ export const ProductSchema = new Schema<IProduct>({
   createdAt: { type: Date, required: true },
 });
 
-const Product = model<IProduct>("Product", ProductSchema);
+export const Product = model<IProduct>("Product", ProductSchema);
 
 export default Product;
