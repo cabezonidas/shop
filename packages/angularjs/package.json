@@ -18,7 +18,8 @@
     "url": "git+https://github.com/cabezonidas/shop.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build-angularjs": "browserify app.js > lib/bundle.js"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
@@ -26,6 +27,7 @@
   "dependencies": {
     "@cabezonidas/shop-ui": "*",
     "@cabezonidas/shop-sub-app": "*",
-    "@cabezonidas/shop-common": "*"
+    "@cabezonidas/shop-common": "*",
+    "react2angular": "^4.0.6"
   }
 }
