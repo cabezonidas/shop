@@ -39,6 +39,7 @@
     "access": "public"
   },
   "dependencies": {
+    "apollo-server": "^2.9.14",
     "express": "^4.17.1",
     "mongoose": "^5.7.12",
     "ts-node": "^8.4.1"
