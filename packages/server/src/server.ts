@@ -1,38 +1,25 @@
+import { config } from "dotenv";
+config();
+
 import "reflect-metadata";
 import * as express from "express";
-import { ApolloServer } from "apollo-server";
-import { connect } from "mongoose";
+import { ApolloServer } from "apollo-server-express";
 import typeDefs from "./type-defs";
 import resolvers from "./resolvers";
 import { createConnection } from "typeorm";
-import { ormconfig } from "../ormconfig";
+import { mongodbConnection } from "../ormconfig";
+import * as cookieParser from "cookie-parser";
 
-const expressPort = 8899;
-express().listen(expressPort, () => {
-  console.log(`Express server ready at http://localhost:${expressPort}/`);
-});
-
-new ApolloServer({ typeDefs, resolvers }).listen().then(({ url }) => {
-  console.log(`Graphql server ready at ${url}`);
-});
-
-const uri: string =
-  "mongodb+srv://cabezonidas:TestPassword1407@repocluster-exdit.mongodb.net/test?retryWrites=true&w=majority";
-
-connect(
-  uri,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  (err: any) => {
-    if (err) {
-      console.log(err.message);
-    } else {
-      console.log("DB Successfully connected");
-    }
-  }
-);
-
-createConnection(ormconfig)
-  .then(async connection => {
-    console.log("Connected to DB via typeORM!");
-  })
+createConnection(mongodbConnection)
+  .then(() => console.log("Connected to DB"))
   .catch(error => console.log("Error: ", error));
+
+const port = process.env.PORT;
+const app = express();
+const server = new ApolloServer({ typeDefs, resolvers });
+app.use(cookieParser());
+server.applyMiddleware({ app });
+
+app.listen({ port }, () =>
+  console.log(`Graphql server ready at http://localhost:${port}${server.graphqlPath}`)
+);

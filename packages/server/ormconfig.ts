@@ -1,9 +1,10 @@
 import { ConnectionOptions } from "typeorm";
 
-export const ormconfig: ConnectionOptions = {
+const { MONGODB_USR, MONGODB_PASSWORD } = process.env;
+
+export const mongodbConnection: ConnectionOptions = {
   type: "mongodb",
-  url:
-    "mongodb+srv://cabezonidas:TestPassword1407@repocluster-exdit.mongodb.net/test?retryWrites=true&w=majority",
+  url: `mongodb+srv://${MONGODB_USR}:${MONGODB_PASSWORD}@repocluster-exdit.mongodb.net/test?retryWrites=true&w=majority`,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   synchronize: true,
@@ -17,5 +18,3 @@ export const ormconfig: ConnectionOptions = {
     subscribersDir: "src/subscriber",
   },
 };
-
-export default ormconfig;
