@@ -1,6 +1,6 @@
 import { ConnectionOptions } from "typeorm";
 
-export const ormconfig: ConnectionOptions = {
+export const mongodbConnection: ConnectionOptions = {
   type: "mongodb",
   url:
     "mongodb+srv://cabezonidas:TestPassword1407@repocluster-exdit.mongodb.net/test?retryWrites=true&w=majority",
@@ -17,5 +17,3 @@ export const ormconfig: ConnectionOptions = {
     subscribersDir: "src/subscriber",
   },
 };
-
-export default ormconfig;

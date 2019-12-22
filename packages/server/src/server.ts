@@ -5,7 +5,7 @@ import { connect } from "mongoose";
 import typeDefs from "./type-defs";
 import resolvers from "./resolvers";
 import { createConnection } from "typeorm";
-import { ormconfig } from "../ormconfig";
+import { mongodbConnection } from "../ormconfig";
 
 const expressPort = 8899;
 express().listen(expressPort, () => {
@@ -31,7 +31,7 @@ connect(
   }
 );
 
-createConnection(ormconfig)
+createConnection(mongodbConnection)
   .then(async connection => {
     console.log("Connected to DB via typeORM!");
   })
