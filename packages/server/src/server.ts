@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+config();
+
 import "reflect-metadata";
 import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
@@ -11,7 +14,7 @@ createConnection(mongodbConnection)
   .then(() => console.log("Connected to DB"))
   .catch(error => console.log("Error: ", error));
 
-const port = 8899;
+const port = process.env.PORT;
 const app = express();
 const server = new ApolloServer({ typeDefs, resolvers });
 app.use(cookieParser());
