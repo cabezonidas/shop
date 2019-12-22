@@ -29,7 +29,8 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node -r ts-node/register ./src/server.ts",
-    "start-server": "nodemon"
+    "start:watch": "nodemon",
+    "typeorm": "./node_modules/.bin/typeorm"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
