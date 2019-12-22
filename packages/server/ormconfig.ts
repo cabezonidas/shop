@@ -9,9 +9,9 @@ export const mongodbConnection: ConnectionOptions = {
   useUnifiedTopology: true,
   synchronize: true,
   logging: false,
-  entities: ["src/entity/*.js"],
-  subscribers: ["src/subscriber/*.js"],
-  migrations: ["src/migration/*.js"],
+  entities: ["src/entity/*.ts"],
+  subscribers: ["src/subscriber/*.ts"],
+  migrations: ["src/migration/*.ts"],
   cli: {
     entitiesDir: "src/entity",
     migrationsDir: "src/migration",
