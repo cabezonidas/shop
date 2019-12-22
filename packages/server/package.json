@@ -49,6 +49,7 @@
     "mongoose": "^5.7.12",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.4.1",
+    "type-graphql": "^0.17.6",
     "typeorm": "^0.2.21"
   },
   "devDependencies": {
