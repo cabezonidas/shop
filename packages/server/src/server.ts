@@ -1,8 +1,10 @@
+import "reflect-metadata";
 import * as express from "express";
 import { ApolloServer } from "apollo-server";
 import { connect } from "mongoose";
 import typeDefs from "./type-defs";
 import resolvers from "./resolvers";
+import { createConnection } from "typeorm";
 
 const expressPort = 8899;
 express().listen(expressPort, () => {
@@ -27,3 +29,9 @@ connect(
     }
   }
 );
+
+createConnection()
+  .then(async connection => {
+    console.log("Connected to DB via typeORM!");
+  })
+  .catch(error => console.log("Error: ", error));
