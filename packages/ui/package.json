@@ -18,7 +18,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "storybook": "start-storybook",
-    "ui-build": "tsc && tsc --build tsconfig.esm.json"
+    "ui-build": "tsc && tsc --build tsconfig.esm.json",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run ui-build"
   },
   "repository": {
     "type": "git",
