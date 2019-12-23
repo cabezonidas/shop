@@ -11,7 +11,7 @@ import {
 import { User } from "../entity/user";
 import { hash, compare } from "bcryptjs";
 import { IGraphqlContext } from "../igraphql-context";
-import { createRefreshToken, createAccessToken } from "../auth/tokens";
+import { createRefreshToken, createAccessToken, sendRefreshToken } from "../auth/tokens";
 import { isAuth } from "../auth/is-auth";
 
 @ObjectType()
@@ -54,7 +54,7 @@ export class UserResolver {
       throw new Error("invalid password");
     }
 
-    res.cookie("jid", createRefreshToken(user), { httpOnly: true });
+    sendRefreshToken(res, createRefreshToken(user));
 
     return {
       accessToken: createAccessToken(user),

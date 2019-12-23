@@ -9,7 +9,7 @@ import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/user";
-import { createAccessToken } from "./auth/tokens";
+import { createAccessToken, createRefreshToken, sendRefreshToken } from "./auth/tokens";
 import { ObjectId } from "mongodb";
 
 (async () => {
@@ -38,6 +38,8 @@ import { ObjectId } from "mongodb";
     if (!user) {
       return res.send({ ok: false, accessToken: "" });
     }
+
+    sendRefreshToken(res, createRefreshToken(user));
 
     return res.send({ ok: true, accessToken: createAccessToken(user) });
   });
