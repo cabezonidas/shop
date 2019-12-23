@@ -13,12 +13,12 @@ import { UserResolver } from "./resolvers/user-resolver";
 
   const port = process.env.PORT;
   const app = express();
+  app.use(cookieParser());
   app.get("/", (_, res) => res.send("Home route"));
   const server = new ApolloServer({
     schema: await buildSchema({ resolvers: [UserResolver] }),
     context: ({ req, res }) => ({ req, res }),
   });
-  app.use(cookieParser());
   server.applyMiddleware({ app });
 
   app.listen({ port }, () =>
