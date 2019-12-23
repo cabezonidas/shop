@@ -13,6 +13,7 @@ import { hash, compare } from "bcryptjs";
 import { IGraphqlContext } from "../igraphql-context";
 import { createRefreshToken, createAccessToken, sendRefreshToken } from "../auth/tokens";
 import { isAuth } from "../auth/is-auth";
+import { ObjectId } from "mongodb";
 
 @ObjectType()
 class LoginResponse {
@@ -59,6 +60,19 @@ export class UserResolver {
     return {
       accessToken: createAccessToken(user),
     };
+  }
+
+  @Mutation(() => Boolean)
+  // Maybe forgot password?
+  public async revokeRefreshTokenForUser(@Arg("userId", () => String) userId: string) {
+    const user = await User.findOne({ _id: new ObjectId(userId) });
+
+    if (user) {
+      user.tokenVersion++;
+      await user.save();
+    }
+
+    return true;
   }
 
   @Mutation(() => Boolean)

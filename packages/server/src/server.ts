@@ -2,7 +2,7 @@ import "dotenv/config";
 import "reflect-metadata";
 import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { createConnection, getMongoRepository, ObjectID } from "typeorm";
+import { createConnection } from "typeorm";
 import { mongodbConnection } from "../ormconfig";
 import * as cookieParser from "cookie-parser";
 import { buildSchema } from "type-graphql";
@@ -36,6 +36,10 @@ import { ObjectId } from "mongodb";
     const user = await User.findOne({ _id: new ObjectId(payload.userId) });
 
     if (!user) {
+      return res.send({ ok: false, accessToken: "" });
+    }
+
+    if (user.tokenVersion !== payload.tokenVersion) {
       return res.send({ ok: false, accessToken: "" });
     }
 
