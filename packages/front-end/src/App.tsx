@@ -4,7 +4,10 @@ import { Square } from "@cabezonidas/shop-ui";
 import { App as SubApp } from "@cabezonidas/shop-sub-app";
 import { SecretSanta } from "./secret-santa";
 import { useUsersQuery } from "./generated/graphql";
-import { BrowserRouter, Switch, Route, Link, Router } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +18,12 @@ const App: React.FC = () => {
             <ul>
               <li>
                 <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
               </li>
               <li>
                 <Link to="/secret-santa">Secret santa</Link>
@@ -32,11 +41,13 @@ const App: React.FC = () => {
           </div>
           <div style={{ flexGrow: 1 }}>
             <Switch>
-              <Route path="/" exact={true} render={() => <div>Home! Choose a route</div>} />
-              <Route path="/secret-santa" render={() => <SecretSanta />} />
-              <Route path="/imported-ui" render={() => <Square />} />
-              <Route path="/users" render={() => <Users />} />
-              <Route path="/sub-app" render={() => <SubApp />} />
+              <Route path="/" exact component={Home} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+              <Route path="/secret-santa" component={SecretSanta} />
+              <Route path="/imported-ui" component={Square} />
+              <Route path="/users" component={Users} />
+              <Route path="/sub-app" component={SubApp} />
             </Switch>
           </div>
         </BrowserRouter>
