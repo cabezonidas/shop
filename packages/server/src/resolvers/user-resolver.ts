@@ -24,11 +24,6 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => String)
-  public hello() {
-    return "hi!";
-  }
-
-  @Query(() => String)
   @UseMiddleware(isAuth)
   public bye(@Ctx() { payload }: IGraphqlContext) {
     return `Bye user ${payload.userId}`;
