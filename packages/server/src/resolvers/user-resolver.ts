@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Arg, ObjectType, Field } from "type-graphql";
 import { User } from "../entity/user";
 import { hash, compare } from "bcryptjs";
+import { sign } from "jsonwebtoken";
 
 @ObjectType()
 class LoginResponse {
@@ -30,13 +31,13 @@ export class UserResolver {
       throw new Error("invalid login");
     }
 
-    const valid = compare(password, user.password);
-    if (valid) {
+    const valid = await compare(password, user.password);
+    if (!valid) {
       throw new Error("invalid password");
     }
 
     return {
-      accessToken: "",
+      accessToken: sign({ userId: user.id }, process.env.SECRET, { expiresIn: "15m" }),
     };
   }
 
