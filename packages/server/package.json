@@ -42,18 +42,23 @@
   "dependencies": {
     "@cabezonidas/shop-common": "*",
     "apollo-server-express": "^2.9.14",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.4.1",
+    "type-graphql": "^0.17.6",
     "typeorm": "^0.2.21"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.1",
+    "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.32",
     "@types/node": "^12.12.21",
     "nodemon": "^1.19.3"
