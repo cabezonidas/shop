@@ -6,7 +6,8 @@
     "no-console": false,
     "no-conditional-assignment": false,
     "ordered-imports": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "max-classes-per-file": ["exclude-class-expressions"]
   },
   "defaultSeverity": "error"
 }
