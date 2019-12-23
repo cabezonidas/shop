@@ -1,8 +1,18 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from "type-graphql";
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Arg,
+  ObjectType,
+  Field,
+  Ctx,
+  UseMiddleware,
+} from "type-graphql";
 import { User } from "../entity/user";
 import { hash, compare } from "bcryptjs";
 import { IGraphqlContext } from "../igraphql-context";
 import { createRefreshToken, createAccessToken } from "../auth/tokens";
+import { isAuth } from "../auth/is-auth";
 
 @ObjectType()
 class LoginResponse {
@@ -15,6 +25,12 @@ export class UserResolver {
   @Query(() => String)
   public hello() {
     return "hi!";
+  }
+
+  @Query(() => String)
+  @UseMiddleware(isAuth)
+  public bye(@Ctx() { payload }: IGraphqlContext) {
+    return `Bye user ${payload.userId}`;
   }
 
   @Query(() => [User])
