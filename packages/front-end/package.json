@@ -7,11 +7,9 @@
     "@cabezonidas/shop-common": "*",
     "@cabezonidas/shop-sub-app": "*",
     "@cabezonidas/shop-ui": "*",
-    "@graphql-codegen/cli": "^1.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/graphql": "^14.5.0",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
@@ -28,7 +26,8 @@
     "start-front-end": "npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "gen": "graphql-codegen --config graphql.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.9.1",
+    "@graphql-codegen/typescript": "^1.9.1",
+    "@graphql-codegen/typescript-operations": "^1.9.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.9.1",
+    "@types/graphql": "^14.5.0"
   }
 }
