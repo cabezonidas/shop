@@ -1,7 +1,8 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field } from "type-graphql";
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from "type-graphql";
 import { User } from "../entity/user";
 import { hash, compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
+import { IGraphqlContext } from "../igraphql-context";
 
 @ObjectType()
 class LoginResponse {
@@ -24,7 +25,8 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   public async login(
     @Arg("email") email: string,
-    @Arg("password") password: string
+    @Arg("password") password: string,
+    @Ctx() { res }: IGraphqlContext
   ): Promise<LoginResponse> {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -36,8 +38,11 @@ export class UserResolver {
       throw new Error("invalid password");
     }
 
+    const refresToken = sign({ userId: user.id }, process.env.REFRESH_KEY, { expiresIn: "7d" });
+    res.cookie("jid", refresToken, { httpOnly: true });
+
     return {
-      accessToken: sign({ userId: user.id }, process.env.SECRET, { expiresIn: "15m" }),
+      accessToken: sign({ userId: user.id }, process.env.ACCESS_KEY, { expiresIn: "15m" }),
     };
   }
 
