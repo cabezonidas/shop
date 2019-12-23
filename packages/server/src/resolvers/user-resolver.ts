@@ -9,6 +9,11 @@ export class UserResolver {
     return "hi!";
   }
 
+  @Query(() => [User])
+  public async users() {
+    return await User.find();
+  }
+
   @Mutation(() => Boolean)
   public async register(@Arg("email") email: string, @Arg("password") password: string) {
     const hashedPassword = await hash(password, 12);
