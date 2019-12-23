@@ -1,7 +1,6 @@
 import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from "type-graphql";
 import { User } from "../entity/user";
 import { hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
 import { IGraphqlContext } from "../igraphql-context";
 import { createRefreshToken, createAccessToken } from "../auth/tokens";
 
