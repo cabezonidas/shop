@@ -11,12 +11,15 @@ import { verify } from "jsonwebtoken";
 import { User } from "./entity/user";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "./auth/tokens";
 import { ObjectId } from "mongodb";
+import * as cors from "cors";
 
 (async () => {
   await createConnection(mongodbConnection);
 
   const port = process.env.PORT;
   const app = express();
+
+  app.use(cors({ origin: "http://localhost:3000", credentials: true }));
   app.use(cookieParser());
 
   app.get("/", (_, res) => res.send("Home route"));
@@ -52,7 +55,7 @@ import { ObjectId } from "mongodb";
     schema: await buildSchema({ resolvers: [UserResolver] }),
     context: ({ req, res }) => ({ req, res }),
   });
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   app.listen({ port }, () =>
     console.log(`Graphql server ready at http://localhost:${port}${server.graphqlPath}`)
