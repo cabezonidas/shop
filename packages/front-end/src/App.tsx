@@ -10,6 +10,7 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Bye } from "./pages/Bye";
 import { setAccessToken } from "./accessToken";
+import { Header } from "./pages/Header";
 
 const App: React.FC = () => {
   const { loadingUser } = useLoggedUser();
@@ -18,6 +19,7 @@ const App: React.FC = () => {
   }
   return (
     <div className="App">
+      <Header />
       <header className="App-header">
         <BrowserRouter>
           <div style={{ flexShrink: 0, width: "200px", background: "#f3f3f3" }}>
