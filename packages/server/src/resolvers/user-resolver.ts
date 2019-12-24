@@ -14,11 +14,14 @@ import { IGraphqlContext } from "../igraphql-context";
 import { createRefreshToken, createAccessToken, sendRefreshToken } from "../auth/tokens";
 import { isAuth } from "../auth/is-auth";
 import { ObjectId } from "mongodb";
+import { verify } from "jsonwebtoken";
 
 @ObjectType()
 class LoginResponse {
   @Field()
   public accessToken: string;
+  @Field(() => User)
+  public user: User;
 }
 
 @Resolver()
@@ -32,6 +35,24 @@ export class UserResolver {
   @Query(() => [User])
   public async users() {
     return await User.find();
+  }
+
+  @Query(() => User, { nullable: true })
+  public me(@Ctx() context: IGraphqlContext) {
+    const authorization = context.req.headers.authorization;
+
+    if (!authorization) {
+      return null;
+    }
+
+    try {
+      const token = authorization.split(" ")[1];
+      const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET);
+      return User.findOne(payload.userId);
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   }
 
   @Mutation(() => LoginResponse)
@@ -54,7 +75,15 @@ export class UserResolver {
 
     return {
       accessToken: createAccessToken(user),
+      user,
     };
+  }
+
+  @Mutation(() => Boolean)
+  public async logout(@Ctx() { res }: IGraphqlContext) {
+    sendRefreshToken(res, "");
+
+    return true;
   }
 
   @Mutation(() => Boolean)
@@ -63,7 +92,8 @@ export class UserResolver {
     const user = await User.findOne({ _id: new ObjectId(userId) });
 
     if (user) {
-      user.tokenVersion++;
+      const { tokenVersion } = user;
+      user.tokenVersion = isNaN(tokenVersion) ? 0 : tokenVersion + 1;
       await user.save();
     }
 

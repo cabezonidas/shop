@@ -1,74 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Square } from "@cabezonidas/shop-ui";
-import { secretSanta } from "@cabezonidas/shop-common";
 import { App as SubApp } from "@cabezonidas/shop-sub-app";
+import { SecretSanta } from "./secret-santa";
+import { useUsersQuery } from "./generated/graphql";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
+import { Bye } from "./pages/Bye";
+import { setAccessToken } from "./accessToken";
+import { Header } from "./pages/Header";
 
-const myParticipants = [
-  { name: "Nico cuñado", phone: "91122447624", overseas: false, sendsOverseas: false },
-  { name: "Fiore", phone: "91162971368", overseas: false, sendsOverseas: false },
-  { name: "Seba", phone: "+642102790126", overseas: true, sendsOverseas: true },
-  { name: "Lucia", phone: "+6421780906", overseas: true, sendsOverseas: true },
-  { name: "Ali", phone: "91161895704", overseas: false, sendsOverseas: true },
-  { name: "Claudio", phone: "91169176429", overseas: false, sendsOverseas: true },
-  { name: "Gabiruli", phone: "91168207507", overseas: false, sendsOverseas: true },
-  { name: "Lelu", phone: "91128873280", overseas: false, sendsOverseas: true },
-  { name: "Marce", phone: "91128261139", overseas: false, sendsOverseas: true },
-  { name: "Nico primo", phone: "91130783205", overseas: false, sendsOverseas: true },
-  { name: "Vicky", phone: "91138480501", overseas: false, sendsOverseas: true },
-];
-const gifts = secretSanta(myParticipants.sort(() => Math.random() - 0.5));
 const App: React.FC = () => {
-  const argentinianDesignations = gifts.filter(g => !g.from.overseas);
-  const luciaDesignation = gifts.find(g => g.from.name === "Lucia");
-  const sebaDesignation = gifts.find(g => g.from.name === "Seba");
-
-  const [showArgs, setShowArgs] = useState(false);
-  const [showSeb, setShowSeb] = useState(false);
-  const [showLucia, setShowLucia] = useState(false);
-
+  const { loadingUser } = useLoggedUser();
+  if (loadingUser) {
+    return <div>Loading</div>;
+  }
   return (
     <div className="App">
+      <Header />
       <header className="App-header">
-        <div style={{ display: "flex" }}>
-          <div style={{ margin: 20, padding: 20, border: "1px solid white" }}>
-            <div style={{ borderBottom: "1px solid white" }}>Participantes Argentila</div>
-            <input type="checkbox" onChange={() => setShowArgs(s => !s)} checked={showArgs} />
-            {showArgs && (
-              <table>
-                <thead>
-                  <tr>
-                    <th>From</th>
-                    <th>To</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {argentinianDesignations.map((g, i) => (
-                    <tr key={i}>
-                      <td>{g.from.phone}</td>
-                      <td>{g.to.name}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+        <BrowserRouter>
+          <div style={{ flexShrink: 0, width: "200px", background: "#f3f3f3" }}>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/bye">Bye</Link>
+              </li>
+              <li>
+                <Link to="/secret-santa">Secret santa</Link>
+              </li>
+              <li>
+                <Link to="/imported-ui">Imported ui</Link>
+              </li>
+              <li>
+                <Link to="/users">Users</Link>
+              </li>
+              <li>
+                <Link to="/sub-app">Sub app</Link>
+              </li>
+            </ul>
           </div>
-          <div style={{ margin: 20, padding: 20, border: "1px solid white" }}>
-            <div style={{ borderBottom: "1px solid white" }}>Lu</div>
-            <input type="checkbox" onChange={() => setShowLucia(s => !s)} checked={showLucia} />
-            {showLucia && luciaDesignation && <small>{luciaDesignation.to.name}</small>}
+          <div style={{ flexGrow: 1 }}>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+              <Route path="/bye" exact component={Bye} />
+              <Route path="/secret-santa" component={SecretSanta} />
+              <Route path="/imported-ui" component={Square} />
+              <Route path="/users" component={Users} />
+              <Route path="/sub-app" component={SubApp} />
+            </Switch>
           </div>
-          <div style={{ margin: 20, padding: 20, border: "1px solid white" }}>
-            <div style={{ borderBottom: "1px solid white" }}>Seba</div>
-            <input type="checkbox" onChange={() => setShowSeb(s => !s)} checked={showSeb} />
-            {showSeb && sebaDesignation && <small>{sebaDesignation.to.name}</small>}
-          </div>
-        </div>
-        <Square />
-        <SubApp />
+        </BrowserRouter>
       </header>
     </div>
   );
 };
 
 export default App;
+
+const Users = () => {
+  const { data, loading } = useUsersQuery();
+
+  if (loading || !data) {
+    return <div>loading...</div>;
+  }
+
+  return (
+    data && (
+      <div>
+        {data.users.map(u => (
+          <div key={u._id}>{u.email}</div>
+        ))}
+      </div>
+    )
+  );
+};
+
+const useLoggedUser = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8899/refresh_token", {
+      method: "POST",
+      credentials: "include",
+    }).then(async x => {
+      const res = await x.json();
+      const { accessToken } = res;
+      setAccessToken(accessToken);
+      setLoading(false);
+    });
+  }, []);
+  return { loadingUser: loading };
+};
