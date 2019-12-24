@@ -92,7 +92,8 @@ export class UserResolver {
     const user = await User.findOne({ _id: new ObjectId(userId) });
 
     if (user) {
-      user.tokenVersion++;
+      const { tokenVersion } = user;
+      user.tokenVersion = isNaN(tokenVersion) ? 0 : tokenVersion + 1;
       await user.save();
     }
 
