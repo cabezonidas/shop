@@ -6,8 +6,8 @@ import { setAccessToken } from "../accessToken";
 interface Props {}
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("seba1@mailinator.com");
+  const [password, setPassword] = useState("12345");
   const [login] = useLoginMutation();
 
   return (
@@ -18,7 +18,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
         const response = await login({
           variables: {
             email,
-            password
+            password,
           },
           update: (store, { data }) => {
             if (!data) {
@@ -28,13 +28,11 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
             store.writeQuery<MeQuery>({
               query: MeDocument,
               data: {
-                me: data.login.user
-              }
+                me: data.login.user,
+              },
             });
-          }
+          },
         });
-
-        console.log(response);
 
         if (response && response.data) {
           setAccessToken(response.data.login.accessToken);
