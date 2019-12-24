@@ -11,4 +11,4 @@ export const createAccessToken = (user: User) =>
   sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15min" });
 
 export const sendRefreshToken = (res: Response, token: string) =>
-  res.cookie("jid", token, { httpOnly: true });
+  res.cookie("jid", token, { httpOnly: true, path: "/refresh_token" });
