@@ -1038,7 +1038,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.4.0":
+"@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0":
   version "7.7.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
   integrity sha512-uCnC2JEVAu8AKB5do1WRIsvrdJ0flYx/A/9f/6chdacnEZ7LmavjdsDXr5ksYBegxtuTPR5Va9/+13QF/kFkCA==
@@ -3174,6 +3174,20 @@
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/http-assert/-/http-assert-1.5.1.tgz#d775e93630c2469c2f980fc27e3143240335db3b"
   integrity sha512-PGAK759pxyfXE78NbKxyfRcWYA/KwW17X290cNev/qAsn9eQIxkH4shoNBafH37wewhDG/0p1cHPbK6+SzZjWQ==
+
+"@types/i18next-express-middleware@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next-express-middleware/-/i18next-express-middleware-1.7.0.tgz#c72465be37557b05b74d3074583841213782d031"
+  integrity sha512-591O8Dxcem4ERtjd3FZcq6DCSpuEwLC24mgEJ1d04QWyM04YaO9edMH+PKmIJRxCToXCqu81/JrCm2dkWrq/BA==
+  dependencies:
+    i18next-express-middleware "*"
+
+"@types/i18next@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-13.0.0.tgz#403ef338add0104e74d9759f1b39217e7c5d4084"
+  integrity sha512-gp/SIShAuf4WOqi8ey0nuI7qfWaVpMNCcs/xLygrh/QTQIXmlDC1E0TtVejweNW+7SGDY7g0lyxyKZIJuCKIJw==
+  dependencies:
+    i18next "*"
 
 "@types/is-function@^1.0.0":
   version "1.0.0"
@@ -6216,6 +6230,14 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
+cookies@0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/cookies/-/cookies-0.7.1.tgz#7c8a615f5481c61ab9f16c833731bcb8f663b99b"
+  integrity sha1-fIphX1SBxhq58WyDNzG8uPZjuZs=
+  dependencies:
+    depd "~1.1.1"
+    keygrip "~1.0.2"
+
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
@@ -6891,7 +6913,7 @@ delegates@^1.0.0:
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
   integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
 
-depd@~1.1.2:
+depd@~1.1.1, depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
@@ -9282,6 +9304,20 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
+i18next-express-middleware@*, i18next-express-middleware@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/i18next-express-middleware/-/i18next-express-middleware-1.9.1.tgz#71759c3bf751ecd483b41c6dfa488a6b6bc540a6"
+  integrity sha512-cLMO8pUC7sU6dfFvkREcim7fXOHVtGSZu3Lt8d1Ty7Z0nZiYs57Lb3CjDrXb671ibCnY2s/RCATsXlaujYwUQg==
+  dependencies:
+    cookies "0.7.1"
+
+i18next@*, i18next@^19.0.2:
+  version "19.0.2"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-19.0.2.tgz#d72502ef031403572703f2e9f013cae005265444"
+  integrity sha512-fBa43Ann2udP1CQAz3IQpOZ1dGAkmi3mMfzisOhH17igneSRbvZ7P2RNbL+L1iRYKMufBmVwnC7G3gqcyviZ9g==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+
 iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -10782,6 +10818,11 @@ kareem@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.3.1.tgz#def12d9c941017fabfb00f873af95e9c99e1be87"
   integrity sha512-l3hLhffs9zqoDe8zjmb/mAN4B8VT3L56EUvKNqLFVs9YlFA+zx7ke1DO8STAdDyYNkeSo1nKmjuvQeI12So8Xw==
+
+keygrip@~1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.0.3.tgz#399d709f0aed2bab0a059e0cdd3a5023a053e1dc"
+  integrity sha512-/PpesirAIfaklxUzp4Yb7xBper9MwP6hNRA6BGGUFCgbJ+BM5CKBtsoxinNXkLHAr+GXS1/lSlF2rP7cv5Fl+g==
 
 killable@^1.0.1:
   version "1.0.1"

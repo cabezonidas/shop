@@ -26,13 +26,8 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
-  @Query(() => String)
-  @UseMiddleware(isAuth)
-  public bye(@Ctx() { payload }: IGraphqlContext) {
-    return `Bye user ${payload.userId}`;
-  }
-
   @Query(() => [User])
+  @UseMiddleware(isAuth)
   public async users() {
     return await User.find();
   }
@@ -50,7 +45,6 @@ export class UserResolver {
       const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET);
       return User.findOne(payload.userId);
     } catch (err) {
-      console.log(err);
       return null;
     }
   }
@@ -59,16 +53,16 @@ export class UserResolver {
   public async login(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Ctx() { res }: IGraphqlContext
+    @Ctx() { req, res }: IGraphqlContext
   ): Promise<LoginResponse> {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      throw new Error("invalid login");
+      throw new Error(req.t("errors.invalid_login"));
     }
 
     const valid = await compare(password, user.password);
     if (!valid) {
-      throw new Error("invalid password");
+      throw new Error(req.t("errors.invalid_password"));
     }
 
     sendRefreshToken(res, createRefreshToken(user));
@@ -106,7 +100,6 @@ export class UserResolver {
     try {
       await User.insert({ email, password: hashedPassword });
     } catch (err) {
-      console.log(err);
       return false;
     }
     return true;

@@ -8,7 +8,6 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-import { Bye } from "./pages/Bye";
 import { setAccessToken } from "./accessToken";
 import { Header } from "./pages/Header";
 
@@ -34,9 +33,6 @@ const App: React.FC = () => {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/bye">Bye</Link>
-              </li>
-              <li>
                 <Link to="/secret-santa">Secret santa</Link>
               </li>
               <li>
@@ -55,7 +51,6 @@ const App: React.FC = () => {
               <Route path="/" exact component={Home} />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Register} />
-              <Route path="/bye" exact component={Bye} />
               <Route path="/secret-santa" component={SecretSanta} />
               <Route path="/imported-ui" component={Square} />
               <Route path="/users" component={Users} />

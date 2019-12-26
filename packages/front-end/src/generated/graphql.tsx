@@ -44,7 +44,6 @@ export type MutationRegisterArgs = {
 
 export type Query = {
    __typename?: 'Query',
-  bye: Scalars['String'],
   users: Array<User>,
   me?: Maybe<User>,
 };
@@ -54,14 +53,6 @@ export type User = {
   _id: Scalars['String'],
   email: Scalars['String'],
 };
-
-export type ByeQueryVariables = {};
-
-
-export type ByeQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'bye'>
-);
 
 export type LoginMutationVariables = {
   email: Scalars['String'],
@@ -123,36 +114,6 @@ export type UsersQuery = (
 );
 
 
-export const ByeDocument = gql`
-    query Bye {
-  bye
-}
-    `;
-
-/**
- * __useByeQuery__
- *
- * To run a query within a React component, call `useByeQuery` and pass it any options that fit your needs.
- * When your component renders, `useByeQuery` returns an object from Apollo Client that contains loading, error, and data properties 
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useByeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useByeQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ByeQuery, ByeQueryVariables>) {
-        return ApolloReactHooks.useQuery<ByeQuery, ByeQueryVariables>(ByeDocument, baseOptions);
-      }
-export function useByeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ByeQuery, ByeQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ByeQuery, ByeQueryVariables>(ByeDocument, baseOptions);
-        }
-export type ByeQueryHookResult = ReturnType<typeof useByeQuery>;
-export type ByeLazyQueryHookResult = ReturnType<typeof useByeLazyQuery>;
-export type ByeQueryResult = ApolloReactCommon.QueryResult<ByeQuery, ByeQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
