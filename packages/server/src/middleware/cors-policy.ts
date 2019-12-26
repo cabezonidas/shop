@@ -10,7 +10,7 @@ export const corsPolicy = cors({
     if (whiteList.indexOf[origin] !== -1) {
       callback(null, true);
     } else {
-      callback(new Error(`${origin} not allowed by CORS`));
+      callback(new Error(`${origin} not allowed`));
     }
   },
   credentials: true,
