@@ -8,7 +8,7 @@ import { mongodbConnection } from "../ormconfig";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { router } from "./router";
-import { corsPolicy } from "./middleware";
+import { corsPolicy, translation } from "./middleware";
 
 (async () => {
   await createConnection(mongodbConnection);
@@ -16,6 +16,7 @@ import { corsPolicy } from "./middleware";
   const port = process.env.PORT;
   const app = express();
 
+  app.use(translation);
   app.use(corsPolicy);
   app.use(cookieParser());
   app.use("/", router);
