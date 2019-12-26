@@ -1,3 +1,4 @@
+import fetch from "isomorphic-fetch";
 import React, { useState, useEffect, createContext, FC } from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
@@ -7,6 +8,9 @@ import { onError } from "apollo-link-error";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
+import { polyfill } from "es6-promise";
+
+polyfill();
 
 interface IGraphqlContext {
   loadingUser: boolean;
@@ -14,7 +18,7 @@ interface IGraphqlContext {
   setAccessToken: (token: string) => void;
 }
 
-const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
+export const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
 export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
   const { getAccessToken, setAccessToken } = useAccessToken();
