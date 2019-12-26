@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import { Square } from "@cabezonidas/shop-ui";
+import { useUsersQuery } from "@cabezonidas/shop-common";
 import { App as SubApp } from "@cabezonidas/shop-sub-app";
 import { SecretSanta } from "./secret-santa";
-import { useUsersQuery } from "./generated/graphql";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";

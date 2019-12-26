@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
-import { useLoginMutation, MeDocument, MeQuery } from "../generated/graphql";
 import { setAccessToken } from "../accessToken";
+import { useLoginMutation, MeQuery, MeDocument } from "@cabezonidas/shop-common";
 
 interface Props {}
 

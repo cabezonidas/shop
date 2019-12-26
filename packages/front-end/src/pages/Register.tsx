@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useRegisterMutation } from "../generated/graphql";
 import { RouteComponentProps } from "react-router-dom";
+import { useRegisterMutation } from "@cabezonidas/shop-common";
 
 export const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -15,8 +15,8 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
         const response = await register({
           variables: {
             email,
-            password
-          }
+            password,
+          },
         });
 
         console.log(response);

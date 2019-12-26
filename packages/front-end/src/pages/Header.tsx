@@ -1,6 +1,7 @@
 import React from "react";
-import { useMeQuery, useLogoutMutation } from "../generated/graphql";
 import { setAccessToken } from "../accessToken";
+import { Box } from "@cabezonidas/shop-ui";
+import { useMeQuery, useLogoutMutation } from "@cabezonidas/shop-common";
 
 interface Props {}
 
@@ -19,7 +20,7 @@ export const Header: React.FC<Props> = () => {
   }
 
   return (
-    <div>
+    <Box bg="#282c34" minHeight="100vh" color="white">
       <div>
         {!loading && data && data.me ? (
           <button
@@ -34,6 +35,6 @@ export const Header: React.FC<Props> = () => {
         ) : null}
       </div>
       {body}
-    </div>
+    </Box>
   );
 };
