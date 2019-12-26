@@ -19,9 +19,16 @@ module.exports = {
         exclude: [/node_modules\//],
       },
       {
-        test: /\.tsx?$/,
-        include: path.resolve(__dirname, "../src"),
-        loader: "awesome-typescript-loader",
+        test: /\.(ts|tsx)$/,
+        use: [
+          {
+            loader: require.resolve("babel-loader"),
+            options: {
+              presets: [require.resolve("babel-preset-react-app")],
+            },
+          },
+          require.resolve("react-docgen-typescript-loader"),
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
