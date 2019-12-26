@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Square } from "@cabezonidas/shop-ui";
 import { useUsersQuery } from "@cabezonidas/shop-common";
 import { App as SubApp } from "@cabezonidas/shop-sub-app";
-import { SecretSanta } from "./secret-santa";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
@@ -16,9 +15,9 @@ const App: React.FC = () => {
     return <div>Loading</div>;
   }
   return (
-    <div className="App">
+    <div>
       <Header />
-      <header className="App-header">
+      <header style={{ display: "flex", flexDirection: "row" }}>
         <BrowserRouter>
           <div style={{ flexShrink: 0, width: "200px", background: "#f3f3f3" }}>
             <ul>
@@ -50,7 +49,6 @@ const App: React.FC = () => {
               <Route path="/" exact component={Home} />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Register} />
-              <Route path="/secret-santa" component={SecretSanta} />
               <Route path="/imported-ui" component={Square} />
               <Route path="/users" component={Users} />
               <Route path="/sub-app" component={SubApp} />

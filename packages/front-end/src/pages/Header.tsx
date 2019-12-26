@@ -20,7 +20,7 @@ export const Header: React.FC<Props> = () => {
   }
 
   return (
-    <Box bg="#282c34" minHeight="100vh" color="white">
+    <Box bg="#282c34" minHeight="100px" color="white">
       <div>
         {!loading && data && data.me ? (
           <button
