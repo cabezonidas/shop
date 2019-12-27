@@ -1,10 +1,16 @@
 import React, { FC } from "react";
-import { ThemeProvider as EmotionThemeProvider, ThemeProviderProps } from "emotion-theming";
-import { theme, ITheme } from "./theme";
+import { ThemeProvider as EmotionThemeProvider } from "emotion-theming";
+import { theme } from "./theme";
+import { globalStyle } from "./global-style";
 
-export const ThemeProvider: FC<ThemeProviderProps<ITheme>> = props => {
-  console.log(theme);
-  return <EmotionThemeProvider theme={theme} {...props} />;
+export const ThemeProvider: FC = props => {
+  const { children } = props;
+  return (
+    <EmotionThemeProvider theme={theme}>
+      {globalStyle}
+      {children}
+    </EmotionThemeProvider>
+  );
 };
 
 export default ThemeProvider;
