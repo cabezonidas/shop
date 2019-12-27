@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-react", "tslint-react-hooks"],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "prettier": true,
@@ -10,6 +10,9 @@
     "max-classes-per-file": ["exclude-class-expressions"],
     "variable-name": {
       "options": ["allow-leading-underscore", "ban-keywords", "check-format", "allow-pascal-case"]
+    },
+    "jsx-use-translation-function": {
+      "options": ["allow-punctuation", "allow-htmlentities"]
     }
   },
   "defaultSeverity": "error"
