@@ -1,13 +1,13 @@
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
-import { ThemeProvider } from "../src/theme";
+import { UiProvider } from "../src/ui-provider";
 import { Global, css } from "@emotion/core";
 
 const req = require.context("../src", true, /\.stories\.(ts|tsx)$/);
 
 configure(() => {
   addDecorator(story => (
-    <ThemeProvider>
+    <UiProvider>
       <Global
         styles={css`
           body {
@@ -16,7 +16,7 @@ configure(() => {
         `}
       />
       {story()}
-    </ThemeProvider>
+    </UiProvider>
   ));
   req.keys().forEach(filename => req(filename));
 }, module);
