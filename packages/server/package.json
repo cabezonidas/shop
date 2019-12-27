@@ -40,7 +40,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@cabezonidas/shop-common": "file:../common",
+    "@cabezonidas/shop-common": "*",
     "apollo-server-express": "^2.9.14",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",

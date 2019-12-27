@@ -54,13 +54,5 @@
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
     "start-front-end": "lerna run start-front-end --stream"
-  },
-  "dependencies": {
-    "@cabezonidas/shop-common": "file:packages/common",
-    "@cabezonidas/shop-front-end": "file:packages/front-end",
-    "@cabezonidas/shop-graphql": "file:packages/graphql",
-    "@cabezonidas/shop-login": "file:packages/login",
-    "@cabezonidas/shop-server": "file:packages/server",
-    "@cabezonidas/shop-ui": "file:packages/ui"
   }
 }
