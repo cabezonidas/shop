@@ -1,9 +1,9 @@
 {
   "name": "@cabezonidas/shop-graphql",
   "version": "0.0.1",
-  "main": "./lib/index.js",
-  "module": "./lib-esm/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./lib/main.js",
+  "module": "./lib-esm/main.js",
+  "types": "./lib/main.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

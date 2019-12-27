@@ -1,6 +1,6 @@
 {
   "exclude": ["node_modules", "lib-esm", "lib"],
-  "include": ["src/index.ts"],
+  "include": ["src/main.ts"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib-esm",
