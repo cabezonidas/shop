@@ -1,5 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Input } from "../input";
+import { Input } from "../components/input";
 
 storiesOf("Input", module).add("Default", () => <Input width="200px" />);
