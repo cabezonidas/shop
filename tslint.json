@@ -7,13 +7,14 @@
     "no-conditional-assignment": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "max-classes-per-file": ["exclude-class-expressions"],
+    "max-classes-per-file": [true, 10, "exclude-class-expressions"],
     "variable-name": {
       "options": ["allow-leading-underscore", "ban-keywords", "check-format", "allow-pascal-case"]
     },
     "jsx-use-translation-function": {
       "options": ["allow-punctuation", "allow-htmlentities"]
-    }
+    },
+    "jsx-no-multiline-js": false
   },
   "defaultSeverity": "error"
 }
