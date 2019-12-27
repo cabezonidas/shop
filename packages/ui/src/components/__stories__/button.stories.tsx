@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Button } from "../components/button";
-import { Box } from "../components/box";
+import { Button } from "../button";
+import { Box } from "../box";
 
 storiesOf("Buttons", module).add("Default", () => (
   <Button bg="green" width="250px">
