@@ -2,13 +2,13 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@types/node": "^12.7.11",
-    "lerna": "^3.16.4",
-    "prettier": "^1.18.2",
-    "tslint": "^5.20.0",
+    "@types/node": "^13.1.1",
+    "lerna": "^3.19.0",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.6.3"
+    "tslint-plugin-prettier": "^2.1.0",
+    "typescript": "^3.7.4"
   },
   "workspaces": [
     "packages/*"
