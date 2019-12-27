@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useUsersQuery } from "@cabezonidas/shop-graphql";
 import { LoginApp } from "@cabezonidas/shop-login";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { setAccessToken } from "./accessToken";
 
 const App: React.FC = () => {
-  const { loadingUser } = useLoggedUser();
-  if (loadingUser) {
-    return <div>Loading</div>;
-  }
   return (
     <div>
       <header style={{ display: "flex", flexDirection: "row" }}>
@@ -58,21 +53,4 @@ const Users = () => {
       </div>
     )
   );
-};
-
-const useLoggedUser = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("http://localhost:8899/refresh_token", {
-      method: "POST",
-      credentials: "include",
-    }).then(async x => {
-      const res = await x.json();
-      const { accessToken } = res;
-      setAccessToken(accessToken);
-      setLoading(false);
-    });
-  }, []);
-  return { loadingUser: loading };
 };
