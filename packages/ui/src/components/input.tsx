@@ -1,4 +1,3 @@
-import React, { forwardRef, ComponentProps } from "react";
 import styled from "@emotion/styled";
 import Box from "./box";
 

@@ -14,7 +14,9 @@
     "jsx-use-translation-function": {
       "options": ["allow-punctuation", "allow-htmlentities"]
     },
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "jsx-wrap-multiline": false,
+    "jsx-no-lambda": false
   },
   "defaultSeverity": "error"
 }

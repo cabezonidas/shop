@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
+import { ThemeProvider } from "@cabezonidas/shop-ui";
 
 ReactDOM.render(
   <GraphqlProvider uri={"http://localhost:8899"}>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </GraphqlProvider>,
   document.getElementById("root")
 );
