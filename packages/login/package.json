@@ -1,5 +1,5 @@
 {
-  "name": "@cabezonidas/shop-sub-app",
+  "name": "@cabezonidas/shop-login",
   "version": "0.0.1",
   "main": "./lib/index.js",
   "module": "./lib-esm/index.js",
@@ -12,6 +12,8 @@
     "lib"
   ],
   "dependencies": {
+    "@cabezonidas/shop-graphql": "*",
+    "@cabezonidas/shop-ui": "*",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -25,12 +27,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start-sub-app": "react-scripts start",
+    "start-login": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sub-app-build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
-    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run sub-app-build"
+    "login-build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run login-build"
   },
   "eslintConfig": {
     "extends": "react-app"
