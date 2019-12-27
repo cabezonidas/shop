@@ -1,10 +1,17 @@
 {
-  "name": "@cabezonidas/shop-front-end",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@cabezonidas/shop-login",
+  "version": "0.0.1",
+  "main": "./lib/main.js",
+  "module": "./lib-esm/main.js",
+  "types": "./lib/main.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
-    "@cabezonidas/shop-common": "*",
-    "@cabezonidas/shop-login": "*",
     "@cabezonidas/shop-graphql": "*",
     "@cabezonidas/shop-ui": "*",
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,16 +23,16 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-front-end": "npm run start",
+    "start-login": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "login-build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run login-build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,10 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/graphql": "^14.5.0",
-    "@types/jwt-decode": "^2.2.1",
-    "@types/react-router-dom": "^5.1.3"
   }
 }

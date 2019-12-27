@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import isPropValid from "@emotion/is-prop-valid";
 
 import {
   background,
@@ -25,6 +26,21 @@ import {
   compose,
   gridArea,
   verticalAlign,
+  fontSize,
+  fontFamily,
+  textAlign,
+  lineHeight,
+  fontWeight,
+  letterSpacing,
+  alignItems,
+  alignContent,
+  justifyContent,
+  flexWrap,
+  flexBasis,
+  flexDirection,
+  fontStyle,
+  zIndex,
+  DisplayProps,
   BackgroundProps,
   MaxWidthProps,
   MinWidthProps,
@@ -37,15 +53,33 @@ import {
   JustifySelfProps,
   AlignSelfProps,
   OrderProps,
-  FlexProps,
   OverflowProps,
   TextAlignProps,
   ZIndexProps,
   PositionProps,
   BackgroundColorProps,
+  FlexProps,
+  FontSizeProps,
+  FontFamilyProps,
+  FontWeightProps,
+  LineHeightProps,
+  FontStyleProps,
+  LetterSpacingProps,
+  AlignItemsProps,
+  AlignContentProps,
+  JustifyContentProps,
+  FlexWrapProps,
+  FlexBasisProps,
+  FlexDirectionProps,
+  FlexGrowProps,
+  FlexShrinkProps,
+  TopProps,
+  RightProps,
+  BottomProps,
+  LeftProps,
 } from "styled-system";
 
-type StyleBoxProps = WidthProps &
+export type StyleBoxProps = WidthProps &
   MaxWidthProps &
   MinWidthProps &
   HeightProps &
@@ -62,7 +96,26 @@ type StyleBoxProps = WidthProps &
   TextAlignProps &
   ZIndexProps &
   PositionProps &
-  FlexProps & {
+  FontSizeProps &
+  FontFamilyProps &
+  FontWeightProps &
+  LineHeightProps &
+  FontStyleProps &
+  LetterSpacingProps &
+  AlignItemsProps &
+  AlignContentProps &
+  JustifyContentProps &
+  FlexWrapProps &
+  FlexBasisProps &
+  FlexDirectionProps &
+  FlexGrowProps &
+  FlexShrinkProps &
+  TopProps &
+  RightProps &
+  BottomProps &
+  LeftProps &
+  FlexProps &
+  DisplayProps & {
     as?: string;
   };
 
@@ -89,10 +142,28 @@ const base = compose(
   maxHeight,
   verticalAlign,
   overflow,
-  display
+  display,
+  fontSize,
+  fontFamily,
+  textAlign,
+  lineHeight,
+  fontWeight,
+  letterSpacing,
+  minHeight,
+  alignItems,
+  alignContent,
+  justifyContent,
+  flexWrap,
+  flexBasis,
+  flexDirection,
+  flex,
+  fontStyle,
+  zIndex
 );
 
-export const Box = styled.div<StyleBoxProps>`
+export const Box = styled("div", {
+  shouldForwardProp: prop => isPropValid(prop),
+})<StyleBoxProps>`
   box-sizing: border-box;
   position: relative;
   ::-webkit-scrollbar {
@@ -108,7 +179,5 @@ export const Box = styled.div<StyleBoxProps>`
   }
   ${base};
 `;
-
-Box.displayName = "Box";
 
 export default Box;

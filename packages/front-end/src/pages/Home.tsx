@@ -1,5 +1,5 @@
 import React from "react";
-import { useUsersQuery } from "@cabezonidas/shop-common";
+import { useUsersQuery } from "@cabezonidas/shop-graphql";
 
 interface Props {}
 

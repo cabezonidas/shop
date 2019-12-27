@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.27",
+    "@emotion/is-prop-valid": "^0.8.6",
     "@emotion/styled": "^10.0.27",
     "styled-system": "^5.1.4"
   }
