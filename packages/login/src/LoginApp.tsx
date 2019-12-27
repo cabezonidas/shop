@@ -4,7 +4,7 @@ import { useMeQuery, GraphqlContext, useLogoutMutation } from "@cabezonidas/shop
 import RegisterForm from "./components/register-form";
 import { Box, Button } from "@cabezonidas/shop-ui";
 
-export const App: React.FC = () => {
+export const LoginApp: React.FC = () => {
   const [mode, setMode] = useState<"register" | "login">("login");
   const { data, loading } = useMeQuery();
   const [logout, { client }] = useLogoutMutation();
@@ -22,7 +22,9 @@ export const App: React.FC = () => {
           onClick={async () => {
             await logout();
             setAccessToken("");
-            await client?.resetStore();
+            if (client) {
+              await client.resetStore();
+            }
           }}
         >
           logout
@@ -34,8 +36,8 @@ export const App: React.FC = () => {
   if (mode === "login") {
     return <LoginForm onRegister={() => setMode("register")} />;
   } else {
-    return <RegisterForm onLogin={() => setMode("login")} />
+    return <RegisterForm onLogin={() => setMode("login")} />;
   }
 };
 
-export default App;
+export default LoginApp;
