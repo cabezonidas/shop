@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@cabezonidas/shop-common": "*",
-    "@cabezonidas/shop-graphql": "*",
-    "@cabezonidas/shop-login": "*",
-    "@cabezonidas/shop-ui": "*",
+    "@cabezonidas/shop-common": "file:../common",
+    "@cabezonidas/shop-graphql": "file:../graphql",
+    "@cabezonidas/shop-login": "file:../login",
+    "@cabezonidas/shop-ui": "file:../ui",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^8.0.2",
@@ -41,16 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/graphql": "^14.5.0",
-    "@types/jwt-decode": "^2.2.1",
-    "@types/node": "^13.1.1",
-    "@types/react-router-dom": "^5.1.3",
-    "lerna": "^3.19.0",
-    "prettier": "^1.19.1",
-    "tslint": "^5.20.1",
-    "tslint-plugin-prettier": "^2.1.0",
-    "typescript": "^3.7.4"
   }
 }
