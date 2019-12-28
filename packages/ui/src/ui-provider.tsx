@@ -8,13 +8,7 @@ import { initReactI18next } from "react-i18next";
 
 i18next.use(initReactI18next).init({
   resources: {
-    "en-US": {
-      translation: {
-        login: {
-          logout: "la concha de tu madre",
-        },
-      },
-    },
+    "en-US": { translation: {} },
     "es-AR": { translation: {} },
   },
   lng: "en-US",
