@@ -17,7 +17,7 @@ export const LoginForm = forwardRef<
   const { t } = useTranslation();
   const [email, setEmail] = useState("seba1@mailinator.com");
   const [password, setPassword] = useState("12345");
-  const [login] = useLoginMutation();
+  const [login, { error }] = useLoginMutation();
   const { setAccessToken } = useGraphqlClient();
   const { onRegister, ...formProps } = props;
   return (
@@ -68,7 +68,13 @@ export const LoginForm = forwardRef<
           setPassword(e.target.value);
         }}
       />
-
+      {error && (
+        <Box>
+          {error.graphQLErrors.map(({ message }) => (
+            <Box key={message}>{message}</Box>
+          ))}
+        </Box>
+      )}
       <Box display="flex" justifyContent="space-between">
         <Box display="flex" alignItems="center">
           <Box>{t("login.dont_have_account")}</Box>

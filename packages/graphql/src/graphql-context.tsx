@@ -111,6 +111,7 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
         },
       }),
       onError(({ graphQLErrors, networkError }) => {
+        // Maybe pass an optional function to the provider, so if present, do something.
         if (graphQLErrors) {
           graphQLErrors.map(({ message, locations, path }) => {
             // Maybe show it in a toast
