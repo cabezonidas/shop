@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./LoginApp";
 import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
-import { ThemeProvider } from "@cabezonidas/shop-ui";
+import { UiProvider } from "@cabezonidas/shop-ui";
 
 ReactDOM.render(
   <GraphqlProvider uri={"http://localhost:8899"}>
-    <ThemeProvider>
+    <UiProvider>
       <App />
-    </ThemeProvider>
+    </UiProvider>
   </GraphqlProvider>,
   document.getElementById("root")
 );

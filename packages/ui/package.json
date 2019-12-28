@@ -37,6 +37,8 @@
     "@emotion/is-prop-valid": "^0.8.6",
     "@emotion/styled": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "i18next": "^19.0.2",
+    "react-i18next": "^11.2.7",
     "styled-system": "^5.1.4"
   }
 }

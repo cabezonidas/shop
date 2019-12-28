@@ -1,11 +1,20 @@
 import React, { forwardRef, ComponentProps, useState, useContext } from "react";
-import { Input, Form, Label, Button, Box } from "@cabezonidas/shop-ui";
+import {
+  Input,
+  Form,
+  Label,
+  Button,
+  Box,
+  useTranslation,
+  PrimaryButton,
+} from "@cabezonidas/shop-ui";
 import { useLoginMutation, MeQuery, MeDocument, GraphqlContext } from "@cabezonidas/shop-graphql";
 
 export const LoginForm = forwardRef<
   HTMLFormElement,
   ComponentProps<typeof Form> & { onRegister: () => void }
 >((props, ref) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("seba1@mailinator.com");
   const [password, setPassword] = useState("12345");
   const [login] = useLoginMutation();
@@ -40,20 +49,20 @@ export const LoginForm = forwardRef<
       {...formProps}
       ref={ref}
     >
-      <Label htmlFor="user">Usuario</Label>
+      <Label htmlFor="user">{t("login.email")}</Label>
       <Input
         id="user"
-        placeholder="email"
+        placeholder={t("login.email")}
         value={email}
         onChange={e => {
           setEmail(e.target.value);
         }}
       />
-      <Label htmlFor="password">Contrasena</Label>
+      <Label htmlFor="password">{t("login.password")}</Label>
       <Input
         type="password"
         id="password"
-        placeholder="password"
+        placeholder={t("login.password")}
         value={password}
         onChange={e => {
           setPassword(e.target.value);
@@ -61,15 +70,18 @@ export const LoginForm = forwardRef<
       />
 
       <Box display="flex" justifyContent="space-between">
-        <Button type="submit">Login</Button>
-        <Button
-          onClick={e => {
-            e.preventDefault();
-            onRegister();
-          }}
-        >
-          Don't have an account? register now!
-        </Button>
+        <Box display="flex" alignItems="center">
+          <Box>{t("login.dont_have_account")}</Box>
+          <Button
+            onClick={e => {
+              e.preventDefault();
+              onRegister();
+            }}
+          >
+            {t("login.register_now")}
+          </Button>
+        </Box>
+        <PrimaryButton type="submit">{t("login.login")}</PrimaryButton>
       </Box>
     </Form>
   );
