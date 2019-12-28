@@ -1,10 +1,10 @@
 import React from "react";
-import { LoginApp } from "@cabezonidas/shop-login";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from "./pages/home";
 import { useTranslation, Box, useTheme } from "@cabezonidas/shop-ui";
 import Users from "./pages/users";
 import { PrivateRoute } from "./pages/private-route";
+import { Login } from "./pages/login";
 
 const enUsRoutes = {
   routes: {
@@ -50,7 +50,7 @@ const App: React.FC = () => {
         <Box width="60%" margin="2">
           <Switch>
             <Route path="/" exact={true} component={Home} />
-            <Route path="/me" exact={true} component={LoginApp} />
+            <Route path="/me" exact={true} component={Login} />
             <PrivateRoute path="/users" component={Users} />
           </Switch>
         </Box>
