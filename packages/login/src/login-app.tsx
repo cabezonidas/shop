@@ -49,30 +49,30 @@ const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) 
 
   if (loading || loadingUser) {
     body = t("login.loading");
-  }
-
-  if (data && data.me) {
-    body = (
-      <>
-        {data.me.email}
-        <Button
-          onClick={async () => {
-            await logout();
-            setAccessToken("");
-            if (client) {
-              await client.resetStore();
-            }
-          }}
-        >
-          {t("login.logout")}
-        </Button>
-      </>
-    );
   } else {
-    if (mode === "login") {
-      body = <LoginForm onRegister={() => setMode("login")} />;
+    if (data && data.me) {
+      body = (
+        <>
+          {data.me.email}
+          <Button
+            onClick={async () => {
+              await logout();
+              setAccessToken("");
+              if (client) {
+                await client.resetStore();
+              }
+            }}
+          >
+            {t("login.logout")}
+          </Button>
+        </>
+      );
     } else {
-      body = <RegisterForm onLogin={() => setMode("login")} />;
+      if (mode === "login") {
+        body = <LoginForm onRegister={() => setMode("login")} />;
+      } else {
+        body = <RegisterForm onLogin={() => setMode("login")} />;
+      }
     }
   }
 

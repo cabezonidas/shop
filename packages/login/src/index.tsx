@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./LoginApp";
+import App from "./login-app";
 import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
 import { UiProvider } from "@cabezonidas/shop-ui";
