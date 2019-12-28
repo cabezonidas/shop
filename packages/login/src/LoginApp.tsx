@@ -64,12 +64,12 @@ const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) 
         </Button>
       </>
     );
-  }
-
-  if (mode === "login") {
-    body = <LoginForm onRegister={() => setMode("register")} />;
   } else {
-    body = <RegisterForm onLogin={() => setMode("login")} />;
+    if (mode === "login") {
+      body = <LoginForm onRegister={() => setMode("register")} />;
+    } else {
+      body = <RegisterForm onLogin={() => setMode("login")} />;
+    }
   }
 
   return (
