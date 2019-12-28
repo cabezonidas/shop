@@ -48,10 +48,10 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
       new Observable(observer => {
         let handle: any;
         Promise.resolve(operation)
-          .then(operation => {
+          .then(op => {
             const accessToken = getAccessToken();
             if (accessToken) {
-              operation.setContext({
+              op.setContext({
                 headers: {
                   authorization: `bearer ${accessToken}`,
                 },
@@ -68,7 +68,9 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
           .catch(observer.error.bind(observer));
 
         return () => {
-          if (handle) handle.unsubscribe();
+          if (handle) {
+            handle.unsubscribe();
+          }
         };
       })
   );
@@ -109,8 +111,18 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
         },
       }),
       onError(({ graphQLErrors, networkError }) => {
-        console.log(graphQLErrors);
-        console.log(networkError);
+        if (graphQLErrors) {
+          graphQLErrors.map(({ message, locations, path }) => {
+            // Maybe show it in a toast
+            console.log(
+              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            );
+          });
+        }
+        if (networkError) {
+          // Maybe show a toast too.
+          console.log(`[Network error]: ${networkError}`);
+        }
       }),
       requestLink,
       new HttpLink({
