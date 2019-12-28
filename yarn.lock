@@ -3291,6 +3291,20 @@
   dependencies:
     "@types/node" "*"
 
+"@types/aws-lambda@*":
+  version "8.10.39"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.39.tgz#da83cf7a82695a8904e383d705829fecf96b7db2"
+  integrity sha512-6qxQ4wS636AapVvDbzltI/Xn69QWxjcvohvxd/+MTWzdE9Vqz1xgERr38jEbBGEkyyG8y819nAhjGsiY6KNh1A==
+
+"@types/aws-serverless-express@^3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@types/aws-serverless-express/-/aws-serverless-express-3.3.2.tgz#a4e7bff8ec53eb970acb0d87806654c80285e6f9"
+  integrity sha512-2vBt5YCjDFAkFC53O8/TEJpjsDnF8Gz0ntxwESWotgXurWrFGdmVkt0Z6t9buVO2bO833+SMsWd8PL+2io4A9Q==
+  dependencies:
+    "@types/aws-lambda" "*"
+    "@types/express" "*"
+    "@types/node" "*"
+
 "@types/babel__core@^7.1.0":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.3.tgz#e441ea7df63cd080dfcd02ab199e6d16a735fc30"
