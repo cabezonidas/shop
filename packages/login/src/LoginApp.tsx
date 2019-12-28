@@ -2,7 +2,7 @@ import React, { useState, ComponentProps, forwardRef } from "react";
 import { LoginForm } from "./components/login-form";
 import { useMeQuery, useLogoutMutation, useGraphqlClient } from "@cabezonidas/shop-graphql";
 import RegisterForm from "./components/register-form";
-import { Box, Button, useTranslation } from "@cabezonidas/shop-ui";
+import { Box, Button, useTranslation, ErrorBoundary } from "@cabezonidas/shop-ui";
 
 const enUsLogin = {
   login: "Login",
@@ -28,10 +28,14 @@ const esArLogin = {
 };
 
 export const LoginApp = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { login: enUsLogin }, true, true);
   i18n.addResourceBundle("en-AR", "translation", { login: esArLogin }, true, true);
-  return <App {...props} ref={ref} />;
+  return (
+    <ErrorBoundary {...{ i18n, t }}>
+      <App {...props} ref={ref} />
+    </ErrorBoundary>
+  );
 });
 
 const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
@@ -66,7 +70,7 @@ const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) 
     );
   } else {
     if (mode === "login") {
-      body = <LoginForm onRegister={() => setMode("register")} />;
+      body = <LoginForm onRegister={() => setMode("login")} />;
     } else {
       body = <RegisterForm onLogin={() => setMode("login")} />;
     }
