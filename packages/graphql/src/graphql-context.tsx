@@ -4,7 +4,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
-import { onError } from "apollo-link-error";
+import { onError, ErrorResponse } from "apollo-link-error";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
@@ -20,7 +20,10 @@ interface IGraphqlContext {
 
 const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
-export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
+export const GraphqlProvider: FC<{
+  uri: string;
+  onErrorResponse?: (error: ErrorResponse) => void;
+}> = ({ uri, onErrorResponse, children }) => {
   const { getAccessToken, setAccessToken } = useAccessToken();
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -110,19 +113,9 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
           console.error(err);
         },
       }),
-      onError(({ graphQLErrors, networkError }) => {
-        // Maybe pass an optional function to the provider, so if present, do something.
-        if (graphQLErrors) {
-          graphQLErrors.map(({ message, locations, path }) => {
-            // Maybe show it in a toast
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            );
-          });
-        }
-        if (networkError) {
-          // Maybe show a toast too.
-          console.log(`[Network error]: ${networkError}`);
+      onError(errResponse => {
+        if (onErrorResponse) {
+          onErrorResponse(errResponse);
         }
       }),
       requestLink,
@@ -132,6 +125,17 @@ export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
       }),
     ]),
     cache,
+    defaultOptions: {
+      query: {
+        errorPolicy: "all",
+      },
+      mutate: {
+        errorPolicy: "all",
+      },
+      watchQuery: {
+        errorPolicy: "all",
+      },
+    },
   });
   return (
     <GraphqlContext.Provider value={{ loadingUser, setAccessToken, getAccessToken }}>
