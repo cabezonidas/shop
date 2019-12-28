@@ -1,27 +1,26 @@
-import React from "react";
-import { useUsersQuery } from "@cabezonidas/shop-graphql";
+import React, { ComponentProps } from "react";
+import { forwardRef } from "react";
+import { Box, useTranslation } from "@cabezonidas/shop-ui";
 
-interface Props {}
+const enUsHome = {
+  home: {
+    welcome: "Welcome to this wonderful app!",
+  },
+};
+const esArHome = {
+  home: {
+    welcome: "Hola! Gracias por visitarnos",
+  },
+};
 
-export const Home: React.FC<Props> = () => {
-  const { data } = useUsersQuery({ fetchPolicy: "network-only" });
-
-  if (!data) {
-    return <div>loading...</div>;
-  }
+export const Home = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
+  const { t, i18n } = useTranslation();
+  i18n.addResourceBundle("en-US", "translation", { main: enUsHome }, true, true);
+  i18n.addResourceBundle("en-AR", "translation", { main: esArHome }, true, true);
 
   return (
-    <div>
-      <div>users:</div>
-      <ul>
-        {data.users.map(x => {
-          return (
-            <li key={x._id}>
-              {x.email}, {x._id}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <Box {...props} ref={ref}>
+      {t("main.home.welcome")}
+    </Box>
   );
-};
+});
