@@ -6,11 +6,19 @@ import { GraphqlProvider } from "@cabezonidas/shop-graphql";
 import { UiProvider } from "@cabezonidas/shop-ui";
 
 ReactDOM.render(
-  <GraphqlProvider uri={"http://localhost:8899"}>
-    <UiProvider>
+  <UiProvider>
+    <GraphqlProvider
+      uri={"http://localhost:8899"}
+      onErrorResponse={({ operation, networkError }) => {
+        // Use toast/alert here.
+        if (networkError) {
+          console.log(networkError, operation);
+        }
+      }}
+    >
       <App />
-    </UiProvider>
-  </GraphqlProvider>,
+    </GraphqlProvider>
+  </UiProvider>,
   document.getElementById("root")
 );
 
