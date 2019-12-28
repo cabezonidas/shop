@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import React, { useState, useEffect, createContext, FC } from "react";
+import React, { useState, useEffect, createContext, FC, useContext } from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -18,7 +18,7 @@ interface IGraphqlContext {
   setAccessToken: (token: string) => void;
 }
 
-export const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
+const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
 export const GraphqlProvider: FC<{ uri: string }> = ({ uri, children }) => {
   const { getAccessToken, setAccessToken } = useAccessToken();
@@ -133,4 +133,8 @@ const useAccessToken = () => {
     getAccessToken: () => token,
     setAccessToken: (t: string) => setToken(t),
   };
+};
+
+export const useGraphqlClient = () => {
+  return useContext(GraphqlContext);
 };

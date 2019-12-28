@@ -1,4 +1,4 @@
-import React, { forwardRef, ComponentProps, useState, useContext } from "react";
+import React, { forwardRef, ComponentProps, useState } from "react";
 import {
   Input,
   Form,
@@ -8,7 +8,7 @@ import {
   useTranslation,
   PrimaryButton,
 } from "@cabezonidas/shop-ui";
-import { useLoginMutation, MeQuery, MeDocument, GraphqlContext } from "@cabezonidas/shop-graphql";
+import { useLoginMutation, MeQuery, MeDocument, useGraphqlClient } from "@cabezonidas/shop-graphql";
 
 export const LoginForm = forwardRef<
   HTMLFormElement,
@@ -18,7 +18,7 @@ export const LoginForm = forwardRef<
   const [email, setEmail] = useState("seba1@mailinator.com");
   const [password, setPassword] = useState("12345");
   const [login] = useLoginMutation();
-  const { setAccessToken } = useContext(GraphqlContext);
+  const { setAccessToken } = useGraphqlClient();
   const { onRegister, ...formProps } = props;
   return (
     <Form

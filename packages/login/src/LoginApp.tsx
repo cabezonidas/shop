@@ -1,6 +1,6 @@
-import React, { useContext, useState, ComponentProps, forwardRef } from "react";
+import React, { useState, ComponentProps, forwardRef } from "react";
 import { LoginForm } from "./components/login-form";
-import { useMeQuery, GraphqlContext, useLogoutMutation } from "@cabezonidas/shop-graphql";
+import { useMeQuery, useLogoutMutation, useGraphqlClient } from "@cabezonidas/shop-graphql";
 import RegisterForm from "./components/register-form";
 import { Box, Button, useTranslation } from "@cabezonidas/shop-ui";
 
@@ -39,7 +39,7 @@ const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) 
   const [mode, setMode] = useState<"register" | "login">("login");
   const { data, loading } = useMeQuery();
   const [logout, { client }] = useLogoutMutation();
-  const { loadingUser, setAccessToken } = useContext(GraphqlContext);
+  const { loadingUser, setAccessToken } = useGraphqlClient();
 
   let body = <></>;
 
