@@ -30,7 +30,8 @@
     "prestart": "npm run build",
     "start": "node -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
-    "typeorm": "./node_modules/.bin/typeorm"
+    "typeorm": "./node_modules/.bin/typeorm",
+    "sls-deploy:testing": "npm install && sls deploy --env testing"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
