@@ -9,9 +9,11 @@ import { buildSchemaSync } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { router } from "./router";
 import { corsPolicy, translation } from "./middleware";
+import * as awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 
 const app = express();
 
+app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(translation);
 app.use(corsPolicy);
 app.use(cookieParser());
