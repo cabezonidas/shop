@@ -2,11 +2,12 @@ service: shop-backend
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
+  stage: ${env:STAGE}
 
 functions:
   backend:
