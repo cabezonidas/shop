@@ -40,7 +40,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@cabezonidas/shop-common": "*",
     "apollo-server-express": "^2.9.14",
     "aws-serverless-express": "^3.3.6",
     "bcryptjs": "^2.4.3",
