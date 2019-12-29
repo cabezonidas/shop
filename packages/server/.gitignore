@@ -1,4 +1,5 @@
 src/**/*.js.map
 *.env
+*.env.*
 .serverless
 .build
