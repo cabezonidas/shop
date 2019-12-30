@@ -121,7 +121,8 @@ export const GraphqlProvider: FC<{
       requestLink,
       new HttpLink({
         uri: `${uri}/graphql`,
-        credentials: "include",
+        // If credentials is "include", it fucks with cros origin
+        // credentials: "include",
       }),
     ]),
     cache,
