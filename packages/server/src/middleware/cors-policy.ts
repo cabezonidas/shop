@@ -1,8 +1,10 @@
 import * as cors from "cors";
 
+const { CORS_ALLOWED_DOMAIN, NODE_ENV } = process.env;
+
 const whiteList = [
-  ...((process.env.CORS_ALLOWED_DOMAIN || "").split(",") || []),
-  ...(process.env.NODE_ENV === "development" ? [undefined] : []),
+  ...((CORS_ALLOWED_DOMAIN || "").split(",") || []),
+  ...(NODE_ENV === "development" || NODE_ENV === "testing" ? [undefined] : []),
 ];
 
 export const corsPolicy = cors({
