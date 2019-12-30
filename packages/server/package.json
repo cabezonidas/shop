@@ -53,6 +53,7 @@
     "i18next": "^19.0.2",
     "i18next-express-middleware": "^1.9.1",
     "jsonwebtoken": "^8.5.1",
+    "middy": "^0.33.1",
     "mongoose": "^5.8.3",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.5.4",

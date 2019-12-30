@@ -7,6 +7,7 @@ import { httpErrorHandler, cors } from "middy/middlewares";
 import { whiteList } from "./src/middleware";
 
 const binaryMimeTypes = [
+  "application/json",
   "application/octet-stream",
   "font/eot",
   "font/opentype",
