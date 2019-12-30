@@ -1,9 +1,9 @@
 import * as cors from "cors";
 
-const { CORS_ALLOWED_DOMAIN, NODE_ENV } = process.env;
+const { CORS_ALLOWED_DOMAINS, NODE_ENV } = process.env;
 
-const whiteList = [
-  ...((CORS_ALLOWED_DOMAIN || "").split(",") || []),
+export const whiteList = [
+  ...((CORS_ALLOWED_DOMAINS || "").split(",") || []),
   ...(NODE_ENV === "development" || NODE_ENV === "testing" ? [undefined] : []),
 ];
 
