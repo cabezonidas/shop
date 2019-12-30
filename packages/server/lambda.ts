@@ -1,5 +1,8 @@
-import * as awsServerlessExpress from "aws-serverless-express";
+import { createServer, proxy } from "aws-serverless-express";
 import app from "./src/server";
+import { connectToDatabase } from "./src/db";
+import { Context } from "aws-lambda";
+
 const binaryMimeTypes = [
   "application/octet-stream",
   "font/eot",
@@ -9,13 +12,11 @@ const binaryMimeTypes = [
   "image/png",
   "image/svg+xml",
 ];
-const server = awsServerlessExpress.createServer(app, null, binaryMimeTypes);
 
-export const backend = (event: any, context: any) => {
-  awsServerlessExpress.proxy(server, event, context);
-};
+const server = createServer(app, null, binaryMimeTypes);
 
-export const hello = (event: any, context: any, callback: any) => {
-  console.log("Hello Cabe");
-  callback(null, "Hello Cabe");
+export const backend = async (event: any, context: Context) => {
+  // context.callbackWaitsForEmptyEventLoop = false;
+  await connectToDatabase();
+  return proxy(server, event, context, "PROMISE").promise;
 };

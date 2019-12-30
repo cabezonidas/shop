@@ -3,34 +3,38 @@ import "reflect-metadata";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { createConnection } from "typeorm";
-import { mongodbConnection } from "../ormconfig";
 import { buildSchemaSync } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { router } from "./router";
 import { corsPolicy, translation } from "./middleware";
 import * as awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
+import { connectToDatabase } from "./db";
 
-const app = express();
+const server = (() => {
+  const app = express();
 
-app.use(awsServerlessExpressMiddleware.eventContext());
-app.use(translation);
-app.use(corsPolicy);
-app.use(cookieParser());
-app.use("/", router);
+  app.use(translation);
+  app.use(corsPolicy);
+  app.use(cookieParser());
+  app.use("/", router);
 
-const server = new ApolloServer({
-  schema: buildSchemaSync({ resolvers: [UserResolver] }),
-  context: ({ req, res }) => ({ req, res }),
-});
-server.applyMiddleware({ app, cors: false });
+  const apolloServer = new ApolloServer({
+    schema: buildSchemaSync({ resolvers: [UserResolver] }),
+    context: ({ req, res }) => ({ req, res }),
+  });
+  apolloServer.applyMiddleware({ app, cors: false });
 
-if (process.env.NODE_ENV === "development") {
-  createConnection(mongodbConnection);
-  const port = process.env.PORT;
-  app.listen({ port }, () =>
-    console.log(`Graphql server ready at http://localhost:${port}${server.graphqlPath}`)
-  );
-}
+  if (process.env.NODE_ENV === "development") {
+    const port = process.env.PORT;
+    connectToDatabase().then(() => {
+      app.listen({ port }, () =>
+        console.log(`Graphql server ready at http://localhost:${port}${apolloServer.graphqlPath}`)
+      );
+    });
+  } else {
+    app.use(awsServerlessExpressMiddleware.eventContext());
+  }
+  return app;
+})();
 
-export default app;
+export default server;
