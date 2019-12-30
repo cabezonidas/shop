@@ -8,7 +8,7 @@ import { UiProvider } from "@cabezonidas/shop-ui";
 ReactDOM.render(
   <UiProvider>
     <GraphqlProvider
-      uri={"http://localhost:8899"}
+      uri={process.env.REACT_APP_BACKEND_URL as string}
       onErrorResponse={({ operation, networkError }) => {
         // Use toast/alert here.
         if (networkError) {
