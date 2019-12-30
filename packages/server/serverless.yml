@@ -15,15 +15,13 @@ functions:
     events:
       - http:
           path: /
-          method: GET
+          method: ANY
           cors: true
       - http:
           path: /refresh_token
-          method: POST
+          method: ANY
           cors: true
       - http:
           path: /graphql
-          method: POST
+          method: ANY
           cors: true
-  hello:
-    handler: lambda.hello
