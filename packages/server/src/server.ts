@@ -13,8 +13,11 @@ import { connectToDatabase } from "./db";
 const server = (() => {
   const app = express();
 
+  if (process.env.NODE_ENV === "development") {
+    app.use(corsPolicy);
+  }
+
   app.use(translation);
-  app.use(corsPolicy);
   app.use(cookieParser());
   app.use("/", router);
 
