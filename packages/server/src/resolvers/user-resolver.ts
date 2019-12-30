@@ -31,6 +31,10 @@ export class UserResolver {
   public async users() {
     return await User.find();
   }
+  @Query(() => String)
+  public hello() {
+    return "hello!";
+  }
 
   @Query(() => User, { nullable: true })
   public me(@Ctx() context: IGraphqlContext) {
