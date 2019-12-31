@@ -45,6 +45,7 @@ export type MutationRegisterArgs = {
 export type Query = {
    __typename?: 'Query',
   users: Array<User>,
+  hello: Scalars['String'],
   me?: Maybe<User>,
 };
 

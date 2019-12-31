@@ -4,5 +4,5 @@
     "outDir": "./lib",
     "moduleResolution": "node"
   },
-  "include": ["./src"]
+  "include": ["./src", "lambda.ts"]
 }
