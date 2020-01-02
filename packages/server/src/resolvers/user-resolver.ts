@@ -15,7 +15,7 @@ import { createRefreshToken, createAccessToken, sendRefreshToken } from "../auth
 import { isAuth } from "../auth/is-auth";
 import { ObjectId } from "mongodb";
 import { verify } from "jsonwebtoken";
-import { getLabels } from "../google";
+import { getLabels } from "../integrations";
 
 @ObjectType()
 class LoginResponse {
