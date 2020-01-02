@@ -1,4 +1,5 @@
 import { config, S3 } from "aws-sdk";
+import { Stream } from "stream";
 
 const albumBucketName = "cabezonidas-shop-photos";
 const bucketRegion = "us-east-1";
@@ -14,43 +15,50 @@ const s3 = new S3({
   params: { Bucket: albumBucketName },
 });
 
-export const awsCreateAlbum = (albumName: string): Promise<{ succeed: boolean; error?: string }> =>
+export const awsCreateAlbum = (
+  albumName: string
+): Promise<{ succeed: boolean; error?: string; albumKey: string }> =>
   new Promise(resolve => {
     albumName = albumName.trim();
     if (!albumName) {
       return resolve({
         succeed: false,
         error: "Album names must contain at least one non-space character.",
+        albumKey: "",
       });
     }
     if (albumName.indexOf("/") !== -1) {
       return resolve({
         succeed: false,
         error: "Album names cannot contain slashes.",
+        albumKey: "",
       });
     }
     const albumKey = encodeURIComponent(albumName) + "/";
-    s3.headObject({ Key: albumKey } as any, (err1, data1) => {
+    s3.headObject({ Key: albumKey } as any, (err1, _) => {
       if (!err1) {
         return resolve({
           succeed: false,
           error: "Album already exists.",
+          albumKey: "",
         });
       }
       if (err1.code !== "NotFound") {
         return resolve({
           succeed: false,
           error: "There was an error creating your album: " + err1.message,
+          albumKey: "",
         });
       }
-      s3.putObject({ Key: albumKey } as any, (err2, data) => {
+      s3.putObject({ Key: albumKey } as any, (err2, __) => {
         if (err2) {
           return resolve({
             succeed: false,
             error: "There was an error creating your album: " + err2.message,
+            albumKey: "",
           });
         }
-        return resolve({ succeed: true });
+        return resolve({ succeed: true, albumKey });
       });
     });
   });
@@ -65,42 +73,108 @@ export const awsListAlbums = async (): Promise<string[]> =>
           const prefix = commonPrefix.Prefix;
           return decodeURIComponent(prefix.replace("/", ""));
         });
-        console.log(albums);
         resolve(albums);
       }
     });
   });
 
-// function addPhoto(albumName) {
-//   const files = document.getElementById("photoupload").files;
-//   if (!files.length) {
-//     return alert("Please choose a file to upload first.");
-//   }
-//   const file = files[0];
-//   const fileName = file.name;
-//   const albumPhotosKey = encodeURIComponent(albumName) + "//";
+export const awsAddPhoto = async (albumName: string, fileName: string, file: Stream) => {
+  const albumPhotosKey = encodeURIComponent(albumName) + "//";
 
-//   const photoKey = albumPhotosKey + fileName;
+  const photoKey = albumPhotosKey + fileName;
 
-//   // Use S3 ManagedUpload class as it supports multipart uploads
-//   const upload = new AWS.S3.ManagedUpload({
-//     params: {
-//       Bucket: albumBucketName,
-//       Key: photoKey,
-//       Body: file,
-//       ACL: "public-read",
-//     },
-//   });
+  const upload = new S3.ManagedUpload({
+    params: {
+      Bucket: albumBucketName,
+      Key: photoKey,
+      Body: file,
+      ACL: "public-read",
+    },
+  });
 
-//   const promise = upload.promise();
+  const result = await upload.promise();
+  return {
+    photoKey: result.Key,
+    name: fileName,
+    photoUrl: result.Location,
+  };
+};
 
-//   promise.then(
-//     function(data) {
-//       alert("Successfully uploaded photo.");
-//       viewAlbum(albumName);
-//     },
-//     function(err) {
-//       return alert("There was an error uploading your photo: ", err.message);
-//     }
-//   );
-// }
+export const awsViewAlbum = async (
+  albumName: string
+): Promise<{
+  succeed: boolean;
+  error?: string;
+  photos: Array<{ photoKey: string; photoUrl: string; name: string }>;
+}> =>
+  new Promise(resolve => {
+    {
+      const albumPhotosKey = encodeURIComponent(albumName) + "//";
+      s3.listObjects({ Prefix: albumPhotosKey } as any, (err, data) => {
+        if (err) {
+          return resolve({
+            succeed: false,
+            error: "There was an error viewing your album: " + err.message,
+            photos: [],
+          });
+        }
+        const bucketUrl = `https://${albumBucketName}.s3.amazonaws.com/`;
+
+        const photos = data.Contents.map(photo => ({
+          photoKey: photo.Key,
+          photoUrl: bucketUrl + encodeURIComponent(photo.Key),
+          name: photo.Key.replace(albumPhotosKey, ""),
+        }));
+        return resolve({ succeed: true, photos });
+      });
+    }
+  });
+
+export const awsDeletePhoto = async (
+  photoKey: string
+): Promise<{ succeed: boolean; error?: string }> =>
+  new Promise(resolve => {
+    {
+      s3.deleteObject({ Key: photoKey } as any, (err, _) => {
+        if (err) {
+          return resolve({
+            succeed: false,
+            error: `There was an error deleting your photo: ${err.message}`,
+          });
+        }
+        return resolve({ succeed: true });
+      });
+    }
+  });
+
+export const awsDeleteAlbum = async (
+  albumName: string
+): Promise<{ succeed: boolean; error?: string }> =>
+  new Promise(resolve => {
+    const albumKey = encodeURIComponent(albumName) + "/";
+    s3.listObjects({ Prefix: albumKey } as any, (err, data) => {
+      if (err) {
+        return resolve({
+          succeed: false,
+          error: `There was an error deleting your album: ${err.message}`,
+        });
+      }
+      const objects = data.Contents.map(object => {
+        return { Key: object.Key };
+      });
+      s3.deleteObjects(
+        {
+          Delete: { Objects: objects, Quiet: true },
+        } as any,
+        (err2, _) => {
+          if (err2) {
+            return resolve({
+              succeed: false,
+              error: `There was an error deleting your album: ${err.message}`,
+            });
+          }
+          return resolve({ succeed: true });
+        }
+      );
+    });
+  });
