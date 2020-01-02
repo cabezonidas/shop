@@ -70,3 +70,37 @@ export const awsListAlbums = async (): Promise<string[]> =>
       }
     });
   });
+
+// function addPhoto(albumName) {
+//   const files = document.getElementById("photoupload").files;
+//   if (!files.length) {
+//     return alert("Please choose a file to upload first.");
+//   }
+//   const file = files[0];
+//   const fileName = file.name;
+//   const albumPhotosKey = encodeURIComponent(albumName) + "//";
+
+//   const photoKey = albumPhotosKey + fileName;
+
+//   // Use S3 ManagedUpload class as it supports multipart uploads
+//   const upload = new AWS.S3.ManagedUpload({
+//     params: {
+//       Bucket: albumBucketName,
+//       Key: photoKey,
+//       Body: file,
+//       ACL: "public-read",
+//     },
+//   });
+
+//   const promise = upload.promise();
+
+//   promise.then(
+//     function(data) {
+//       alert("Successfully uploaded photo.");
+//       viewAlbum(albumName);
+//     },
+//     function(err) {
+//       return alert("There was an error uploading your photo: ", err.message);
+//     }
+//   );
+// }

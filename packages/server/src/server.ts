@@ -24,7 +24,10 @@ const server = (() => {
   app.use("/", router);
 
   const apolloServer = new ApolloServer({
-    schema: buildSchemaSync({ resolvers: [UserResolver, MediaResolver, MailResolver] }),
+    schema: buildSchemaSync({
+      resolvers: [UserResolver, MediaResolver, MailResolver],
+      validate: false,
+    }),
     context: ({ req, res }) => ({ req, res }),
   });
   apolloServer.applyMiddleware({ app, cors: false });
