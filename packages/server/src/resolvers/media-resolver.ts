@@ -1,7 +1,13 @@
-import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { awsListAlbums, awsCreateAlbum } from "../integrations";
+import { Resolver, Query, Mutation, Arg, ObjectType, Field } from "type-graphql";
+import {
+  awsListAlbums,
+  awsCreateAlbum,
+  awsAddPhoto,
+  awsViewAlbum,
+  awsDeleteAlbum,
+  awsDeletePhoto,
+} from "../integrations";
 import { Stream } from "stream";
-import { createWriteStream, WriteStream, writeFileSync } from "fs";
 import { GraphQLUpload } from "apollo-server-express";
 
 // tslint:disable-next-line: interface-over-type-literal
@@ -12,6 +18,16 @@ type FileUpload = {
   createReadStream: () => Stream;
 };
 
+@ObjectType()
+class AwsPhoto {
+  @Field()
+  public photoKey: string;
+  @Field()
+  public photoUrl: string;
+  @Field()
+  public name: string;
+}
+
 @Resolver()
 export class MediaResolver {
   @Query(() => [String])
@@ -19,27 +35,64 @@ export class MediaResolver {
     return await awsListAlbums();
   }
 
-  @Mutation(() => Boolean)
-  public async createAlbum(@Arg("albumName") albumName: string): Promise<boolean> {
-    const result = await awsCreateAlbum(albumName);
+  @Query(() => [AwsPhoto])
+  public async viewAlbum(
+    @Arg("albumName", () => String)
+    albumName: string
+  ) {
+    const result = await awsViewAlbum(albumName);
     if (result.succeed) {
-      return true;
+      return result.photos;
     } else {
       throw new Error(result.error);
     }
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
+  public async createAlbum(@Arg("albumName") albumName: string): Promise<string> {
+    const result = await awsCreateAlbum(albumName);
+    if (result.succeed) {
+      return result.albumKey;
+    } else {
+      throw new Error(result.error);
+    }
+  }
+
+  @Mutation(() => AwsPhoto)
   public async addPicture(
     @Arg("picture", () => GraphQLUpload)
-    image: FileUpload
+    { filename, createReadStream }: FileUpload,
+    @Arg("albumName", () => String)
+    albumName: string
+  ): Promise<AwsPhoto> {
+    const stream = createReadStream();
+    const upload = await awsAddPhoto(albumName, filename, stream);
+    return upload;
+  }
+
+  @Mutation(() => Boolean)
+  public async deleteAlbum(
+    @Arg("albumName", () => String)
+    albumName: string
   ): Promise<boolean> {
-    return new Promise(async (resolve, reject) => {
-      const { filename, createReadStream } = image;
-      createReadStream()
-        .pipe(createWriteStream(`/Users/Personal/shop/packages/server/src/resolvers/${filename}`))
-        .on("finish", () => resolve(true))
-        .on("error", () => reject(false));
-    });
+    const deleted = await awsDeleteAlbum(albumName);
+    if (deleted.succeed) {
+      return true;
+    } else {
+      throw new Error(deleted.error);
+    }
+  }
+
+  @Mutation(() => Boolean)
+  public async deletePicture(
+    @Arg("photoKey", () => String)
+    photoKey: string
+  ): Promise<boolean> {
+    const deleted = await awsDeletePhoto(photoKey);
+    if (deleted.succeed) {
+      return true;
+    } else {
+      throw new Error(deleted.error);
+    }
   }
 }
