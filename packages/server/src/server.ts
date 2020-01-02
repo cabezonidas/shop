@@ -9,6 +9,8 @@ import { router } from "./router";
 import { corsPolicy, translation } from "./middleware";
 import * as awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 import { connectToDatabase } from "./db";
+import { MediaResolver } from "./resolvers/media-resolver";
+import { MailResolver } from "./resolvers/mail-resolver";
 
 const server = (() => {
   const app = express();
@@ -22,7 +24,7 @@ const server = (() => {
   app.use("/", router);
 
   const apolloServer = new ApolloServer({
-    schema: buildSchemaSync({ resolvers: [UserResolver] }),
+    schema: buildSchemaSync({ resolvers: [UserResolver, MediaResolver, MailResolver] }),
     context: ({ req, res }) => ({ req, res }),
   });
   apolloServer.applyMiddleware({ app, cors: false });

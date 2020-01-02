@@ -15,7 +15,6 @@ import { createRefreshToken, createAccessToken, sendRefreshToken } from "../auth
 import { isAuth } from "../auth/is-auth";
 import { ObjectId } from "mongodb";
 import { verify } from "jsonwebtoken";
-import { getLabels, listAlbums, createAlbum } from "../integrations";
 
 @ObjectType()
 class LoginResponse {
@@ -33,24 +32,9 @@ export class UserResolver {
     return await User.find();
   }
 
-  @Query(() => [String])
-  public async getAlbums() {
-    return await listAlbums();
-  }
-
-  @Mutation(() => Boolean)
-  public async newAlbum(@Arg("albumName") albumName: string): Promise<boolean> {
-    return await createAlbum(albumName);
-  }
-
   @Query(() => String)
   public hello() {
     return "hello!";
-  }
-
-  @Query(() => [String])
-  public async labels() {
-    return await getLabels();
   }
 
   @Query(() => User, { nullable: true })

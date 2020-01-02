@@ -14,29 +14,43 @@ const s3 = new S3({
   params: { Bucket: albumBucketName },
 });
 
-export const awsCreateAlbum = (albumName: string): Promise<boolean> =>
+export const awsCreateAlbum = (albumName: string): Promise<{ succeed: boolean; error?: string }> =>
   new Promise(resolve => {
     albumName = albumName.trim();
     if (!albumName) {
-      throw new Error("Album names must contain at least one non-space character.");
+      return resolve({
+        succeed: false,
+        error: "Album names must contain at least one non-space character.",
+      });
     }
     if (albumName.indexOf("/") !== -1) {
-      throw new Error("Album names cannot contain slashes.");
+      return resolve({
+        succeed: false,
+        error: "Album names cannot contain slashes.",
+      });
     }
     const albumKey = encodeURIComponent(albumName) + "/";
     s3.headObject({ Key: albumKey } as any, (err1, data1) => {
       if (!err1) {
-        throw new Error("Album already exists.");
+        return resolve({
+          succeed: false,
+          error: "Album already exists.",
+        });
       }
       if (err1.code !== "NotFound") {
-        throw new Error("There was an error creating your album: " + err1.message);
+        return resolve({
+          succeed: false,
+          error: "There was an error creating your album: " + err1.message,
+        });
       }
       s3.putObject({ Key: albumKey } as any, (err2, data) => {
         if (err2) {
-          throw new Error("There was an error creating your album: " + err2.message);
+          return resolve({
+            succeed: false,
+            error: "There was an error creating your album: " + err2.message,
+          });
         }
-        console.log("Successfully created album.");
-        resolve(true);
+        return resolve({ succeed: true });
       });
     });
   });
