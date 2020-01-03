@@ -1,24 +1,6 @@
-import styled from "@emotion/styled";
 import Box from "./box";
 
-export const Input = styled(Box.withComponent("input"))`
-  border-width: 1px;
-  border-style: solid;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  &::after {
-    content: " test";
-  }
-  &:focus + span,
-  &:active + span {
-    opacity: 1 !important;
-    z-index: 1;
-  }
-  &:focus + svg,
-  &:active + svg {
-    opacity: 1 !important;
-    z-index: 1;
-  }
-`;
+export const Input = Box.withComponent("input");
 
 Input.defaultProps = {
   maxLength: 255,
@@ -27,6 +9,8 @@ Input.defaultProps = {
   mb: 4,
   borderRadius: 4,
   width: "100%",
+  borderWidth: "1px",
+  borderStyle: "solid",
 };
 
 export default Input;

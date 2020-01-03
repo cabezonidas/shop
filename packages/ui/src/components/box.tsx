@@ -40,6 +40,16 @@ import {
   flexDirection,
   fontStyle,
   zIndex,
+  gridGap,
+  gridColumn,
+  gridRow,
+  gridTemplateColumns,
+  gridTemplateRows,
+  GridGapProps,
+  GridColumnProps,
+  GridRowProps,
+  GridTemplateColumnsProps,
+  GridTemplateRowsProps,
   DisplayProps,
   BackgroundProps,
   MaxWidthProps,
@@ -115,6 +125,11 @@ export type StyleBoxProps = WidthProps &
   BottomProps &
   LeftProps &
   FlexProps &
+  GridGapProps &
+  GridColumnProps &
+  GridRowProps &
+  GridTemplateColumnsProps &
+  GridTemplateRowsProps &
   DisplayProps & {
     as?: string;
   };
@@ -158,7 +173,12 @@ const base = compose(
   flexDirection,
   flex,
   fontStyle,
-  zIndex
+  zIndex,
+  gridGap,
+  gridColumn,
+  gridRow,
+  gridTemplateColumns,
+  gridTemplateRows
 );
 
 export const Box = styled("div", {
