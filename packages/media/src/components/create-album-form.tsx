@@ -12,7 +12,6 @@ export const CreateAlbumForm = forwardRef<
 
   return (
     <Form
-      style={{ cursor: loading ? "wait" : "auto" }}
       onSubmit={async e => {
         e.preventDefault();
         if (loading) {
@@ -39,7 +38,9 @@ export const CreateAlbumForm = forwardRef<
             <Box>{t("media.createAlbum.createAlbumSuccess", { album: data.createAlbum })}</Box>
           )}
         </Box>
-        <PrimaryButton type="submit">{t("media.createAlbum.save")}</PrimaryButton>
+        <PrimaryButton style={{ cursor: loading ? "wait" : "auto" }} type="submit">
+          {t("media.createAlbum.save")}
+        </PrimaryButton>
       </Box>
     </Form>
   );

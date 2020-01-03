@@ -12,14 +12,7 @@ export const Thumbnail = forwardRef<
   const [remove, { loading, error }] = useDeletePictureMutation({ variables: { photoKey } });
 
   return (
-    <Box
-      style={{ cursor: loading ? "wait" : "auto" }}
-      {...boxProps}
-      ref={ref}
-      display="flex"
-      flexDirection="column"
-      alignContent="middle"
-    >
+    <Box {...boxProps} ref={ref} display="flex" flexDirection="column" alignContent="middle">
       <Box textAlign="center">{name}</Box>
       <img src={photoUrl} width="100px" height="100px" alt={name} />
       <Button
@@ -31,6 +24,7 @@ export const Thumbnail = forwardRef<
             }
           }
         }}
+        style={{ cursor: loading ? "wait" : "auto" }}
       >
         {t("media.thumbnail.delete")}
       </Button>

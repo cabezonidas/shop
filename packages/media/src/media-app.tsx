@@ -23,6 +23,8 @@ const enUsMedia = {
   },
   albumCollection: {
     empty_album: "This album is empty.",
+    warning: "Warning",
+    delete_album: "Delete album",
   },
 };
 const esArMedia = {
@@ -42,6 +44,8 @@ const esArMedia = {
   },
   albumCollection: {
     empty_album: "Este álbum está vacío.",
+    warning: "Cuidado",
+    delete_album: "Eliminar álbum",
   },
 };
 
@@ -91,7 +95,16 @@ const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) 
           ))}
         </Select>
       </Box>
-      {album && <AlbumImageCollection album={album} pt={3} />}
+      {album && (
+        <AlbumImageCollection
+          album={album}
+          pt={3}
+          onDeleted={() => {
+            setAlbumCollection(ac => ac.filter(a => a !== album));
+            setAlbum("");
+          }}
+        />
+      )}
     </Box>
   );
 });

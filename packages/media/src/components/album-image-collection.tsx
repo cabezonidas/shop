@@ -4,12 +4,13 @@ import { useViewAlbumQuery, AwsPhoto } from "@cabezonidas/shop-graphql";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Thumbnail } from "./thumbnail";
+import { DeleteAlbum } from "./delete-album";
 
 export const AlbumImageCollection = forwardRef<
   HTMLDivElement,
-  ComponentProps<typeof Box> & { album: string }
+  ComponentProps<typeof Box> & { album: string; onDeleted: () => void }
 >((props, ref) => {
-  const { album, ...boxProps } = props;
+  const { album, onDeleted, ...boxProps } = props;
   const { data, error, loading } = useViewAlbumQuery({
     variables: { albumName: album },
     fetchPolicy: "cache-and-network",
@@ -26,6 +27,14 @@ export const AlbumImageCollection = forwardRef<
   const result = (children: JSX.Element | null) => (
     <Box {...boxProps} ref={ref}>
       {children}
+      <DeleteAlbum
+        album={album}
+        onDeleted={onDeleted}
+        display="flex"
+        alignItems="center"
+        pt={5}
+        justifyContent="flex-end"
+      />
     </Box>
   );
   if (error) {
