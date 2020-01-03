@@ -26,6 +26,12 @@ const enUsMedia = {
     warning: "Warning",
     delete_album: "Delete album",
   },
+  uploadImage: {
+    title: "Upload an image to this album",
+    label: "Image",
+    submit: "Upload",
+    uploading: "Uploading...",
+  },
 };
 const esArMedia = {
   welcome: "Estás navegando la aplicación de multimedios",
@@ -46,6 +52,12 @@ const esArMedia = {
     empty_album: "Este álbum está vacío.",
     warning: "Cuidado",
     delete_album: "Eliminar álbum",
+  },
+  uploadImage: {
+    title: "Sube una imagen al álbum",
+    label: "Imagen",
+    submit: "Subir",
+    uploading: "Subiendo...",
   },
 };
 

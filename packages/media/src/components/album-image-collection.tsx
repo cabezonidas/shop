@@ -5,13 +5,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Thumbnail } from "./thumbnail";
 import { DeleteAlbum } from "./delete-album";
+import { UploadImageForm } from "./upload-image-form";
 
 export const AlbumImageCollection = forwardRef<
   HTMLDivElement,
   ComponentProps<typeof Box> & { album: string; onDeleted: () => void }
 >((props, ref) => {
   const { album, onDeleted, ...boxProps } = props;
-  const { data, error, loading } = useViewAlbumQuery({
+  const { data, error, loading, refetch } = useViewAlbumQuery({
     variables: { albumName: album },
     fetchPolicy: "cache-and-network",
   });
@@ -27,14 +28,8 @@ export const AlbumImageCollection = forwardRef<
   const result = (children: JSX.Element | null) => (
     <Box {...boxProps} ref={ref}>
       {children}
-      <DeleteAlbum
-        album={album}
-        onDeleted={onDeleted}
-        display="flex"
-        alignItems="center"
-        pt={5}
-        justifyContent="flex-end"
-      />
+      <UploadImageForm pt={4} album={album} onUploaded={() => refetch()} />
+      <DeleteAlbum justifyContent="flex-end" pt={5} album={album} onDeleted={onDeleted} />
     </Box>
   );
   if (error) {

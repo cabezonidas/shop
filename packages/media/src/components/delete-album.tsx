@@ -10,7 +10,7 @@ export const DeleteAlbum = forwardRef<
   const { t } = useTranslation();
   const [remove, { loading, error }] = useDeleteAlbumMutation({ variables: { albumName: album } });
   return (
-    <Box {...boxProps} ref={ref}>
+    <Box display="flex" alignItems="center" {...boxProps} ref={ref}>
       <Box display="flex" flexDirection="column" textAlign="center">
         <Label htmlFor="delete_album">{t("media.albumCollection.warning")}</Label>
         <Button
