@@ -9,16 +9,17 @@ import {
   Label,
   Input,
   PrimaryButton,
+  Button,
 } from "@cabezonidas/shop-ui";
 import {
   useAlbumsQuery,
   useCreateAlbumMutation,
   useViewAlbumQuery,
   AwsPhoto,
+  useDeletePictureMutation,
 } from "@cabezonidas/shop-graphql";
 import { useState } from "react";
 import { useEffect } from "react";
-import { FC } from "react";
 
 const enUsMedia = {
   welcome: "You're browsing the media app",
@@ -32,6 +33,9 @@ const enUsMedia = {
     save: "Save",
     createAlbumSuccess: "Album {{album}} created.",
   },
+  thumbnail: {
+    delete: "Delete",
+  },
 };
 const esArMedia = {
   welcome: "Estás navegando la aplicación de multimedios",
@@ -44,6 +48,9 @@ const esArMedia = {
     name: "Nombre",
     save: "Guardar",
     createAlbumSuccess: "Álbum {{album}} creado.",
+  },
+  thumbnail: {
+    delete: "Eliminar",
   },
 };
 
@@ -60,7 +67,7 @@ export const MediaApp = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((
 
 const App = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
   const { t } = useTranslation();
-  const { data } = useAlbumsQuery();
+  const { data } = useAlbumsQuery({ fetchPolicy: "cache-and-network" });
   const [albumCollection, setAlbumCollection] = useState<string[]>([]);
   const [album, setAlbum] = useState("");
 
@@ -105,8 +112,19 @@ const AlbumImageCollection = forwardRef<
   ComponentProps<typeof Box> & { album: string }
 >((props, ref) => {
   const { album, ...boxProps } = props;
-  const { data, error, loading } = useViewAlbumQuery({ variables: { albumName: album } });
+  const { data, error, loading } = useViewAlbumQuery({
+    variables: { albumName: album },
+    fetchPolicy: "cache-and-network",
+  });
+  const [collection, setCollection] = useState<AwsPhoto[]>([]);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (data) {
+      setCollection(data.viewAlbum);
+    }
+  }, [data, setCollection]);
+
   const result = (children: JSX.Element | null) => (
     <Box {...boxProps} ref={ref}>
       {children}
@@ -126,8 +144,13 @@ const AlbumImageCollection = forwardRef<
   }
   const body = data ? (
     <Box display="grid" gridGap={2} gridTemplateColumns="repeat(auto-fill, minmax(100px, 1fr))">
-      {data.viewAlbum.map(photo => (
-        <Thumbnail key={photo.photoUrl} {...photo} />
+      {collection.map(photo => (
+        <Thumbnail
+          key={photo.photoUrl}
+          onDeleted={deletedUrl => setCollection(c => c.filter(p => p.photoUrl !== deletedUrl))}
+          {...photo}
+          pt={1}
+        />
       ))}
     </Box>
   ) : null;
@@ -135,9 +158,42 @@ const AlbumImageCollection = forwardRef<
   return result(body);
 });
 
-const Thumbnail: FC<AwsPhoto> = ({ photoUrl, name }) => {
-  return <img src={photoUrl} width="100px" height="100px" alt={name} />;
-};
+const Thumbnail = forwardRef<
+  HTMLDivElement,
+  ComponentProps<typeof Box> & AwsPhoto & { onDeleted: (photoUrl: string) => void }
+>((props, ref) => {
+  const { name, photoUrl, photoKey, onDeleted, ...boxProps } = props;
+  const { t } = useTranslation();
+
+  const [remove, { loading, error }] = useDeletePictureMutation({ variables: { photoKey } });
+
+  return (
+    <Box
+      style={{ cursor: loading ? "wait" : "auto" }}
+      {...boxProps}
+      ref={ref}
+      display="flex"
+      flexDirection="column"
+      alignContent="middle"
+    >
+      <Box textAlign="center">{name}</Box>
+      <img src={photoUrl} width="100px" height="100px" alt={name} />
+      <Button
+        onClick={async () => {
+          if (!loading) {
+            const { data } = await remove();
+            if (data && data.deletePicture) {
+              onDeleted(photoUrl);
+            }
+          }
+        }}
+      >
+        {t("media.thumbnail.delete")}
+      </Button>
+      {error && error.graphQLErrors.map((e, i) => <Box key={i}>{e}</Box>)}
+    </Box>
+  );
+});
 
 const CreateAlbumForm = forwardRef<
   HTMLFormElement,
