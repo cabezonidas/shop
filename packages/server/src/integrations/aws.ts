@@ -58,7 +58,7 @@ export const awsCreateAlbum = (
             albumKey: "",
           });
         }
-        return resolve({ succeed: true, albumKey });
+        return resolve({ succeed: true, albumKey: albumName });
       });
     });
   });
