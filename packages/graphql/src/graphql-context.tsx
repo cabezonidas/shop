@@ -3,12 +3,12 @@ import React, { useState, useEffect, createContext, FC, useContext } from "react
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
 import { onError, ErrorResponse } from "apollo-link-error";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
 import { polyfill } from "es6-promise";
+import { createUploadLink } from "apollo-upload-client";
 
 polyfill();
 
@@ -119,10 +119,11 @@ export const GraphqlProvider: FC<{
         }
       }),
       requestLink,
-      new HttpLink({
+      createUploadLink({
         uri: `${uri}/graphql`,
-        // If credentials is "include", it fucks with cros origin
-        // credentials: "include",
+        headers: {
+          "keep-alive": "true",
+        },
       }),
     ]),
     cache,
