@@ -140,6 +140,16 @@ export type DeleteAlbumMutation = (
   & Pick<Mutation, 'deleteAlbum'>
 );
 
+export type DeletePictureMutationVariables = {
+  photoKey: Scalars['String']
+};
+
+
+export type DeletePictureMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deletePicture'>
+);
+
 export type ViewAlbumQueryVariables = {
   albumName: Scalars['String']
 };
@@ -338,6 +348,36 @@ export function useDeleteAlbumMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type DeleteAlbumMutationHookResult = ReturnType<typeof useDeleteAlbumMutation>;
 export type DeleteAlbumMutationResult = ApolloReactCommon.MutationResult<DeleteAlbumMutation>;
 export type DeleteAlbumMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteAlbumMutation, DeleteAlbumMutationVariables>;
+export const DeletePictureDocument = gql`
+    mutation DeletePicture($photoKey: String!) {
+  deletePicture(photoKey: $photoKey)
+}
+    `;
+export type DeletePictureMutationFn = ApolloReactCommon.MutationFunction<DeletePictureMutation, DeletePictureMutationVariables>;
+
+/**
+ * __useDeletePictureMutation__
+ *
+ * To run a mutation, you first call `useDeletePictureMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePictureMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePictureMutation, { data, loading, error }] = useDeletePictureMutation({
+ *   variables: {
+ *      photoKey: // value for 'photoKey'
+ *   },
+ * });
+ */
+export function useDeletePictureMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeletePictureMutation, DeletePictureMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeletePictureMutation, DeletePictureMutationVariables>(DeletePictureDocument, baseOptions);
+      }
+export type DeletePictureMutationHookResult = ReturnType<typeof useDeletePictureMutation>;
+export type DeletePictureMutationResult = ApolloReactCommon.MutationResult<DeletePictureMutation>;
+export type DeletePictureMutationOptions = ApolloReactCommon.BaseMutationOptions<DeletePictureMutation, DeletePictureMutationVariables>;
 export const ViewAlbumDocument = gql`
     query ViewAlbum($albumName: String!) {
   viewAlbum(albumName: $albumName) {
