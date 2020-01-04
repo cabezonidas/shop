@@ -31,7 +31,7 @@ const server = (() => {
     }),
     context: ({ req, res }) => ({ req, res }),
   });
-  apolloServer.applyMiddleware({ app, cors: true });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   if (process.env.NODE_ENV === "development") {
     const port = 8899;
