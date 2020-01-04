@@ -21,9 +21,10 @@ interface IGraphqlContext {
 const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
 export const GraphqlProvider: FC<{
+  language?: string;
   uri: string;
   onErrorResponse?: (error: ErrorResponse) => void;
-}> = ({ uri, onErrorResponse, children }) => {
+}> = ({ uri, onErrorResponse, language, children }) => {
   const { getAccessToken, setAccessToken } = useAccessToken();
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -123,6 +124,7 @@ export const GraphqlProvider: FC<{
         uri: `${uri}/graphql`,
         headers: {
           "keep-alive": "true",
+          "Accept-Language": language || "en-US",
         },
       }),
     ]),
