@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import { Home } from "./pages/home";
 import { useTranslation, Box, useTheme } from "@cabezonidas/shop-ui";
-import Users from "./pages/users";
 import { PrivateRoute } from "./pages/private-route";
 import { Login } from "./pages/login";
 import { MediaApp } from "@cabezonidas/shop-media";
+import { Home } from "./pages/home";
+import Users from "./pages/users";
 
 const enUsRoutes = {
   routes: {
