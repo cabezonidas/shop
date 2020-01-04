@@ -4,7 +4,7 @@ import { User } from "../entity/user";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "../auth/tokens";
 import { ObjectId } from "mongodb";
 
-const sendUnauthenticated = (res: Response, error: string) => res.send({ ok: false, error });
+const sendUnauthenticated = (res: Response) => res.send({ ok: false });
 export const router = Router();
 
 router.route("/").get((_, res) => res.send("Home route"));
@@ -12,26 +12,23 @@ router.route("/refresh_token").post(async (req, res) => {
   const token = req.cookies.jid;
 
   if (!token) {
-    return sendUnauthenticated(res, `no token`);
+    return sendUnauthenticated(res);
   }
   let payload = null;
   try {
     payload = verify(token, process.env.REFRESH_TOKEN_SECRET);
   } catch (err) {
-    return sendUnauthenticated(res, `not verified ${token}`);
+    return sendUnauthenticated(res);
   }
 
   const user = await User.findOne({ _id: new ObjectId(payload.userId) });
 
   if (!user) {
-    return sendUnauthenticated(res, `no user ${payload.userId}`);
+    return sendUnauthenticated(res);
   }
 
   if (user.tokenVersion !== payload.tokenVersion) {
-    return sendUnauthenticated(
-      res,
-      `different token versions ${user.tokenVersion} ${payload.tokenVersion}`
-    );
+    return sendUnauthenticated(res);
   }
 
   sendRefreshToken(res, createRefreshToken(user));

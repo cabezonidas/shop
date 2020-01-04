@@ -7,7 +7,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: ${env:STAGE}
+  stage: ${env:NODE_ENV}
 
 functions:
   backend:
@@ -16,12 +16,9 @@ functions:
       - http:
           path: /
           method: ANY
-          cors: true
       - http:
           path: /refresh_token
           method: ANY
-          cors: true
       - http:
           path: /graphql
           method: ANY
-          cors: true
