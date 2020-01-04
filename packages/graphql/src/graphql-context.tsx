@@ -20,6 +20,8 @@ interface IGraphqlContext {
 
 const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
+const credentials = "include";
+
 export const GraphqlProvider: FC<{
   language?: string;
   uri: string;
@@ -32,7 +34,7 @@ export const GraphqlProvider: FC<{
     let alive = true;
     fetch(`${uri}/refresh_token`, {
       method: "POST",
-      credentials: "include",
+      credentials,
     }).then(async x => {
       const res = await x.json();
       const { accessToken } = res;
@@ -103,7 +105,7 @@ export const GraphqlProvider: FC<{
         fetchAccessToken: () => {
           return fetch(`${uri}/refresh_token`, {
             method: "POST",
-            credentials: "include",
+            credentials,
           });
         },
         handleFetch: accessToken => {
@@ -126,7 +128,7 @@ export const GraphqlProvider: FC<{
           "keep-alive": "true",
           "Accept-Language": language || "en-US",
         },
-        credentials: "include",
+        credentials,
       }),
     ]),
     cache,
