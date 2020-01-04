@@ -30,7 +30,7 @@ const esArLogin = {
 export const LoginApp = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
   const { i18n, t } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { login: enUsLogin }, true, true);
-  i18n.addResourceBundle("en-AR", "translation", { login: esArLogin }, true, true);
+  i18n.addResourceBundle("es-AR", "translation", { login: esArLogin }, true, true);
   return (
     <ErrorBoundary {...{ i18n, t }}>
       <App {...props} ref={ref} />

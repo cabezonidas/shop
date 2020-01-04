@@ -64,7 +64,7 @@ const esArMedia = {
 export const MediaApp = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
   const { i18n, t } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { media: enUsMedia }, true, true);
-  i18n.addResourceBundle("en-AR", "translation", { media: esArMedia }, true, true);
+  i18n.addResourceBundle("es-AR", "translation", { media: esArMedia }, true, true);
   return (
     <ErrorBoundary {...{ i18n, t }}>
       <App {...props} ref={ref} />
