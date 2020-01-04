@@ -23,4 +23,11 @@ export const backend = middy(async (event: any, context: Context) => {
   return proxy(server, event, context, "PROMISE").promise;
 })
   .use(httpErrorHandler())
-  .use(cors({ origin: "http://localhost:3000", credentials: true }));
+  .use(
+    cors({
+      origin: process.env.ALLOWED_ORIGIN,
+      credentials: true,
+      headers:
+        "Access-Control-Request-Method, Access-Control-Request-Headers, Origin, Content-Type, authorization",
+    })
+  );

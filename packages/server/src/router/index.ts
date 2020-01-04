@@ -8,6 +8,7 @@ const sendUnauthenticated = (res: Response) => res.send({ ok: false });
 export const router = Router();
 
 router.route("/").get((_, res) => res.send("Home route"));
+router.route("/graphql").options((_, res) => res.send({ ok: true }));
 router.route("/refresh_token").post(async (req, res) => {
   const token = req.cookies.jid;
 
