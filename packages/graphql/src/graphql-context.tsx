@@ -126,6 +126,7 @@ export const GraphqlProvider: FC<{
           "keep-alive": "true",
           "Accept-Language": language || "en-US",
         },
+        credentials: "include",
       }),
     ]),
     cache,
