@@ -3,12 +3,12 @@ import React, { useState, useEffect, createContext, FC, useContext } from "react
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
 import { onError, ErrorResponse } from "apollo-link-error";
 import { ApolloLink, Observable } from "apollo-link";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode from "jwt-decode";
 import { polyfill } from "es6-promise";
+import { createUploadLink } from "apollo-upload-client";
 
 polyfill();
 
@@ -20,10 +20,13 @@ interface IGraphqlContext {
 
 const GraphqlContext = createContext<IGraphqlContext>(undefined as any);
 
+const credentials = "include";
+
 export const GraphqlProvider: FC<{
+  language?: string;
   uri: string;
   onErrorResponse?: (error: ErrorResponse) => void;
-}> = ({ uri, onErrorResponse, children }) => {
+}> = ({ uri, onErrorResponse, language, children }) => {
   const { getAccessToken, setAccessToken } = useAccessToken();
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -31,7 +34,7 @@ export const GraphqlProvider: FC<{
     let alive = true;
     fetch(`${uri}/refresh_token`, {
       method: "POST",
-      credentials: "include",
+      credentials,
     }).then(async x => {
       const res = await x.json();
       const { accessToken } = res;
@@ -102,7 +105,7 @@ export const GraphqlProvider: FC<{
         fetchAccessToken: () => {
           return fetch(`${uri}/refresh_token`, {
             method: "POST",
-            credentials: "include",
+            credentials,
           });
         },
         handleFetch: accessToken => {
@@ -119,10 +122,13 @@ export const GraphqlProvider: FC<{
         }
       }),
       requestLink,
-      new HttpLink({
+      createUploadLink({
         uri: `${uri}/graphql`,
-        // If credentials is "include", it fucks with cros origin
-        // credentials: "include",
+        headers: {
+          "keep-alive": "true",
+          "Accept-Language": language || "en-US",
+        },
+        credentials,
       }),
     ]),
     cache,

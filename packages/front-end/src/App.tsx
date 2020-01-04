@@ -5,12 +5,14 @@ import { useTranslation, Box, useTheme } from "@cabezonidas/shop-ui";
 import Users from "./pages/users";
 import { PrivateRoute } from "./pages/private-route";
 import { Login } from "./pages/login";
+import { MediaApp } from "@cabezonidas/shop-media";
 
 const enUsRoutes = {
   routes: {
     me: "Me",
     home: "Home",
     users: "Users",
+    pictures: "Pictures",
   },
 };
 const esArRoutes = {
@@ -18,13 +20,14 @@ const esArRoutes = {
     me: "Yo",
     home: "Inicio",
     users: "Usuarios",
+    pictures: "Imágenes",
   },
 };
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { main: enUsRoutes }, true, true);
-  i18n.addResourceBundle("en-AR", "translation", { main: esArRoutes }, true, true);
+  i18n.addResourceBundle("es-AR", "translation", { main: esArRoutes }, true, true);
   const theme = useTheme();
   return (
     <BrowserRouter>
@@ -46,11 +49,15 @@ const App: React.FC = () => {
           <Box>
             <Link to="/users">{t("main.routes.users")}</Link>
           </Box>
+          <Box>
+            <Link to="/pictures">{t("main.routes.pictures")}</Link>
+          </Box>
         </Box>
         <Box width="60%" margin="2">
           <Switch>
             <Route path="/" exact={true} component={Home} />
             <Route path="/me" exact={true} component={Login} />
+            <Route path="/pictures" component={MediaApp} />
             <PrivateRoute path="/users" component={Users} />
           </Switch>
         </Box>

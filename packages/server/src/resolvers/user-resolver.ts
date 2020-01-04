@@ -31,6 +31,7 @@ export class UserResolver {
   public async users() {
     return await User.find();
   }
+
   @Query(() => String)
   public hello() {
     return "hello!";

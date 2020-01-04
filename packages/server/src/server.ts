@@ -6,15 +6,18 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchemaSync } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { router } from "./router";
-import { corsPolicy, translation } from "./middleware";
+import { translation } from "./middleware";
 import * as awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 import { connectToDatabase } from "./db";
+import { MediaResolver } from "./resolvers/media-resolver";
+import { MailResolver } from "./resolvers/mail-resolver";
+import * as cors from "cors";
 
 const server = (() => {
   const app = express();
 
   if (process.env.NODE_ENV === "development") {
-    app.use(corsPolicy);
+    app.use(cors({ origin: true, credentials: true }));
   }
 
   app.use(translation);
@@ -22,13 +25,16 @@ const server = (() => {
   app.use("/", router);
 
   const apolloServer = new ApolloServer({
-    schema: buildSchemaSync({ resolvers: [UserResolver] }),
+    schema: buildSchemaSync({
+      resolvers: [UserResolver, MediaResolver, MailResolver],
+      validate: false,
+    }),
     context: ({ req, res }) => ({ req, res }),
   });
   apolloServer.applyMiddleware({ app, cors: false });
 
   if (process.env.NODE_ENV === "development") {
-    const port = process.env.PORT;
+    const port = 8899;
     connectToDatabase().then(() => {
       app.listen({ port }, () =>
         console.log(`Graphql server ready at http://localhost:${port}${apolloServer.graphqlPath}`)
