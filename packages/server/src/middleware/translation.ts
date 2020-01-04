@@ -1,6 +1,7 @@
 import { i18n } from "i18next";
 import * as i18next from "i18next";
 import * as middleware from "i18next-express-middleware";
+import { awsEnUs, awsEsAr } from "../integrations";
 
 const enUs = {
   translation: {
@@ -8,6 +9,7 @@ const enUs = {
       not_authenticated: "Unauthenticated access",
       invalid_login: "Invalid login",
       invalid_password: "Invalid password",
+      aws: awsEnUs,
     },
   },
 };
@@ -18,6 +20,7 @@ const esAr = {
       not_authenticated: "Acceso sin autenticar",
       invalid_login: "Usuario inválido",
       invalid_password: "Contraseña inválida",
+      aws: awsEsAr,
     },
   },
 };

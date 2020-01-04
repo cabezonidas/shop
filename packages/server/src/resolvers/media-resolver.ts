@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field } from "type-graphql";
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from "type-graphql";
 import {
   awsListAlbums,
   awsCreateAlbum,
@@ -9,6 +9,7 @@ import {
 } from "../integrations";
 import { Stream } from "stream";
 import { GraphQLUpload } from "apollo-server-express";
+import { IGraphqlContext } from "../igraphql-context";
 
 // tslint:disable-next-line: interface-over-type-literal
 type FileUpload = {
@@ -31,30 +32,44 @@ class AwsPhoto {
 @Resolver()
 export class MediaResolver {
   @Query(() => [String])
-  public async getAlbums() {
-    return await awsListAlbums();
+  public async getAlbums(
+    @Ctx()
+    { req: { t } }: IGraphqlContext
+  ) {
+    const res = await awsListAlbums();
+    if (res.success) {
+      return res.data;
+    } else {
+      throw new Error(t(res.error));
+    }
   }
 
   @Query(() => [AwsPhoto])
   public async viewAlbum(
     @Arg("albumName", () => String)
-    albumName: string
+    albumName: string,
+    @Ctx()
+    { req: { t } }: IGraphqlContext
   ) {
     const result = await awsViewAlbum(albumName);
     if (result.succeed) {
       return result.photos;
     } else {
-      throw new Error(result.error);
+      throw new Error(t(result.error));
     }
   }
 
   @Mutation(() => String)
-  public async createAlbum(@Arg("albumName") albumName: string): Promise<string> {
+  public async createAlbum(
+    @Arg("albumName") albumName: string,
+    @Ctx()
+    { req: { t } }: IGraphqlContext
+  ): Promise<string> {
     const result = await awsCreateAlbum(albumName);
     if (result.succeed) {
       return result.albumKey;
     } else {
-      throw new Error(result.error);
+      throw new Error(t(result.error));
     }
   }
 
@@ -73,26 +88,30 @@ export class MediaResolver {
   @Mutation(() => Boolean)
   public async deleteAlbum(
     @Arg("albumName", () => String)
-    albumName: string
+    albumName: string,
+    @Ctx()
+    { req: { t } }: IGraphqlContext
   ): Promise<boolean> {
     const deleted = await awsDeleteAlbum(albumName);
     if (deleted.succeed) {
       return true;
     } else {
-      throw new Error(deleted.error);
+      throw new Error(t(deleted.error));
     }
   }
 
   @Mutation(() => Boolean)
   public async deletePicture(
     @Arg("photoKey", () => String)
-    photoKey: string
+    photoKey: string,
+    @Ctx()
+    { req: { t } }: IGraphqlContext
   ): Promise<boolean> {
     const deleted = await awsDeletePhoto(photoKey);
     if (deleted.succeed) {
       return true;
     } else {
-      throw new Error(deleted.error);
+      throw new Error(t(deleted.error));
     }
   }
 }

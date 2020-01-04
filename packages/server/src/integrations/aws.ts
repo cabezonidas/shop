@@ -1,6 +1,30 @@
 import { config, S3 } from "aws-sdk";
 import { Stream } from "stream";
 
+export const awsEnUs = {
+  incorrect_album_name_one_non_space_character:
+    "Album names must contain at least one non-space character.",
+  incorrect_album_name_contains_slashes: "Album names cannot contain slashes.",
+  album_already_exists: "Album already exists.",
+  failed_to_create_album: "There was an error creating your album.",
+  failed_to_list_albums: "There was an error listing your albums.",
+  failed_to_view_album: "There was an error viewing your album.",
+  failed_to_delete_photo: "There was an error deleting your photo.",
+  failed_to_delete_album: "There was an error deleting your album.",
+};
+
+export const awsEsAr = {
+  incorrect_album_name_one_non_space_character:
+    "El nombre del álbum tiene que tener al menos un caracter no espacial.",
+  incorrect_album_name_contains_slashes: "Nombres de álbum no pueden contener barras.",
+  album_already_exists: "Álbum ya existe.",
+  failed_to_create_album: "Hubo un error al crear tu álbum.",
+  failed_to_list_albums: "Hubo un error al listar tus álbumes.",
+  failed_to_view_album: "Hubo un error al ver tu álbum.",
+  failed_to_delete_photo: "Hubo un error al eliminar tu foto.",
+  failed_to_delete_album: "Hubo un error al eliminar tu álbum.",
+};
+
 const albumBucketName = "cabezonidas-shop-photos";
 const bucketRegion = "us-east-1";
 
@@ -23,14 +47,14 @@ export const awsCreateAlbum = (
     if (!albumName) {
       return resolve({
         succeed: false,
-        error: "Album names must contain at least one non-space character.",
+        error: "errors.aws.incorrect_album_name_one_non_space_character",
         albumKey: "",
       });
     }
     if (albumName.indexOf("/") !== -1) {
       return resolve({
         succeed: false,
-        error: "Album names cannot contain slashes.",
+        error: "errors.aws.incorrect_album_name_contains_slashes",
         albumKey: "",
       });
     }
@@ -39,14 +63,14 @@ export const awsCreateAlbum = (
       if (!err1) {
         return resolve({
           succeed: false,
-          error: "Album already exists.",
+          error: "errors.aws.album_already_exists",
           albumKey: "",
         });
       }
       if (err1.code !== "NotFound") {
         return resolve({
           succeed: false,
-          error: "There was an error creating your album: " + err1.message,
+          error: "errors.aws.failed_to_create_album",
           albumKey: "",
         });
       }
@@ -54,7 +78,7 @@ export const awsCreateAlbum = (
         if (err2) {
           return resolve({
             succeed: false,
-            error: "There was an error creating your album: " + err2.message,
+            error: "errors.aws.failed_to_create_album",
             albumKey: "",
           });
         }
@@ -63,17 +87,21 @@ export const awsCreateAlbum = (
     });
   });
 
-export const awsListAlbums = async (): Promise<string[]> =>
+export const awsListAlbums = async (): Promise<{
+  success: boolean;
+  error?: string;
+  data: string[];
+}> =>
   new Promise(resolve => {
     s3.listObjects({ Delimiter: "/" } as any, (err, data) => {
       if (err) {
-        throw new Error("There was an error listing your albums: " + err.message);
+        resolve({ success: false, data: [], error: "errors.aws.failed_to_list_albums" });
       } else {
         const albums = data.CommonPrefixes.map(commonPrefix => {
           const prefix = commonPrefix.Prefix;
           return decodeURIComponent(prefix.replace("/", ""));
         });
-        resolve(albums);
+        resolve({ success: true, data: albums });
       }
     });
   });
@@ -114,7 +142,7 @@ export const awsViewAlbum = async (
         if (err) {
           return resolve({
             succeed: false,
-            error: "There was an error viewing your album: " + err.message,
+            error: "errors.aws.failed_to_view_album",
             photos: [],
           });
         }
@@ -139,7 +167,7 @@ export const awsDeletePhoto = async (
         if (err) {
           return resolve({
             succeed: false,
-            error: `There was an error deleting your photo: ${err.message}`,
+            error: "errors.aws.failed_to_delete_photo",
           });
         }
         return resolve({ succeed: true });
@@ -156,7 +184,7 @@ export const awsDeleteAlbum = async (
       if (err) {
         return resolve({
           succeed: false,
-          error: `There was an error deleting your album: ${err.message}`,
+          error: "errors.aws.failed_to_delete_album",
         });
       }
       const objects = data.Contents.map(object => {
@@ -170,7 +198,7 @@ export const awsDeleteAlbum = async (
           if (err2) {
             return resolve({
               succeed: false,
-              error: `There was an error deleting your album: ${err.message}`,
+              error: "errors.aws.failed_to_delete_album",
             });
           }
           return resolve({ succeed: true });
