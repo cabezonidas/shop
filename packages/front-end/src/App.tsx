@@ -27,7 +27,7 @@ const esArRoutes = {
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { main: enUsRoutes }, true, true);
-  i18n.addResourceBundle("en-AR", "translation", { main: esArRoutes }, true, true);
+  i18n.addResourceBundle("es-AR", "translation", { main: esArRoutes }, true, true);
   const theme = useTheme();
   return (
     <BrowserRouter>

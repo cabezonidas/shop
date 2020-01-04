@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
-import { UiProvider } from "@cabezonidas/shop-ui";
+import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
 
-ReactDOM.render(
-  <UiProvider>
+const GraphqlState: FC = ({ children }) => {
+  const { i18n } = useTranslation();
+  return (
     <GraphqlProvider
+      language={i18n.language}
       uri={process.env.REACT_APP_BACKEND_URL as string}
       onErrorResponse={({ operation, networkError }) => {
         // Use toast/alert here.
@@ -16,8 +18,16 @@ ReactDOM.render(
         }
       }}
     >
-      <App />
+      {children}
     </GraphqlProvider>
+  );
+};
+
+ReactDOM.render(
+  <UiProvider>
+    <GraphqlState>
+      <App />
+    </GraphqlState>
   </UiProvider>,
   document.getElementById("root")
 );

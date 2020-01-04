@@ -17,7 +17,7 @@ const esArUsers = {
 export const Users = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((props, ref) => {
   const { t, i18n } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { main: enUsUsers }, true, true);
-  i18n.addResourceBundle("en-AR", "translation", { main: esArUsers }, true, true);
+  i18n.addResourceBundle("es-AR", "translation", { main: esArUsers }, true, true);
 
   const { data, loading } = useUsersQuery();
 
