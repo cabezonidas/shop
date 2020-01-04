@@ -25,13 +25,16 @@ const esAr = {
   },
 };
 
-((i18next as unknown) as i18n).init({
+((i18next as unknown) as i18n).use(middleware.LanguageDetector).init({
   resources: {
     "en-US": enUs,
     "es-AR": esAr,
   },
   lng: "en-US",
   fallbackLng: "en-US",
+  detection: {
+    lookupHeader: "accept-language",
+  },
 });
 
 export const translation = middleware.handle((i18next as unknown) as i18n, {
