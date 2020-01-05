@@ -5,12 +5,17 @@ import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
 import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
 
+const uri =
+  process.env.NODE_ENV === "development"
+    ? (process.env.REACT_APP_BACKEND_URL as string)
+    : "https://uvpw68eyx1.execute-api.us-east-1.amazonaws.com/test";
+
 const GraphqlState: FC = ({ children }) => {
   const { i18n } = useTranslation();
   return (
     <GraphqlProvider
       language={i18n.language}
-      uri={process.env.REACT_APP_BACKEND_URL as string}
+      uri={uri}
       onErrorResponse={({ operation, networkError }) => {
         // Use toast/alert here.
         if (networkError) {

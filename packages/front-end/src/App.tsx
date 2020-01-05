@@ -30,7 +30,7 @@ const App: React.FC = () => {
   i18n.addResourceBundle("es-AR", "translation", { main: esArRoutes }, true, true);
   const theme = useTheme();
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <Box height="100vh" display="flex" flexDirection="row">
         <Box
           width="40%"
