@@ -58,6 +58,7 @@
     "publish": "lerna run tsc && lerna publish",
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
+    "build-front-end": "lerna run graphql-build && lerna run ui-build && lerna run login-build && lerna run media-build && lerna run front-end-build",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
     "start-front-end": "lerna run start-front-end --stream"
