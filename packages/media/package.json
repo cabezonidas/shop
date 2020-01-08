@@ -12,8 +12,8 @@
     "lib"
   ],
   "dependencies": {
-    "@cabezonidas/shop-graphql": "0.0.1",
-    "@cabezonidas/shop-ui": "0.0.1",
+    "@cabezonidas/shop-graphql": "*",
+    "@cabezonidas/shop-ui": "*",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^8.0.2",
