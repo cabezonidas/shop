@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { useTranslation, Box, useTheme } from "@cabezonidas/shop-ui";
 import { MediaApp } from "@cabezonidas/shop-media";
-import { Login } from "./pages";
+import { Login, Home, Users, PrivateRoute } from "./components";
 
 const enUsRoutes = {
   routes: {
@@ -52,10 +52,10 @@ const App: React.FC = () => {
         </Box>
         <Box width="60%" margin="2">
           <Switch>
-            {/* <Route path="/" exact={true} component={Home} /> */}
+            <Route path="/" exact={true} component={Home} />
             <Route path="/me" exact={true} component={Login} />
             <Route path="/pictures" component={MediaApp} />
-            {/* <PrivateRoute path="/users" component={Users} /> */}
+            <PrivateRoute path="/users" component={Users} />
           </Switch>
         </Box>
       </Box>
