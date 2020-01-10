@@ -58,7 +58,7 @@
     "publish": "lerna run tsc && lerna publish",
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
-    "build-front-end": "yarn global add lerna && lerna bootstrap",
+    "build-front-end": "yarn global add lerna && lerna bootstrap && lerna run front-end-build",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
     "start-front-end": "lerna run start-front-end --stream"
