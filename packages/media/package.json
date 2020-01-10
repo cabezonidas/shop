@@ -31,8 +31,8 @@
     "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
-    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run build"
+    "build-media": "tsc --build tsconfig.lib.json && tsc --build tsconfig.lib-esm.json",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run build-media"
   },
   "eslintConfig": {
     "extends": "react-app"

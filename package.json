@@ -59,7 +59,7 @@
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
     "prebuild": "lerna bootstrap",
-    "build": "lerna run --stream build",
+    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
     "start-front-end": "lerna run start-front-end --stream"
