@@ -23,8 +23,8 @@
     "type-check:watch": "npm run type-check -- --watch",
     "build:types": "tsc --emitDeclarationOnly && tsc --build tsconfig.esm.json",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "common-build": "npm run build:types && npm run build:js",
-    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run common-build"
+    "build": "npm run build:types && npm run build:js",
+    "build:watch": "nodemon --watch src -e ts,tsx --exec npm run build"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
