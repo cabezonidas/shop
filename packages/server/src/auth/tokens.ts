@@ -13,5 +13,5 @@ export const createAccessToken = (user: User) =>
 export const sendRefreshToken = (res: Response, token: string) => {
   const { NODE_ENV } = process.env;
   const path = `${NODE_ENV !== "development" ? `/${NODE_ENV}` : ""}/refresh_token`;
-  return res.cookie("jid", token, { httpOnly: true, path });
+  return res.cookie("jid", token, { httpOnly: true, path, sameSite: "none", secure: true });
 };
