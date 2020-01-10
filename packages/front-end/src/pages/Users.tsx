@@ -43,5 +43,3 @@ export const Users = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>((pro
     </Box>
   );
 });
-
-export default Users;
