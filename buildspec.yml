@@ -1,0 +1,14 @@
+# AWS CICD
+version: 0.1
+phases:
+  install:
+    commands:
+      - npm i -gs yarn serverless lerna
+      - yarn
+  build:
+    commands:
+      - lerna bootstrap
+      - yarn deploy:backend
+  post_build:
+    commands:
+      - yarn test:backend
