@@ -15,6 +15,15 @@ const binaryMimeTypes = [
   "image/svg+xml",
 ];
 
+const origin = (() => {
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return "http://localhost:3000";
+    default:
+      return "https://tender-visvesvaraya-c78d68.netlify.com";
+  }
+})();
+
 const server = createServer(app, null, binaryMimeTypes);
 
 export const backend = middy(async (event: any, context: Context) => {
@@ -25,7 +34,7 @@ export const backend = middy(async (event: any, context: Context) => {
   .use(httpErrorHandler())
   .use(
     cors({
-      origin: process.env.ALLOWED_ORIGIN,
+      origin,
       credentials: true,
       headers:
         "Access-Control-Request-Method, Access-Control-Request-Headers, Origin, Content-Type, authorization",
