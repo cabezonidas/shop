@@ -62,6 +62,8 @@
     "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
-    "start-front-end": "lerna run start-front-end --stream"
+    "start-front-end": "lerna run start-front-end --stream",
+    "test:backend": "lerna run test:backend",
+    "deploy:backend": "lerna run deploy:backend:prd"
   }
 }
