@@ -5,10 +5,16 @@ import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
 import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
 
-const uri =
-  process.env.NODE_ENV === "development"
-    ? (process.env.REACT_APP_BACKEND_URL as string)
-    : "https://uvpw68eyx1.execute-api.us-east-1.amazonaws.com/test";
+const uri = (() => {
+  switch (process.env.NODE_ENV) {
+    case "production":
+      return "https://uvpw68eyx1.execute-api.us-east-1.amazonaws.com/prd";
+    case "test":
+      return "https://uvpw68eyx1.execute-api.us-east-1.amazonaws.com/test";
+    default:
+      return "http://localhost:8899";
+  }
+})();
 
 const GraphqlState: FC = ({ children }) => {
   const { i18n } = useTranslation();
