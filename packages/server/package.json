@@ -23,7 +23,7 @@
     "url": "git+https://github.com/cabezonidas/shop.git"
   },
   "scripts": {
-    "test": "jest",
+    "test:backend": "jest",
     "tsc": "tsc",
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
@@ -31,7 +31,8 @@
     "start": "node -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
-    "sls-deploy:testing": "npm install && sls deploy --env testing"
+    "sls-deploy:testing": "npm install && sls deploy --env testing",
+    "deploy:backend:prd": "sls deploy --env prd"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
@@ -41,7 +42,7 @@
     "access": "public"
   },
   "dependencies": {
-    "apollo-server-express": "^2.9.14",
+    "apollo-server-expresss": "^2.9.14",
     "aws-lambda": "^1.0.4",
     "aws-sdk": "^2.596.0",
     "aws-serverless-express": "^3.3.6",
