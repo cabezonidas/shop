@@ -1,5 +1,5 @@
 [build]
-  command = "npm i -gs yarn && npm i -gs lerna && yarn build"
+  command = "npm i -gs yarn lerna && yarn && lerna bootstrap && yarn build"
 
 [[redirects]]
   from = "/*"
