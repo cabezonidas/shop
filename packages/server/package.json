@@ -23,7 +23,7 @@
     "url": "git+https://github.com/cabezonidas/shop.git"
   },
   "scripts": {
-    "test:backend": "jest",
+    "test": "jest",
     "tsc": "tsc",
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
@@ -31,8 +31,8 @@
     "start": "node -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
-    "sls-deploy:testing": "npm install && sls deploy --env testing",
-    "deploy:backend:prd": "sls deploy --env prd"
+    "deploy:test": "npm install && sls offline --env testing",
+    "deploy:prd": "npm install && npm run test && sls deploy --env prd"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
