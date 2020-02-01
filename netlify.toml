@@ -1,5 +1,10 @@
 [build]
-  command = "npm i -gs yarn lerna && yarn && lerna bootstrap && yarn build"
+  publish = "packages/front-end/build/"
+  command = "npm i -g yarn && yarn build"
+  base = "/"
+
+[build.environment]
+  NODE_ENV = "production"
 
 [[redirects]]
   from = "/*"
