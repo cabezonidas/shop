@@ -29,7 +29,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node -r ts-node/register ./src/server.ts",
-    "start:watch": "nodemon",
+    "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
     "deploy:test": "npm install && sls offline --env testing",
     "deploy:prd": "npm install && npm run test && sls deploy --env prd"

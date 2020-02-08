@@ -26,7 +26,8 @@
     "start-front-end": "npm run start",
     "build-fe": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve-build": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
