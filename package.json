@@ -39,6 +39,7 @@
     "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.6.0",
     "sass-loader": "^8.0.0",
+    "serverless": "^1.63.0",
     "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-dotenv-plugin": "^2.1.1",
@@ -59,7 +60,7 @@
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
     "prebuild": "lerna bootstrap",
-    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
+    "build": "lerna run deploy-server && lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-server": "lerna run start-server --stream",
     "start-front-end": "lerna run start-front-end --stream"
