@@ -1,10 +1,11 @@
 [build]
   publish = "packages/front-end/build/"
-  command = "yarn -v && exit 1"
+  command = "yarn -v && yarn build"
   base = "/"
 
 [build.environment]
   NODE_ENV = "production"
+  YARN_VERSION = "1.22.0"
 
 [[redirects]]
   from = "/*"
