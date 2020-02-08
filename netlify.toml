@@ -1,6 +1,6 @@
 [build]
   publish = "packages/front-end/build/"
-  command = "npm i -g yarn lerna && yarn && yarn prebuild && yarn build"
+  command = "yarn -v && exit 1"
   base = "/"
 
 [build.environment]
