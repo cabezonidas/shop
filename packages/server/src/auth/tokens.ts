@@ -12,6 +12,22 @@ export const createAccessToken = (user: User) =>
 
 export const sendRefreshToken = (res: Response, token: string) => {
   const { NODE_ENV } = process.env;
-  const path = `${NODE_ENV !== "development" ? `/${NODE_ENV}` : ""}/refresh_token`;
+  let suffixPath = "";
+  switch (NODE_ENV) {
+    case "development": {
+      suffixPath = "";
+      break;
+    }
+    case "test": {
+      suffixPath = "/test";
+      break;
+    }
+    case "prd":
+    case "production": {
+      suffixPath = "/prd";
+      break;
+    }
+  }
+  const path = `${suffixPath}/refresh_token`;
   return res.cookie("jid", token, { httpOnly: true, path, sameSite: "none", secure: true });
 };

@@ -20,7 +20,7 @@ const origin = (() => {
     case "development":
       return "http://localhost:3000";
     default:
-      return "https://tender-visvesvaraya-c78d68.netlify.com";
+      return "https://master.d17uumlhbk5fie.amplifyapp.com";
   }
 })();
 
