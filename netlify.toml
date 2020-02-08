@@ -1,2 +1,12 @@
 [build]
-  command = "npm i -gs yarn && yarn build"
+  publish = "packages/front-end/build/"
+  command = "npm i -g yarn lerna && yarn && yarn prebuild && yarn build"
+  base = "/"
+
+[build.environment]
+  NODE_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
