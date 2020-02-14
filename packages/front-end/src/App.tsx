@@ -9,7 +9,7 @@ const enUsRoutes = {
     me: "Me",
     home: "Home",
     users: "Users",
-    pictures: "Pictures",
+    pictures: "Images",
   },
 };
 const esArRoutes = {
