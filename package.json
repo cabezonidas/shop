@@ -60,9 +60,9 @@
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
     "prebuild": "lerna bootstrap",
-    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
+    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe && lerna run build-server",
     "watch-dependencies": "lerna run build:watch --stream",
-    "start-server": "lerna run start-server --stream",
+    "start-lambda": "lerna run start-lambda --stream",
     "start-front-end": "lerna run start-front-end --stream"
   }
 }
