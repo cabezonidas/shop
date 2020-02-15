@@ -4,7 +4,8 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "outDir": "lib"
   },
   "include": ["./src", "lambda.ts"]
 }
