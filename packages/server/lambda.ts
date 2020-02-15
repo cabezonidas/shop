@@ -26,7 +26,7 @@ const origin = (() => {
 
 const server = createServer(app, null, binaryMimeTypes);
 
-export const backend = middy(async (event: any, context: Context) => {
+export const handler = middy(async (event: any, context: Context) => {
   context.callbackWaitsForEmptyEventLoop = false;
   await connectToDatabase();
   return proxy(server, event, context, "PROMISE").promise;

@@ -12,7 +12,7 @@ provider:
 
 functions:
   backend:
-    handler: lambda.backend
+    handler: lambda.handler
     events:
       - http:
           path: /
