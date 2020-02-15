@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./lib",
-    "moduleResolution": "node"
+    "sourceMap": true,
+    "experimentalDecorators": true
   },
   "include": ["./src", "lambda.ts"]
 }
