@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
