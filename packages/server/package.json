@@ -32,8 +32,7 @@
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
     "start-lambda": "npm install && sls offline --env testing",
-    "build-server-webpack": "webpack --config webpack.config.js",
-    "build-server": "npm install --prefix ./lib && tsc"
+    "build-server": "webpack --config webpack.config.js"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
