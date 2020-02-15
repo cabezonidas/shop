@@ -3,6 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 const { NODE_ENV = "production" } = process.env;
 module.exports = {
   entry: "./lambda.ts",
+  devtool: "inline-source-map",
   mode: NODE_ENV,
   target: "node",
   output: {
@@ -17,6 +18,7 @@ module.exports = {
       {
         test: /\.ts$/,
         use: ["ts-loader"],
+        exclude: /node_modules/,
       },
     ],
   },
