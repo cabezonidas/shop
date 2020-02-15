@@ -1,11 +1,11 @@
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)]()
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d21f43f8-342b-4f35-a1c6-aa4b4d0c1d8f/deploy-status)](https://app.netlify.com/sites/tender-visvesvaraya-c78d68/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a08e3d72-b18d-4db3-b4c8-791c5389dff0/deploy-status)](https://app.netlify.com/sites/boring-swirles-fe3074/deploys)
 
 # Full stack application
 
 This repository aims to be the basis of a scalable and affordable web project that reduces technical debt as much as possible from its conception and uses best coding practices.
 
-Site https://tender-visvesvaraya-c78d68.netlify.com
+Site https://boring-swirles-fe3074.netlify.com
 
 ## General
 
