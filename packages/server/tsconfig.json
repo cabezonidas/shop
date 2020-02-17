@@ -1,10 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "experimentalDecorators": true,
-    "module": "commonjs",
-    "target": "es5"
+    "noImplicitAny": false,
+    "module": "AMD",
+    "target": "es5",
+    "outFile": "./lib/lambda.js",
+    "moduleResolution": "node"
   },
-  "include": ["./src", "lambda.ts"]
+  "include": ["lambda.ts", "node_modules"]
 }
