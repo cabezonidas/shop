@@ -2,22 +2,31 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 module.exports = {
   entry: "./lambda.ts",
-  devtool: "inline-source-map",
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-    ],
+  mode: "production",
+  target: "node",
+  devtool: "source-map",
+  output: {
+    path: path.resolve(__dirname, "lib"),
+    filename: "lambda.js",
   },
   resolve: {
     extensions: [".ts", ".mjs", ".js"],
   },
-  output: {
-    filename: "lambda.js",
-    path: path.resolve(__dirname, "lib"),
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              happyPackMode: true,
+              transpileOnly: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   externals: [nodeExternals()],
 };

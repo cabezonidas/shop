@@ -1,6 +1,8 @@
 import { mongodbConnection } from "../ormconfig";
 import { createConnection } from "typeorm";
-import mongoose = require("mongoose");
+
+// tslint:disable-next-line: no-var-requires
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 let isConnected: boolean;
 
