@@ -4,7 +4,6 @@ module.exports = {
   entry: "./lambda.ts",
   mode: "production",
   target: "node",
-  devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "lib"),
     filename: "lambda.js",
@@ -25,6 +24,7 @@ module.exports = {
             },
           },
         ],
+        exclude: /node_modules/,
       },
     ],
   },
