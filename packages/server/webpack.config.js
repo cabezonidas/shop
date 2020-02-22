@@ -1,5 +1,5 @@
 const path = require("path");
-const nodeExternals = require("webpack-node-externals");
+
 module.exports = {
   entry: "./lambda.ts",
   mode: "production",
@@ -10,23 +10,15 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".mjs", ".js"],
+    symlinks: true,
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              happyPackMode: true,
-              transpileOnly: true,
-            },
-          },
-        ],
+        use: ["ts-loader"],
         exclude: /node_modules/,
       },
     ],
   },
-  externals: [nodeExternals()],
 };

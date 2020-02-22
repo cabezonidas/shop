@@ -1,13 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": false,
+    "outDir": "./lib",
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "module": "AMD",
-    "target": "es5",
-    "outFile": "./lib/lambda.js",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "module": "esnext"
   },
   "include": ["lambda.ts", "node_modules"]
 }
