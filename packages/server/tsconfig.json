@@ -4,9 +4,7 @@
     "outDir": "./lib",
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "moduleResolution": "node",
-    "rootDir": "./",
-    "module": "esnext"
+    "module": "commonjs"
   },
   "include": ["lambda.ts", "node_modules"]
 }
