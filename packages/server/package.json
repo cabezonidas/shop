@@ -31,8 +31,7 @@
     "start": "node -r ts-node/register ./src/server.ts",
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
-    "start-lambda": "npm install && sls offline --env testing",
-    "build-server": "npm install && sls package -p lib && cd lib && unzip shop-backend.zip"
+    "start-lambda": "npm install && sls offline --env testing"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"

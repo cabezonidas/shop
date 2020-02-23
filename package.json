@@ -60,9 +60,10 @@
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
     "prebuild": "lerna bootstrap",
-    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe && lerna run build-server",
+    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe && yarn build-server",
     "watch-dependencies": "lerna run build:watch --stream",
     "start-lambda": "lerna run start-lambda --stream",
-    "start-front-end": "lerna run start-front-end --stream"
+    "start-front-end": "lerna run start-front-end --stream",
+    "build-server": "cd packages/server && npm install && sls package -p publish && cd publish && unzip shop-backend.zip"
   }
 }
