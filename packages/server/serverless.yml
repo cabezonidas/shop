@@ -8,7 +8,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: ${env:NODE_ENV}
+  stage: prd
 
 functions:
   backend:
