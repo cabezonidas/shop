@@ -32,8 +32,7 @@
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
     "start-lambda": "npm install && sls offline --env testing",
-    "build-server": "tsc && yarn post-build-server",
-    "post-build-server": "cp package.json lib/package.json && cd lib && npm install --only=production"
+    "build-server": "npm install && sls package -p lib"
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
@@ -64,9 +63,7 @@
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22",
     "webpack": "^4.41.6",
-    "ts-loader": "^6.2.1",
-    "webpack-node-externals": "^1.7.2",
-    "webpack-cli": "^3.3.11"
+    "ts-loader": "^6.2.1"
   },
   "nodemonConfig": {
     "ignore": [
