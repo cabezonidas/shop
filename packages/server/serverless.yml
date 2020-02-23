@@ -2,7 +2,7 @@ service: shop-backend
 
 plugins:
   - serverless-plugin-typescript
-  - serverless-dotenv-plugin
+  # - serverless-dotenv-plugin
   - serverless-offline
 
 provider:
