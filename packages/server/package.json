@@ -23,7 +23,6 @@
     "url": "git+https://github.com/cabezonidas/shop.git"
   },
   "scripts": {
-    "test": "jest",
     "tsc": "tsc",
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
@@ -64,7 +63,11 @@
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22",
     "webpack": "^4.41.6",
-    "ts-loader": "^6.2.1"
+    "ts-loader": "^6.2.1",
+    "serverless-offline": "^5.12.1",
+    "typescript": "^3.8.3",
+    "serverless-plugin-typescript": "^1.1.9",
+    "serverless-dotenv-plugin": "^2.1.1"
   },
   "nodemonConfig": {
     "ignore": [
