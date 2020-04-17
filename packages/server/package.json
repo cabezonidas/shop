@@ -32,7 +32,8 @@
     "typeorm": "./node_modules/.bin/typeorm",
     "start-lambda": "npm install && sls offline --env testing",
     "build-server": "tsc",
-    "post-build-server": "cp package.json lib/package.json && cd lib && npm install"
+    "post-build-server": "cp package.json lib/package.json && cd lib && npm install",
+    "test": "echo \"No tests to run\""
   },
   "bugs": {
     "url": "https://github.com/cabezonidas/shop/issues"
