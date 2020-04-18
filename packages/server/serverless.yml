@@ -8,7 +8,6 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  role: arn:aws:iam::462400010207:role/SFProRole-default
   stage: prd
 
 functions:
