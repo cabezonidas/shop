@@ -65,7 +65,8 @@
     "typeorm": "^0.2.22",
     "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^1.1.9",
-    "serverless-dotenv-plugin": "^2.3.2"
+    "serverless-dotenv-plugin": "^2.3.2",
+    "typescript": "^3.7.4"
   },
   "nodemonConfig": {
     "ignore": [

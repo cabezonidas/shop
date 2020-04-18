@@ -49,9 +49,6 @@
     "typescript": "^3.7.4",
     "serverless": "^1.67.3"
   },
-  "devDependencies": {
-    "typescript": "^3.7.4"
-  },
   "workspaces": [
     "packages/*"
   ],
