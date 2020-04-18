@@ -20,7 +20,7 @@ const origin = (() => {
     case "development":
       return "http://localhost:3000";
     default:
-      return "https://boring-swirles-fe3074.netlify.com";
+      return "https://boring-swirles-fe3074.netlify.app";
   }
 })();
 
