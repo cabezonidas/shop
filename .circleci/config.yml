@@ -3,41 +3,52 @@ version: 2.1
 workflows:
   shop-backend:
     jobs:
-      - build
+      - build:
+          context: aws-shop
 
 jobs:
   build:
     docker:
       - image: circleci/node
-    working_directory: ~/packages/server
     steps:
-      - checkout:
-          path: ~/packages/server
+      - checkout
+
+      - run:
+          name: Add environment variables
+          command: |
+            cd packages/server
+            echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
+            echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
+            echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
+            echo GOOGLE_REDIRECT_URI=$GOOGLE_REDIRECT_URI >> .env
+            echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN >> .env
+            echo MEDIA_AWS_ACCESS_KEY_ID=$MEDIA_AWS_ACCESS_KEY_ID >> .env
+            echo MEDIA_AWS_SECRET_ACCESS_KEY=$MEDIA_AWS_SECRET_ACCESS_KEY >> .env
+            echo MONGODB_PASSWORD=$MONGODB_PASSWORD >> .env
+            echo MONGODB_USR=$MONGODB_USR >> .env
+            echo NODE_ENV=$NODE_ENV >> .env
+            echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
+            cd ../..
       - run:
           name: Install Serverless CLI
           command: |
             sudo npm i -g serverless
             sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-
       # Download and cache dependencies
       - restore_cache:
           keys:
             - dependencies-cache-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - dependencies-cache
-
       - run:
           name: Install root dependencies
           command: yarn
-
       # - run:
       #     name: Run tests
       #     command: npm test
-
       - run:
           name: Deploy server
           command: yarn build-server # Add stage and -v flag to show CloudFormation activity
-
       - save_cache:
           paths:
             - node_modules
