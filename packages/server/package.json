@@ -30,7 +30,7 @@
     "start": "node -r ts-node/register ./src/server.ts",
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
-    "start-lambda": "npm install && sls offline --env testing",
+    "start-lambda": "npm install && sls offline --env development",
     "build-server": "tsc",
     "post-build-server": "cp package.json lib/package.json && cd lib && npm install",
     "test": "echo \"No tests to run\""
@@ -62,11 +62,11 @@
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.5.4",
     "type-graphql": "^0.17.6",
-    "typeorm": "^0.2.22",
-    "webpack": "^4.41.6",
-    "ts-loader": "^6.2.1",
-    "serverless-offline": "^5.12.1",
+    "typeorm": "^0.2.22"
+  },
+  "devDependencies": {
     "typescript": "^3.8.3",
+    "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^1.1.9",
     "serverless-dotenv-plugin": "^2.1.1"
   },
