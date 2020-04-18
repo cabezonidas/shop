@@ -9,6 +9,7 @@ jobs:
   build:
     docker:
       - image: circleci/node
+    working_directory: ~/packages/server
     steps:
       - checkout:
           path: ~/packages/server
@@ -26,16 +27,16 @@ jobs:
             - dependencies-cache
 
       - run:
-          name: Install dependencies
-          command: npm install
+          name: Install root dependencies
+          command: yarn
+
+      # - run:
+      #     name: Run tests
+      #     command: npm test
 
       - run:
-          name: Run tests
-          command: npm test
-
-      - run:
-          name: Deploy application
-          command: sls deploy -v # Add stage and -v flag to show CloudFormation activity
+          name: Deploy server
+          command: yarn build-server # Add stage and -v flag to show CloudFormation activity
 
       - save_cache:
           paths:

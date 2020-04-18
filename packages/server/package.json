@@ -31,7 +31,7 @@
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
     "start-lambda": "npm install && sls offline --env development",
-    "build-server": "tsc",
+    "build-server": "npm install && sls deploy -v",
     "post-build-server": "cp package.json lib/package.json && cd lib && npm install",
     "test": "echo \"No tests to run\""
   },
