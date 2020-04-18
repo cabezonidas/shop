@@ -8,8 +8,9 @@ import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
 const uri = (() => {
   switch (process.env.NODE_ENV) {
     case "production":
+      return "https://uzgz73amti.execute-api.us-east-1.amazonaws.com/prd";
     case "test":
-      return "/.netlify/functions/lambda";
+      return "https://uzgz73amti.execute-api.us-east-1.amazonaws.com/test";
     default:
       return "http://localhost:8899";
   }
