@@ -1,0 +1,43 @@
+version: 2.1
+
+workflows:
+  shop-backend:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout:
+          path: ~/packages/server
+      - run:
+          name: Install Serverless CLI
+          command: |
+            sudo npm i -g serverless
+            sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Deploy application
+          command: sls deploy -v # Add stage and -v flag to show CloudFormation activity
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-cache-{{ checksum "package.json" }}
