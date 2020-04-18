@@ -1,11 +1,5 @@
 service: shop-backend
 
-package:
-  individually: true
-  excludeDevDependencies: false
-  exclude:
-    - node_modules/**
-
 plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
