@@ -1,8 +1,11 @@
 service: shop-backend
 
+package:
+  excludeDevDependencies: false
+
 plugins:
   - serverless-plugin-typescript
-  # - serverless-dotenv-plugin
+  - serverless-dotenv-plugin
   - serverless-offline
 
 provider:
