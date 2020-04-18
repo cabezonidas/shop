@@ -62,9 +62,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.5.4",
     "type-graphql": "^0.17.6",
-    "typeorm": "^0.2.22"
-  },
-  "devDependencies": {
+    "typeorm": "^0.2.22",
     "typescript": "^3.8.3",
     "serverless-offline": "^5.12.1",
     "serverless-plugin-typescript": "^1.1.9",
