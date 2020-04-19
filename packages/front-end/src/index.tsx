@@ -8,9 +8,7 @@ import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
 const uri = (() => {
   switch (process.env.NODE_ENV) {
     case "production":
-      return "https://uzgz73amti.execute-api.us-east-1.amazonaws.com/prd";
-    case "test":
-      return "https://uzgz73amti.execute-api.us-east-1.amazonaws.com/test";
+      return "https://api.javascript.kiwi";
     default:
       return "http://localhost:8899";
   }
