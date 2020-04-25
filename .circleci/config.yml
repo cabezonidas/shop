@@ -13,10 +13,21 @@ jobs:
     steps:
       - checkout
 
+      # Download and cache dependencies
+      - restore_cache:
+        keys:
+          - dependencies-cache-{{ checksum "packages/server/package-lock.json" }}
+          - dependencies-cache
+
+      # Set working directory
+      - run:
+          name: Sit on server package subfolder
+          command: cd packages/server
+
+      # Add environment variables
       - run:
           name: Add environment variables
           command: |
-            cd packages/server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
             echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
             echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
@@ -28,28 +39,32 @@ jobs:
             echo MONGODB_USR=$MONGODB_USR >> .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
-            cd ../..
+
+      # Instal dependencies
       - run:
-          name: Install Serverless CLI
+          name: Install dependencies
+          command: npm install
+
+      # Run tests
+      - run:
+          name: Run tests
+          command: npm run test
+
+      # Deploy
+      - run:
+          name: Deploy AWS lambda
           command: |
             sudo npm i -g serverless
             sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - dependencies-cache-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - dependencies-cache
+            sls deploy -v
+
+      # Set working directory
       - run:
-          name: Install root dependencies
-          command: yarn
-      # - run:
-      #     name: Run tests
-      #     command: npm test
-      - run:
-          name: Deploy server
-          command: yarn build-server # Add stage and -v flag to show CloudFormation activity
+          name: Sit on server package subfolder
+          command: cd ../..
+
+      # Save cache
       - save_cache:
           paths:
-            - node_modules
-          key: dependencies-cache-{{ checksum "package.json" }}
+            - packages/server/node_modules
+          key: dependencies-cache-{{ checksum "packages/server/package-lock.json" }}
