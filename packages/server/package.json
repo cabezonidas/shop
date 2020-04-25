@@ -59,13 +59,13 @@
     "middy": "^0.33.1",
     "mongoose": "^5.8.3",
     "reflect-metadata": "^0.1.13",
+    "serverless-domain-manager": "^3.3.1",
+    "serverless-dotenv-plugin": "^2.3.2",
+    "serverless-offline": "^5.12.1",
+    "serverless-plugin-typescript": "^1.1.9",
     "ts-node": "^8.5.4",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22",
-    "serverless-offline": "^5.12.1",
-    "serverless-plugin-typescript": "^1.1.9",
-    "serverless-domain-manager": "^3.3.1",
-    "serverless-dotenv-plugin": "^2.3.2",
     "typescript": "^3.7.4"
   },
   "nodemonConfig": {
