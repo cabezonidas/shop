@@ -41,7 +41,7 @@
     "access": "public"
   },
   "dependencies": {
-    "apollo-server-express": "^2.9.14",
+    "apollo-server-express": "^2.12.0",
     "aws-lambda": "^1.0.4",
     "aws-sdk": "^2.596.0",
     "aws-serverless-express": "^3.3.6",
