@@ -25,7 +25,7 @@ custom:
 
 functions:
   backend:
-    handler: lambda.handler
+    handler: packages/server/lambda.handler
     events:
       - http:
           path: /
