@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
 import * as serviceWorker from "./serviceWorker";
 import { GraphqlProvider } from "@cabezonidas/shop-graphql";
 import { UiProvider, useTranslation } from "@cabezonidas/shop-ui";
+import FrontEnd from "./front-end";
 
 const uri = (() => {
   switch (process.env.NODE_ENV) {
@@ -35,7 +35,7 @@ const GraphqlState: FC = ({ children }) => {
 ReactDOM.render(
   <UiProvider>
     <GraphqlState>
-      <App />
+      <FrontEnd />
     </GraphqlState>
   </UiProvider>,
   document.getElementById("root")

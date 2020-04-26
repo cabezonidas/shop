@@ -21,7 +21,7 @@ const esArRoutes = {
   },
 };
 
-const App: React.FC = () => {
+export const FrontEnd: React.FC = () => {
   const { t, i18n } = useTranslation();
   i18n.addResourceBundle("en-US", "translation", { main: enUsRoutes }, true, true);
   i18n.addResourceBundle("es-AR", "translation", { main: esArRoutes }, true, true);
@@ -63,4 +63,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default FrontEnd;
