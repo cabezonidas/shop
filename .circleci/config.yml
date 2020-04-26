@@ -47,15 +47,15 @@ jobs:
       #     name: Run tests
       #     command: npm run test
 
-      # Build front end
-      - run:
-          name: Building front-end packages
-          command: yarn build
-
       # Publish backend
       - run:
           name: Publishing backend
           command: yarn publish-server
+
+      # Build front end
+      - run:
+          name: Building front-end packages
+          command: yarn build
 
       # Publish front end
       - run:
