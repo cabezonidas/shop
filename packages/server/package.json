@@ -27,6 +27,7 @@
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "yarn build",
+    "build-server": "yarn build",
     "start": "node -r ts-node/register ./src/server.ts",
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
@@ -74,11 +75,6 @@
     "@types/mongoose": "^5.7.13",
     "@types/node": "^13.13.2",
     "nodemon": "^2.0.3",
-    "serverless": "^1.68.0",
-    "serverless-domain-manager": "^3.3.2",
-    "serverless-dotenv-plugin": "^2.4.2",
-    "serverless-offline": "^6.1.4",
-    "serverless-plugin-typescript": "^1.1.9",
     "typescript": "^3.8.3"
   },
   "nodemonConfig": {

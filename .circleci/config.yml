@@ -8,7 +8,6 @@ workflows:
 
 jobs:
   build:
-    working_directory: ~/packages/server
     docker:
       - image: circleci/node
     steps:
@@ -17,13 +16,14 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - dependencies-cache-{{ checksum "package.json" }}
+            - dependencies-cache-{{ checksum "yarn.lock" }}
             - dependencies-cache
 
       # Add environment variables
       - run:
           name: Add environment variables
           command: |
+            cd packages/server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
             echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
             echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
@@ -35,30 +35,35 @@ jobs:
             echo MONGODB_USR=$MONGODB_USR >> .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
-
-      - run:
-          name: Install Serverless CLI
-          command: |
-            sudo npm i -g serverless
-            sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+            cd ../..
 
       # Instal dependencies
       - run:
           name: Install dependencies
-          command: npm install
+          command: yarn
 
       # Run tests
-      - run:
-          name: Run tests
-          command: npm run test
+      # - run:
+      #     name: Run tests
+      #     command: npm run test
 
-      # Deploy
+      # Build front end
       - run:
-          name: Deploy AWS lambda
-          command: sls deploy -v
+          name: Building packages
+          command: yarn build
+
+      # Publish backend
+      - run:
+          name: Publishing backend
+          command: yarn publish-server
+
+      # Publish front end
+      - run:
+          name: Publishing front end
+          command: yarn publish-fe
 
       # Save cache
       - save_cache:
           paths:
             - node_modules
-          key: dependencies-cache-{{ checksum "package.json" }}
+          key: dependencies-cache-{{ checksum "yarn.lock" }}
