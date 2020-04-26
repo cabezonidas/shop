@@ -13,16 +13,16 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-        keys:
-          - dependencies-cache-{{ checksum "packages/server/package-lock.json" }}
-          - dependencies-cache
-
       # Set working directory
       - run:
           name: Sit on server package subfolder
           command: cd packages/server
+
+      # Download and cache dependencies
+      - restore_cache:
+        keys:
+          - dependencies-cache-{{ checksum "package.json" }}
+          - dependencies-cache
 
       # Add environment variables
       - run:
@@ -58,13 +58,8 @@ jobs:
             sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
             sls deploy -v
 
-      # Set working directory
-      - run:
-          name: Sit on server package subfolder
-          command: cd ../..
-
       # Save cache
       - save_cache:
           paths:
-            - packages/server/node_modules
-          key: dependencies-cache-{{ checksum "packages/server/package-lock.json" }}
+            - node_modules
+          key: dependencies-cache-{{ checksum "package.json" }}
