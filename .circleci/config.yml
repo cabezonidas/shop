@@ -8,21 +8,17 @@ workflows:
 
 jobs:
   build:
+    working_directory: ~/packages/server
     docker:
       - image: circleci/node
     steps:
       - checkout
 
-      # Set working directory
-      - run:
-          name: Sit on server package subfolder
-          command: cd packages/server
-
       # Download and cache dependencies
       - restore_cache:
-        keys:
-          - dependencies-cache-{{ checksum "package.json" }}
-          - dependencies-cache
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            - dependencies-cache
 
       # Add environment variables
       - run:
@@ -40,6 +36,12 @@ jobs:
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
 
+      - run:
+          name: Install Serverless CLI
+          command: |
+            sudo npm i -g serverless
+            sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+
       # Instal dependencies
       - run:
           name: Install dependencies
@@ -53,10 +55,7 @@ jobs:
       # Deploy
       - run:
           name: Deploy AWS lambda
-          command: |
-            sudo npm i -g serverless
-            sls config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-            sls deploy -v
+          command: sls deploy -v
 
       # Save cache
       - save_cache:
