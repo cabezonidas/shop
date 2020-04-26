@@ -39,9 +39,7 @@
     "emotion-theming": "^10.0.27",
     "i18next": "^19.0.2",
     "react-i18next": "^11.2.7",
-    "styled-system": "^5.1.4"
-  },
-  "devDependencies": {
+    "styled-system": "^5.1.4",
     "@babel/core": "^7.7.7",
     "@storybook/react": "^5.2.8",
     "@types/styled-system": "^5.1.4",
