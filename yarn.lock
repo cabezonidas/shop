@@ -20540,6 +20540,13 @@ serverless-offline@^6.1.4:
     velocityjs "^2.0.0"
     ws "^7.2.1"
 
+serverless-plugin-monorepo@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/serverless-plugin-monorepo/-/serverless-plugin-monorepo-0.8.0.tgz#1cba60f83df68c308ed02ec7c619806c588ee68b"
+  integrity sha512-KGrPfnZtdC0ZiSU1LUPn+LLCFUfzjb+DuJrD1tje8IhxkSabGk6qcQfG4mBEszK/cih+eE+nl8A7vZSDQ4fE0A==
+  dependencies:
+    fs-extra "^7.0.0"
+
 serverless-plugin-typescript@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/serverless-plugin-typescript/-/serverless-plugin-typescript-1.1.9.tgz#75348a93f3f5dae19aad7006d51a545618892028"

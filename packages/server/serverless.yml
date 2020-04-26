@@ -1,6 +1,7 @@
 service: shop-backend
 
 plugins:
+  - serverless-plugin-monorepo
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-offline
