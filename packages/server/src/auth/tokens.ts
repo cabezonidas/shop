@@ -29,5 +29,10 @@ export const sendRefreshToken = (res: Response, token: string) => {
     }
   }
   const path = `${suffixPath}/refresh_token`;
-  return res.cookie("jid", token, { httpOnly: true, path, sameSite: "none", secure: true });
+  return ((res as unknown) as any).cookie("jid", token, {
+    httpOnly: true,
+    path,
+    sameSite: "none",
+    secure: true,
+  });
 };
