@@ -40,5 +40,17 @@
     "i18next": "^19.0.2",
     "react-i18next": "^11.2.7",
     "styled-system": "^5.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@storybook/react": "^5.2.8",
+    "@types/styled-system": "^5.1.4",
+    "babel-loader": "^8.0.6",
+    "nodemon": "^2.0.3",
+    "node-sass": "^4.13.0",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "sass-loader": "^8.0.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^1.1.2"
   }
 }
