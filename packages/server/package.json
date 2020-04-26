@@ -28,7 +28,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node -r ts-node/register ./src/server.ts",
-    "start-server": "nodemon",
+    "start-server": "npm install && nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
     "start-lambda": "npm run sls offline",
     "test": "echo \"No tests to run\""
