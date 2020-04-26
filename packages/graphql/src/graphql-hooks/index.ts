@@ -4,103 +4,103 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string,
-  String: string,
-  Boolean: boolean,
-  Int: number,
-  Float: number,
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
   /** The `Upload` scalar type represents a file upload. */
-  Upload: any,
+  Upload: any;
 };
 
 export type AwsPhoto = {
-   __typename?: 'AwsPhoto',
-  photoKey: Scalars['String'],
-  photoUrl: Scalars['String'],
-  name: Scalars['String'],
+   __typename?: 'AwsPhoto';
+  photoKey: Scalars['String'];
+  photoUrl: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type LoginResponse = {
-   __typename?: 'LoginResponse',
-  accessToken: Scalars['String'],
-  user: User,
+   __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
+  user: User;
 };
 
 export type Mutation = {
-   __typename?: 'Mutation',
-  login: LoginResponse,
-  logout: Scalars['Boolean'],
-  revokeRefreshTokenForUser: Scalars['Boolean'],
-  register: Scalars['Boolean'],
-  createAlbum: Scalars['String'],
-  addPicture: AwsPhoto,
-  deleteAlbum: Scalars['Boolean'],
-  deletePicture: Scalars['Boolean'],
+   __typename?: 'Mutation';
+  login: LoginResponse;
+  logout: Scalars['Boolean'];
+  revokeRefreshTokenForUser: Scalars['Boolean'];
+  register: Scalars['Boolean'];
+  createAlbum: Scalars['String'];
+  addPicture: AwsPhoto;
+  deleteAlbum: Scalars['Boolean'];
+  deletePicture: Scalars['Boolean'];
 };
 
 
 export type MutationLoginArgs = {
-  password: Scalars['String'],
-  email: Scalars['String']
+  password: Scalars['String'];
+  email: Scalars['String'];
 };
 
 
 export type MutationRevokeRefreshTokenForUserArgs = {
-  userId: Scalars['String']
+  userId: Scalars['String'];
 };
 
 
 export type MutationRegisterArgs = {
-  password: Scalars['String'],
-  email: Scalars['String']
+  password: Scalars['String'];
+  email: Scalars['String'];
 };
 
 
 export type MutationCreateAlbumArgs = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
 export type MutationAddPictureArgs = {
-  albumName: Scalars['String'],
-  picture: Scalars['Upload']
+  albumName: Scalars['String'];
+  picture: Scalars['Upload'];
 };
 
 
 export type MutationDeleteAlbumArgs = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
 export type MutationDeletePictureArgs = {
-  photoKey: Scalars['String']
+  photoKey: Scalars['String'];
 };
 
 export type Query = {
-   __typename?: 'Query',
-  users: Array<User>,
-  hello: Scalars['String'],
-  me?: Maybe<User>,
-  getAlbums: Array<Scalars['String']>,
-  viewAlbum: Array<AwsPhoto>,
-  labels: Array<Scalars['String']>,
+   __typename?: 'Query';
+  users: Array<User>;
+  hello: Scalars['String'];
+  me?: Maybe<User>;
+  getAlbums: Array<Scalars['String']>;
+  viewAlbum: Array<AwsPhoto>;
+  labels: Array<Scalars['String']>;
 };
 
 
 export type QueryViewAlbumArgs = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
 export type User = {
-   __typename?: 'User',
-  _id: Scalars['String'],
-  email: Scalars['String'],
+   __typename?: 'User';
+  _id: Scalars['String'];
+  email: Scalars['String'];
 };
 
 export type AddPictureMutationVariables = {
-  picture: Scalars['Upload'],
-  albumName: Scalars['String']
+  picture: Scalars['Upload'];
+  albumName: Scalars['String'];
 };
 
 
@@ -121,7 +121,7 @@ export type AlbumsQuery = (
 );
 
 export type CreateAlbumMutationVariables = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
@@ -131,7 +131,7 @@ export type CreateAlbumMutation = (
 );
 
 export type DeleteAlbumMutationVariables = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
@@ -141,7 +141,7 @@ export type DeleteAlbumMutation = (
 );
 
 export type DeletePictureMutationVariables = {
-  photoKey: Scalars['String']
+  photoKey: Scalars['String'];
 };
 
 
@@ -151,7 +151,7 @@ export type DeletePictureMutation = (
 );
 
 export type ViewAlbumQueryVariables = {
-  albumName: Scalars['String']
+  albumName: Scalars['String'];
 };
 
 
@@ -164,8 +164,8 @@ export type ViewAlbumQuery = (
 );
 
 export type LoginMutationVariables = {
-  email: Scalars['String'],
-  password: Scalars['String']
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -194,15 +194,15 @@ export type MeQueryVariables = {};
 
 export type MeQuery = (
   { __typename?: 'Query' }
-  & { me: Maybe<(
+  & { me?: Maybe<(
     { __typename?: 'User' }
     & Pick<User, '_id' | 'email'>
   )> }
 );
 
 export type RegisterMutationVariables = {
-  email: Scalars['String'],
-  password: Scalars['String']
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -268,7 +268,7 @@ export const AlbumsDocument = gql`
  * __useAlbumsQuery__
  *
  * To run a query within a React component, call `useAlbumsQuery` and pass it any options that fit your needs.
- * When your component renders, `useAlbumsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useAlbumsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -392,7 +392,7 @@ export const ViewAlbumDocument = gql`
  * __useViewAlbumQuery__
  *
  * To run a query within a React component, call `useViewAlbumQuery` and pass it any options that fit your needs.
- * When your component renders, `useViewAlbumQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useViewAlbumQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -492,7 +492,7 @@ export const MeDocument = gql`
  * __useMeQuery__
  *
  * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
- * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -556,7 +556,7 @@ export const UsersDocument = gql`
  * __useUsersQuery__
  *
  * To run a query within a React component, call `useUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;

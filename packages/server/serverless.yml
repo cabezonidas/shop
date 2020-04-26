@@ -12,6 +12,8 @@ provider:
   stage: prd
 
 custom:
+  serverless-offline:
+    port: 8899
   customDomain:
     domainName: api.javascript.kiwi
     basePath: ""

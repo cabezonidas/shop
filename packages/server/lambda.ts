@@ -39,4 +39,4 @@ export const handler = middy(async (event: any, context: Context) => {
       headers:
         "Access-Control-Request-Method, Access-Control-Request-Headers, Origin, Content-Type, authorization",
     })
-  );
+  ) as unknown;

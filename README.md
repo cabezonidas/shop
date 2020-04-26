@@ -30,6 +30,10 @@ Grapqhl
 
 ## Frontend
 
+React
+
+Storybook
+
 ## CD
 
 **Frontend** The master branch is hooked up with Netlify, which on every push, it builds all the packages and deploys the frontend.

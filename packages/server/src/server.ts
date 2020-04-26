@@ -36,9 +36,7 @@ const server = (() => {
   if (process.env.NODE_ENV === "development") {
     const port = 8899;
     connectToDatabase().then(() => {
-      app.listen({ port }, () =>
-        console.log(`Graphql server ready at http://localhost:${port}${apolloServer.graphqlPath}`)
-      );
+      app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}`));
     });
   } else {
     app.use(awsServerlessExpressMiddleware.eventContext());
