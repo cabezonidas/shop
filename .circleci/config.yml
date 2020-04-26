@@ -42,6 +42,11 @@ jobs:
           name: Install dependencies
           command: yarn
 
+      # Publish backend
+      - run:
+          name: Publishing backend
+          command: yarn publish-server
+
       # Run tests
       # - run:
       #     name: Run tests
@@ -56,11 +61,6 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
-
-      # Publish backend
-      - run:
-          name: Publishing backend
-          command: yarn publish-server
 
       # Save cache
       - save_cache:
