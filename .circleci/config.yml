@@ -14,10 +14,10 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - dependencies-cache-{{ checksum "yarn.lock" }}
-            - dependencies-cache
+      # - restore_cache:
+      #     keys:
+      #       - dependencies-cache-{{ checksum "yarn.lock" }}
+      #       - dependencies-cache
 
       # Add environment variables
       - run:
@@ -61,9 +61,8 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
-
       # Save cache
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-cache-{{ checksum "yarn.lock" }}
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: dependencies-cache-{{ checksum "yarn.lock" }}
