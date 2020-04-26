@@ -47,11 +47,6 @@ jobs:
       #     name: Run tests
       #     command: npm run test
 
-      # Publish backend
-      - run:
-          name: Publishing backend
-          command: yarn publish-server
-
       # Build front end
       - run:
           name: Building front-end packages
@@ -61,6 +56,12 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
+
+      # Publish backend
+      - run:
+          name: Publishing backend
+          command: yarn publish-server
+
       # Save cache
       - save_cache:
           paths:
