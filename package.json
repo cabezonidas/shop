@@ -20,7 +20,7 @@
     "prebuild": "lerna bootstrap",
     "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
     "build-server": "lerna run build-server",
-    "1-start-lambda": "cd packages/server && npm run start-server --stream",
+    "1-start-lambda": "lerna run start-server --stream",
     "2-watch-packages": "lerna run build:watch --stream",
     "3-start-app": "lerna run start-front-end --stream"
   }

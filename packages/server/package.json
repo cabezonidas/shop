@@ -26,11 +26,10 @@
     "tsc": "tsc",
     "prebuild": "tslint -c ../../tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "prestart": "npm run build",
+    "prestart": "yarn build",
     "start": "node -r ts-node/register ./src/server.ts",
-    "start-server": "npm install && nodemon",
+    "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",
-    "start-lambda": "npm run sls offline",
     "test": "echo \"No tests to run\""
   },
   "bugs": {
