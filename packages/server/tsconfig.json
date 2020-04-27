@@ -3,7 +3,8 @@
   "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": ".build",
+    "rootDir": "./",
     "moduleResolution": "node",
     "esModuleInterop": true
   }
