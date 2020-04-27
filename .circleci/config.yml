@@ -28,6 +28,11 @@ jobs:
           paths:
             - ~/.cache/yarn
 
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .build
+
       # Add environment variables
       - run:
           name: Add environment variables
