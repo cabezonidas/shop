@@ -3,8 +3,9 @@
   "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": ".build",
-    "rootDir": "./",
+    "outDir": "lib",
+    "sourceMap": false,
+    "alwaysStrict": true,
     "moduleResolution": "node",
     "esModuleInterop": true
   }
