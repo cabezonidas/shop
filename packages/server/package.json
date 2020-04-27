@@ -28,7 +28,7 @@
     "build": "tsc",
     "prestart": "yarn build",
     "build-server": "yarn build",
-    "publish-server": "sls deploy",
+    "publish-server": "sls deploy -v",
     "start": "node -r ts-node/register ./src/server.ts",
     "start-server": "nodemon",
     "typeorm": "./node_modules/.bin/typeorm",

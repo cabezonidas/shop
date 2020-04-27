@@ -46,6 +46,11 @@ jobs:
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
             cd ../..
 
+      # Lerna bootstrap
+      - run:
+          name: Lerna bootstrap
+          command: yarn bootstrap
+
       # Publish backend
       - run:
           name: Publishing backend
