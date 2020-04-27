@@ -39,6 +39,11 @@ jobs:
           name: Install dependencies
           command: yarn
 
+      # Run tests
+      # - run:
+      #     name: Run tests
+      #     command: npm run test
+
       # Build front end
       - run:
           name: Building front-end packages
@@ -48,6 +53,11 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
+
+      # Publish backend
+      - run:
+          name: Publishing backend
+          command: yarn publish-server
 
       - save_cache:
           paths:
