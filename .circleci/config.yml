@@ -14,24 +14,9 @@ jobs:
       - checkout
 
       - restore_cache:
-          name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .build
+            - dependencies-cache-{{ checksum "yarn.lock" }}
+            - dependencies-cache
 
       # Add environment variables
       - run:
@@ -49,20 +34,10 @@ jobs:
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
 
-      # Lerna bootstrap
+      # Instal dependencies
       - run:
-          name: Lerna bootstrap
-          command: yarn bootstrap
-
-      # Publish backend
-      - run:
-          name: Publishing backend
-          command: yarn publish-server
-
-      # Run tests
-      # - run:
-      #     name: Run tests
-      #     command: npm run test
+          name: Install dependencies
+          command: yarn
 
       # Build front end
       - run:
@@ -73,3 +48,8 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-cache-{{ checksum "yarn.lock" }}
