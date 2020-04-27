@@ -6,6 +6,7 @@
     "netlify-cli": "^2.41.0",
     "prettier": "^1.19.1",
     "serverless": "^1.68.0",
+    "serverless-bundle": "^1.4.0",
     "serverless-domain-manager": "^3.3.2",
     "serverless-dotenv-plugin": "^2.4.2",
     "serverless-offline": "^6.1.4",
