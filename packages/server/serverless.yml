@@ -1,10 +1,14 @@
 service: shop-backend
 
 plugins:
+  - serverless-plugin-optimize
   - serverless-plugin-monorepo
   - serverless-dotenv-plugin
   - serverless-offline
   - serverless-domain-manager
+
+package:
+  individually: true
 
 provider:
   name: aws
