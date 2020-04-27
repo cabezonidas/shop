@@ -20547,15 +20547,6 @@ serverless-plugin-monorepo@^0.8.0:
   dependencies:
     fs-extra "^7.0.0"
 
-serverless-plugin-typescript@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/serverless-plugin-typescript/-/serverless-plugin-typescript-1.1.9.tgz#75348a93f3f5dae19aad7006d51a545618892028"
-  integrity sha512-OmZrD1uArNx+1MPrXck39zsa76k/H7QYOOAg/Uz9xpLGJPUsvW0pXRSE9NN7LRid6IuM/WpY3VWkD5DPusY4cA==
-  dependencies:
-    fs-extra "^7.0.1"
-    globby "^9.2.0"
-    lodash "^4.17.11"
-
 serverless@^1.68.0:
   version "1.68.0"
   resolved "https://registry.yarnpkg.com/serverless/-/serverless-1.68.0.tgz#ac72994f3cf7dcdb3f30c33bbea4b6e25171beca"

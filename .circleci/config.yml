@@ -22,6 +22,7 @@ jobs:
       - run:
           name: Add environment variables
           command: |
+            cd packages/server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
             echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
             echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
@@ -33,6 +34,7 @@ jobs:
             echo MONGODB_USR=$MONGODB_USR >> .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
+            cd ../..
 
       # Instal dependencies
       - run:
@@ -44,6 +46,11 @@ jobs:
       #     name: Run tests
       #     command: npm run test
 
+      # Publish backend
+      - run:
+          name: Publishing backend
+          command: yarn publish-server
+
       # Build front end
       - run:
           name: Building front-end packages
@@ -53,11 +60,6 @@ jobs:
       - run:
           name: Publishing front end
           command: yarn publish-fe
-
-      # Publish backend
-      - run:
-          name: Publishing backend
-          command: yarn publish-server
 
       - save_cache:
           paths:

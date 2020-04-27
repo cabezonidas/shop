@@ -2,7 +2,6 @@ service: shop-backend
 
 plugins:
   - serverless-plugin-monorepo
-  - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-offline
   - serverless-domain-manager
@@ -25,7 +24,7 @@ custom:
 
 functions:
   backend:
-    handler: packages/server/lambda.handler
+    handler: lambda.handler
     events:
       - http:
           path: /
