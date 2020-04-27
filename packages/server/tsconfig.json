@@ -1,7 +1,10 @@
 {
+  "exclude": ["lib"],
+  "include": ["src"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node"
-  },
-  "include": ["./src", "lambda.ts"]
+    "outDir": "lib",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  }
 }

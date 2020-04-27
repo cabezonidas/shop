@@ -1,17 +1,17 @@
 import "dotenv/config";
 import "reflect-metadata";
-import * as cookieParser from "cookie-parser";
-import * as express from "express";
+import cookieParser from "cookie-parser";
+import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchemaSync } from "type-graphql";
 import { UserResolver } from "./resolvers/user-resolver";
 import { router } from "./router";
 import { translation } from "./middleware";
-import * as awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
+import awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 import { connectToDatabase } from "./db";
 import { MediaResolver } from "./resolvers/media-resolver";
 import { MailResolver } from "./resolvers/mail-resolver";
-import * as cors from "cors";
+import cors from "cors";
 
 const server = (() => {
   const app = express();

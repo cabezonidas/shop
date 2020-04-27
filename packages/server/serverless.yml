@@ -7,9 +7,6 @@ plugins:
   - serverless-offline
   - serverless-domain-manager
 
-package:
-  individually: true
-
 provider:
   name: aws
   runtime: nodejs12.x
@@ -28,7 +25,7 @@ custom:
 
 functions:
   backend:
-    handler: lambda.handler
+    handler: lib/lambda.handler
     events:
       - http:
           path: /
