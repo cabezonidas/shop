@@ -1,5 +1,5 @@
 import { ConnectionOptions } from "typeorm";
-import { User } from "./src/entity/user";
+import { User } from "./entity/user";
 
 const { MONGODB_USR, MONGODB_PASSWORD } = process.env;
 

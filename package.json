@@ -3,12 +3,6 @@
   "private": true,
   "dependencies": {
     "lerna": "^3.19.0",
-    "serverless": "^1.68.0",
-    "serverless-domain-manager": "^3.3.2",
-    "serverless-dotenv-plugin": "^2.4.2",
-    "serverless-offline": "^6.1.4",
-    "serverless-plugin-optimize": "^4.1.4-rc.1",
-    "serverless-plugin-monorepo": "^0.8.0",
     "netlify-cli": "^2.41.0",
     "prettier": "^1.19.1",
     "tslint": "^5.20.1",
@@ -27,9 +21,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
     "publish-fe": "netlify deploy --dir=packages/front-end/build/ -p",
-    "publish-server": "lerna run publish-server --stream",
-    "1-start-lambda": "lerna run start-server --stream",
-    "2-watch-packages": "lerna run build:watch --stream",
-    "3-start-app": "lerna run start-front-end --stream"
+    "1-watch-packages": "lerna run build:watch --stream",
+    "2-start-app": "lerna run start-front-end --stream"
   }
 }

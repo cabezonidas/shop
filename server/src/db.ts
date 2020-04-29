@@ -1,4 +1,4 @@
-import { mongodbConnection } from "../ormconfig";
+import { mongodbConnection } from "./ormconfig";
 import { createConnection } from "typeorm";
 
 // tslint:disable-next-line: no-var-requires

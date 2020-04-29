@@ -1,8 +1,8 @@
 import { createServer, proxy } from "aws-serverless-express";
-import app from "./src/server";
-import { connectToDatabase } from "./src/db";
+import app from "./server";
+import { connectToDatabase } from "./db";
 import { Context } from "aws-lambda";
-import * as middy from "middy";
+import middy from "middy";
 import { httpErrorHandler, cors } from "middy/middlewares";
 
 const binaryMimeTypes = [
