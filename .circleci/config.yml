@@ -20,7 +20,7 @@ jobs:
 
       # Deploy server
       - run:
-          name: Deploy server
+          name: Add env vars for server
           command: |
             cd packages/server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
