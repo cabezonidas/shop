@@ -1,6 +1,7 @@
 service: shop-backend
 
 plugins:
+  - serverless-plugin-monorepo
   - serverless-webpack
   - serverless-dotenv-plugin
   - serverless-domain-manager
@@ -11,7 +12,10 @@ provider:
   stage: prd
 
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: "webpack.config.js"
+    includeModules: true
+    packager: "yarn"
   customDomain:
     domainName: api.javascript.kiwi
     basePath: ""
