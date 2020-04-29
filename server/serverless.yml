@@ -1,13 +1,9 @@
 service: shop-backend
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-webpack
   - serverless-dotenv-plugin
   - serverless-domain-manager
-
-package:
-  exclude:
-    - node_modules/**
 
 provider:
   name: aws
@@ -15,6 +11,7 @@ provider:
   stage: prd
 
 custom:
+  webpackIncludeModules: true
   customDomain:
     domainName: api.javascript.kiwi
     basePath: ""
@@ -25,7 +22,7 @@ custom:
 
 functions:
   backend:
-    handler: src/lambda.handler
+    handler: .build/lambda.handler
     events:
       - http:
           path: /
