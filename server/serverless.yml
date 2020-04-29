@@ -7,10 +7,7 @@ plugins:
 
 package:
   exclude:
-    - node_modules/serverless/**
-    - node_modules/serverless-plugin-typescript/**
-    - node_modules/serverless-dotenv-plugin/**
-    - node_modules/serverless-domain-manager/**
+    - node_modules/**
 
 provider:
   name: aws
