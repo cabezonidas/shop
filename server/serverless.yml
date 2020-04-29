@@ -5,6 +5,13 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-domain-manager
 
+package:
+  exclude:
+    - node_modules/serverless/**
+    - node_modules/serverless-plugin-typescript/**
+    - node_modules/serverless-dotenv-plugin/**
+    - node_modules/serverless-domain-manager/**
+
 provider:
   name: aws
   runtime: nodejs12.x
