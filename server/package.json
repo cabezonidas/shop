@@ -53,7 +53,7 @@
     "googleapis": "^49.0.0",
     "graphql": "^14.6.0",
     "i18next": "^19.4.3",
-    "i18next-express-middleware": "^2.0.0",
+    "i18next-http-middleware": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "middy": "^0.36.0",
     "mongoose": "^5.9.10",

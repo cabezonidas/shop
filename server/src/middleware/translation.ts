@@ -1,6 +1,5 @@
-import { i18n } from "i18next";
-import * as i18next from "i18next";
-import * as middleware from "i18next-express-middleware";
+import i18next from "i18next";
+import * as middleware from "i18next-http-middleware";
 import { awsEnUs, awsEsAr } from "../integrations";
 
 const enUs = {
@@ -25,7 +24,7 @@ const esAr = {
   },
 };
 
-((i18next as unknown) as i18n).use(middleware.LanguageDetector).init({
+i18next.use(middleware.LanguageDetector).init({
   resources: {
     "en-US": enUs,
     "es-AR": esAr,
@@ -37,6 +36,6 @@ const esAr = {
   },
 });
 
-export const translation = middleware.handle((i18next as unknown) as i18n, {
+export const translation = middleware.handle(i18next, {
   removeLngFromUrl: false,
 });
