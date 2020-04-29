@@ -19,7 +19,8 @@
     "storybook": "lerna run storybook --stream",
     "tsc": "tsc",
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
+    "build": "lerna run build-server && lerna run build-ui && lerna run build-graphql && lerna run build-login && lerna run build-media && lerna run build-fe",
+    "publish-server": "lerna run publish-server --stream",
     "publish-fe": "netlify deploy --dir=packages/front-end/build/ -p",
     "1-watch-packages": "lerna run build:watch --stream",
     "2-start-app": "lerna run start-front-end --stream"

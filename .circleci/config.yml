@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Deploy server
           command: |
-            cd server
+            cd packages/server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
             echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
             echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
@@ -34,13 +34,11 @@ jobs:
             echo MONGODB_USR=$MONGODB_USR >> .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
-            npm install
-            npm run publish-server
-            cd ..
+            cd ../..
 
       # Instal dependencies
       - run:
-          name: Install front end dependencies
+          name: Install dependencies
           command: yarn
 
       # Run tests
@@ -48,10 +46,15 @@ jobs:
       #     name: Run tests
       #     command: npm run test
 
-      # Build front end
+      # Build back end
       - run:
-          name: Building front-end packages
+          name: Building packages
           command: yarn build
+
+      # Publish back end
+      - run:
+          name: Publishing server
+          command: yarn publish-server
 
       # Publish front end
       - run:
