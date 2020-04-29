@@ -1,9 +1,9 @@
 {
   "exclude": ["lib"],
   "include": ["src"],
-  "extends": "../../tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": ".build",
     "sourceMap": false,
     "alwaysStrict": true,
     "moduleResolution": "node",

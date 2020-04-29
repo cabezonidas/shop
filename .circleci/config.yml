@@ -18,11 +18,11 @@ jobs:
             - dependencies-cache-{{ checksum "yarn.lock" }}
             - dependencies-cache
 
-      # Add environment variables
+      # Deploy server
       - run:
-          name: Add environment variables
+          name: Deploy server
           command: |
-            cd packages/server
+            cd server
             echo ACCESS_TOKEN_SECRET=$ACCESS_TOKEN_SECRET >> .env
             echo GOOGLE_CLIENT_IT=$GOOGLE_CLIENT_IT >> .env
             echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
@@ -34,22 +34,19 @@ jobs:
             echo MONGODB_USR=$MONGODB_USR >> .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo REFRESH_TOKEN_SECRET=$REFRESH_TOKEN_SECRET >> .env
-            cd ../..
+            npm install
+            npm run publish-server
+            cd ..
 
       # Instal dependencies
       - run:
-          name: Install dependencies
+          name: Install front end dependencies
           command: yarn
 
       # Run tests
       # - run:
       #     name: Run tests
       #     command: npm run test
-
-      # Publish backend
-      - run:
-          name: Publishing backend
-          command: yarn publish-server
 
       # Build front end
       - run:
