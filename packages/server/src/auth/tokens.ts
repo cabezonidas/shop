@@ -24,7 +24,7 @@ export const sendRefreshToken = (res: Response, token: string) => {
     }
     case "prd":
     case "production": {
-      suffixPath = "/prd";
+      suffixPath = "";
       break;
     }
   }
