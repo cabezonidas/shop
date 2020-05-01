@@ -25,6 +25,7 @@ const server = (() => {
   app.use("/", router);
 
   const apolloServer = new ApolloServer({
+    introspection: true,
     schema: buildSchemaSync({
       resolvers: [UserResolver, MediaResolver, MailResolver],
       validate: false,
